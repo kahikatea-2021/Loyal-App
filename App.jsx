@@ -9,6 +9,7 @@ import { useState } from 'react/cjs/react.development'
 import Navigation from './navigation'
 import LoginScreen from './screen/LoginScreen'
 import firebase from './auth'
+import RegisterScreen from './screen/RegisterScreen'
 
 /* const styles = StyleSheet.create({
 	container: {
@@ -23,26 +24,25 @@ const AppStack = createStackNavigator()
 
 export default function App () {
 	// eslint-disable-next-line no-unused-vars
-	const [isLoggedIn, setLoggedIn] = useState(false)
 	return (
 		<SafeAreaProvider>
-			{isLoggedIn
-				? (
-					<NavigationContainer>
-						<AppStack.Navigator
-							screenOptions={{
-								headerShown: false,
-							}}
-						>
-							<AppStack.Screen
-								name="BottomNavigation"
-								component={Navigation}
-							/>
-						</AppStack.Navigator>
-					</NavigationContainer>
-				)
-				: <LoginScreen />}
-			<StatusBar />
+			<NavigationContainer>
+				<AppStack.Navigator
+					screenOptions={{
+						headerShown: true,
+					}}
+				>
+					<AppStack.Screen
+						name="Login"
+						component={LoginScreen}
+					/>
+					<AppStack.Screen
+						name="Register"
+						component={RegisterScreen}
+					/>
+				</AppStack.Navigator>
+			</NavigationContainer>
+
 		</SafeAreaProvider>
 	)
 }
