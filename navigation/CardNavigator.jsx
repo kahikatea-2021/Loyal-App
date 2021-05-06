@@ -1,17 +1,17 @@
 import React from 'react'
 import { createStackNavigator } from '@react-navigation/stack'
-import HomeScreen from '../screen/HomeScreen'
+import CardScreen from '../screen/CardScreen'
 
 const StackNavigator = createStackNavigator()
 
-function HomeNavigationItem() {
+function CardNavigator() {
 	return (
 		<StackNavigator.Navigator>
 			<StackNavigator.Screen
-				name="Home"
-				component={HomeScreen}
+				name="Card"
+				component={CardScreen}
 				options={{
-					title: 'Home Stamp',
+					title: 'Card',
 					headerTitleAlign: 'center',
 				}}
 			/>
@@ -19,4 +19,4 @@ function HomeNavigationItem() {
 	)
 }
 
-export default HomeNavigationItem
+export default CardNavigator

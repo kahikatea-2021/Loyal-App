@@ -22,7 +22,7 @@ const AppStack = createStackNavigator()
 
 export default function App () {
 	// eslint-disable-next-line no-unused-vars
-	const [isLoggedIn, setLoggedIn] = useState(false)
+	const [isLoggedIn, setLoggedIn] = useState(true)
 	return (
 		<SafeAreaProvider>
 			{isLoggedIn

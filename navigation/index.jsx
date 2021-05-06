@@ -3,6 +3,7 @@ import React from 'react'
 import { MaterialIcons } from '@expo/vector-icons'
 import ScanNavigator from './ScanNavigator'
 import HomeScreen from '../screen/HomeScreen'
+import CardScreen from '../screen/CardScreen'
 
 const AppTab = createBottomTabNavigator()
 
@@ -19,6 +20,13 @@ function Index () {
 			<AppTab.Screen
 				name="Home"
 				component={HomeScreen}
+				options={{
+					tabBarIcon: ({ color }) => <TabIcon color={color} name="home" />,
+				}}
+			/>
+			<AppTab.Screen
+				name="Card"
+				component={CardScreen}
 				options={{
 					tabBarIcon: ({ color }) => <TabIcon color={color} name="home" />,
 				}}
