@@ -66,7 +66,7 @@ function RegisterScreen ({ navigation }) {
 				/>
 				<TextInput
 					style={styles.inputContainer}
-					placeholder="firstName"
+					placeholder="First Name"
 					autofocus
 					type="text"
 					value={firstName}
@@ -74,14 +74,14 @@ function RegisterScreen ({ navigation }) {
 				/>
 				<TextInput
 					style={styles.inputContainer}
-					placeholder="lastName"
+					placeholder="Last Name"
 					type="text"
 					value={lastName}
 					onChangeText={(text) => setLastName(text)}
 				/>
 				<TextInput
 					style={styles.inputContainer}
-					placeholder="phone"
+					placeholder="Phone Number"
 					type="tel"
 					value={phone}
 					keyboardType="numeric"
@@ -89,14 +89,14 @@ function RegisterScreen ({ navigation }) {
 				/>
 				<TextInput
 					style={styles.inputContainer}
-					placeholder="email"
+					placeholder="E-mail"
 					type="email"
 					value={email}
 					onChangeText={(text) => setEmail(text)}
 				/>
 				<TextInput
 					style={styles.inputContainer}
-					placeholder="password"
+					placeholder="Password"
 					type="password"
 					secureTextEntry
 					value={password}
