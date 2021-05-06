@@ -6,9 +6,9 @@ import { NavigationContainer } from '@react-navigation/native'
 import { createStackNavigator } from '@react-navigation/stack'
 import { SafeAreaProvider } from 'react-native-safe-area-context'
 import { useState } from 'react/cjs/react.development'
-import firebase from 'firebase/app'
 import Navigation from './navigation'
 import LoginScreen from './screen/LoginScreen'
+import firebase from './auth'
 
 /* const styles = StyleSheet.create({
 	container: {
@@ -18,16 +18,6 @@ import LoginScreen from './screen/LoginScreen'
 		justifyContent: 'center',
 	},
 }) */
-
-const firebaseConfig = {
-	apiKey: 'AIzaSyAV8RHScWgUvU57E9lo4M2XpF8Ohablkb4',
-	authDomain: 'loyal-cbd69.firebaseapp.com',
-	projectId: 'loyal-cbd69',
-	appId: '1:552424010228:web:71970ae45cb3f3cca889a1',
-	measurementId: 'G-Y8481BN92Z',
-}
-
-firebase.initializeApp(firebaseConfig)
 
 const AppStack = createStackNavigator()
 
