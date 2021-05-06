@@ -11,7 +11,7 @@ function HomeNavigationItem() {
 				name="Home"
 				component={HomeScreen}
 				options={{
-					title: 'Homew Stamp',
+					title: 'Home Stamp',
 					headerTitleAlign: 'center',
 				}}
 			/>

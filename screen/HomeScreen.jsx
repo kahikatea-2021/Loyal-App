@@ -5,7 +5,7 @@ function HomeScreen() {
 	return (
 		<SafeAreaView>
 			<View>
-				<Text>Hello Wolrd</Text>
+				<Text>Hello World</Text>
 			</View>
 		</SafeAreaView>
 	)
