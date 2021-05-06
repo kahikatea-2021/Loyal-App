@@ -40,7 +40,6 @@ function LoginScreen ({ navigation }) {
 				<TextInput placeholder="email" autofocus type="email" value={email} onChangeText={(text) => setEmail(text)} />
 				<TextInput placeholder="password" type="password" secureTextEntry value={password} onChangeText={(text) => setPassword(text)} />
 			</SafeAreaView>
-
 			<Button style={styles.button} onPress={signIn} title="Login" />
 			<Button style={styles.button} onPress={() => navigation.navigate('Register')} title="Register" type="outline" />
 		</KeyboardAvoidingView>
