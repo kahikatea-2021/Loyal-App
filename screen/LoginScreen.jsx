@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import {
-	SafeAreaView, TextInput, Text, Button, Platform, StyleSheet, KeyboardAvoidingView,
+	SafeAreaView, TextInput, Text, Button, Platform, StyleSheet, KeyboardAvoidingView, Image,
 } from 'react-native'
 import * as WebBrowser from 'expo-web-browser'
 import { set } from 'react-native-reanimated'
@@ -26,6 +26,13 @@ const styles = StyleSheet.create({
 		width: 200,
 		marginTop: 10,
 	},
+	logo: {
+		width: 170,
+		height: 168,
+		alignSelf: 'center',
+		margin: 20,
+		borderRadius: 10,
+	},
 })
 
 function LoginScreen ({ navigation }) {
@@ -41,6 +48,10 @@ function LoginScreen ({ navigation }) {
 	return (
 		<KeyboardAvoidingView behaviour="padding" style={styles.container}>
 			<SafeAreaView>
+				<Image
+					style={styles.logo}
+					source={require('../assets/coffee.jpg')}
+				/>
 				<TextInput style={styles.inputContainer} placeholder="email" autofocus type="email" value={email} onChangeText={(text) => setEmail(text)} />
 				<TextInput style={styles.inputContainer} placeholder="password" type="password" secureTextEntry value={password} onChangeText={(text) => setPassword(text)} />
 			</SafeAreaView>
