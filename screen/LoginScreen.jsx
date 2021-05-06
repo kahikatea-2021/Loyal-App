@@ -15,7 +15,11 @@ const styles = StyleSheet.create({
 	},
 	inputContainer: {
 		width: 300,
-		borderColor: 'black',
+		borderWidth: 1,
+		borderRadius: 10,
+		borderColor: '#0B82D6',
+		padding: 9,
+		margin: 4,
 
 	},
 	button: {
@@ -36,9 +40,9 @@ function LoginScreen ({ navigation }) {
 	}
 	return (
 		<KeyboardAvoidingView behaviour="padding" style={styles.container}>
-			<SafeAreaView style={styles.inputContainer}>
-				<TextInput placeholder="email" autofocus type="email" value={email} onChangeText={(text) => setEmail(text)} />
-				<TextInput placeholder="password" type="password" secureTextEntry value={password} onChangeText={(text) => setPassword(text)} />
+			<SafeAreaView>
+				<TextInput style={styles.inputContainer} placeholder="email" autofocus type="email" value={email} onChangeText={(text) => setEmail(text)} />
+				<TextInput style={styles.inputContainer} placeholder="password" type="password" secureTextEntry value={password} onChangeText={(text) => setPassword(text)} />
 			</SafeAreaView>
 			<Button style={styles.button} onPress={signIn} title="Login" />
 			<Button style={styles.button} onPress={() => navigation.navigate('Register')} title="Register" type="outline" />

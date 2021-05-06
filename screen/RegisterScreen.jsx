@@ -1,10 +1,11 @@
 import { registerRootComponent } from 'expo'
 import React, { useState, useLayoutEffect } from 'react'
 import {
-    SafeAreaView, TextInput, Text, Button, StyleSheet, KeyboardAvoidingView,
+	SafeAreaView, TextInput, Text, Button, StyleSheet, KeyboardAvoidingView,
 } from 'react-native'
 
 function RegisterScreen ({ navigation }) {
+
     const [firstName, setFirstName] = useState('')
     const [lastName, setLastName] = useState('')
     const [phone, setPhone] = useState('')
@@ -63,12 +64,13 @@ function RegisterScreen ({ navigation }) {
             </SafeAreaView>
         </KeyboardAvoidingView>
     )
+
 }
 
 const styles = StyleSheet.create({
-    container: {
+	container: {
 
-    },
+	},
 })
 
 export default RegisterScreen
