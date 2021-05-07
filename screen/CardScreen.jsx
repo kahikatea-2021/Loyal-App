@@ -47,22 +47,22 @@ function CardScreen() {
 					flexDirection: 'row', flex: 1,
 				}}
 				>
-					<View style={[styles.default, (finalCount > 2) ? styles.stamped : styles.unstamped]} />
-					<View style={{ flex: 1, backgroundColor: 'darkorange' }} />
-					<View style={{ flex: 1, backgroundColor: 'green' }} />
-					<View style={{ flex: 1, backgroundColor: 'pink' }} />
-					<View style={{ flex: 1, backgroundColor: 'magenta' }} />
+					<View style={[styles.default, (finalCount >= 1) ? styles.stamped : styles.unstamped]} />
+					<View style={[styles.default, (finalCount >= 2) ? styles.stamped : styles.unstamped]} />
+					<View style={[styles.default, (finalCount >= 3) ? styles.stamped : styles.unstamped]} />
+					<View style={[styles.default, (finalCount >= 4) ? styles.stamped : styles.unstamped]} />
+					<View style={[styles.default, (finalCount >= 5) ? styles.stamped : styles.unstamped]} />
 				</View>
 
 				<View style={{
 					flexDirection: 'row', flex: 1,
 				}}
 				>
-					<View style={{ flex: 1, backgroundColor: 'blue' }} />
-					<View style={{ flex: 1, backgroundColor: 'yellow' }} />
-					<View style={{ flex: 1, backgroundColor: 'purple' }} />
-					<View style={{ flex: 1, backgroundColor: 'grey' }} />
-					<View style={{ flex: 1, backgroundColor: 'gold' }} />
+					<View style={[styles.default, (finalCount >= 6) ? styles.stamped : styles.unstamped]} />
+					<View style={[styles.default, (finalCount >= 7) ? styles.stamped : styles.unstamped]} />
+					<View style={[styles.default, (finalCount >= 8) ? styles.stamped : styles.unstamped]} />
+					<View style={[styles.default, (finalCount >= 9) ? styles.stamped : styles.unstamped]} />
+					<View style={[styles.default, (finalCount >= 10) ? styles.stamped : styles.unstamped]} />
 				</View>
 			</View>
 
