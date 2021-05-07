@@ -126,11 +126,10 @@ function RegisterScreen ({ navigation }) {
 						secureTextEntry
 						value={password}
 						onChangeText={(text) => setPassword(text)}
-						onSubmitEditing={register}
 					/>
 				</SafeAreaView>
 				<SafeAreaView>
-					<Button raised style={styles.button} onPress={register} title="Register" />
+					<Button raised style={styles.button} onPress={registerUser} title="Register" />
 				</SafeAreaView>
 			</ScrollView>
 		</KeyboardAvoidingView>
