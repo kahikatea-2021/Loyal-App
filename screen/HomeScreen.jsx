@@ -30,6 +30,7 @@ function HomeScreen ({ navigation }) {
 	return (
 		<SafeAreaView>
 			<View>
+
 				<Button onPress={signOutUser} title="Sign Out" />
 				<Text>Hello World</Text>
 			</View>
