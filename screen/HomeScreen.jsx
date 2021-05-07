@@ -21,7 +21,7 @@ function HomeScreen ({ navigation }) {
 	}
 	useLayoutEffect(() => {
 		navigation.setOptions({
-			title: 'Loyal',
+			title: 'Account',
 			headerStyle: { backgroundColor: '#fff' },
 
 		})

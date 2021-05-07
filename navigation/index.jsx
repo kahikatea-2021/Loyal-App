@@ -18,18 +18,20 @@ function Index () {
 					tabBarIcon: ({ color }) => <TabIcon color={color} name="qr-code-scanner" />,
 				}}
 			/>
-			<AppTab.Screen
-				name={HOME}
-				component={HomeScreen}
-				options={{
-					tabBarIcon: ({ color }) => <TabIcon color={color} name="home" />,
-				}}
-			/>
+
 			<AppTab.Screen
 				name={CARD}
 				component={CardScreen}
 				options={{
 					tabBarIcon: ({ color }) => <TabIcon color={color} name="home" />,
+				}}
+			/>
+			<AppTab.Screen
+				name={HOME}
+				component={HomeScreen}
+				options={{
+					title: 'Home',
+					tabBarIcon: ({ color }) => <TabIcon color={color} name="supervised-user-circle" />,
 				}}
 			/>
 		</AppTab.Navigator>

@@ -2,7 +2,6 @@ import 'react-native-gesture-handler'
 import { StatusBar } from 'expo-status-bar'
 import React, { useEffect } from 'react'
 import { Provider } from 'react-redux'
-
 // import { StyleSheet, Text, View } from 'react-native'
 import { NavigationContainer } from '@react-navigation/native'
 import { createStackNavigator } from '@react-navigation/stack'
@@ -19,33 +18,31 @@ const AppStack = createStackNavigator()
 
 export default function App () {
 	return (
-		<SafeAreaProvider>
-			<NavigationContainer>
-				<AppStack.Navigator
-					screenOptions={{
-						headerShown: true,
-					}}
-				>
-					<AppStack.Screen
-						name="Login"
-						component={LoginScreen}
-					/>
-					<AppStack.Screen
-						name="Register"
-						component={RegisterScreen}
-					/>
-					<AppStack.Screen
-						name="Home"
-						component={HomeScreen}
-					/>
-					<AppStack.Screen
-						name="BottomNavigation"
-						component={Navigation}
-					/>
-				</AppStack.Navigator>
-			</NavigationContainer>
+		<Provider store={store}>
+			<SafeAreaProvider>
+				<NavigationContainer>
+					<AppStack.Navigator
+						screenOptions={{
+							headerShown: true,
+						}}
+					>
+						<AppStack.Screen
+							name="Login"
+							component={LoginScreen}
+						/>
+						<AppStack.Screen
+							name="Register"
+							component={RegisterScreen}
+						/>
+						<AppStack.Screen
+							name="BottomNavigation"
+							component={Navigation}
+						/>
+					</AppStack.Navigator>
+				</NavigationContainer>
 
-		</SafeAreaProvider>
+			</SafeAreaProvider>
+		</Provider>
 
 	)
 }
