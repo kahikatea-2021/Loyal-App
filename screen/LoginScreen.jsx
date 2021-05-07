@@ -4,7 +4,7 @@ import {
 } from 'react-native'
 import * as WebBrowser from 'expo-web-browser'
 import { set } from 'react-native-reanimated'
-import firebase from '../auth'
+import { auth } from '../auth'
 
 const styles = StyleSheet.create({
 	container: {
@@ -38,10 +38,15 @@ const styles = StyleSheet.create({
 function LoginScreen ({ navigation }) {
 	const [email, setEmail] = useState('')
 	const [password, setPassword] = useState('')
-	// const signIn = () => {
-	console.log(email)
-	console.log(password)
-	// }
+
+	useEffect(() => {
+		const unsubscribe = auth.onAuthStateChanged((authUser) => {
+			if (authUser) {
+				navigation.replace('Home')
+			}
+		})
+		return unsubscribe
+	}, [])
 	const signIn = () => {
 
 	}

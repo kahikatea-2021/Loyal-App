@@ -10,6 +10,7 @@ import Navigation from './navigation'
 import LoginScreen from './screen/LoginScreen'
 import firebase from './auth'
 import RegisterScreen from './screen/RegisterScreen'
+import HomeScreen from './screen/HomeScreen'
 
 /* const styles = StyleSheet.create({
 	container: {
@@ -39,6 +40,10 @@ export default function App () {
 					<AppStack.Screen
 						name="Register"
 						component={RegisterScreen}
+					/>
+					<AppStack.Screen
+						name="Home"
+						component={HomeScreen}
 					/>
 				</AppStack.Navigator>
 			</NavigationContainer>

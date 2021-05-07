@@ -1,8 +1,12 @@
 import { registerRootComponent } from 'expo'
 import React, { useState, useLayoutEffect } from 'react'
 import {
+
 	SafeAreaView, TextInput, Text, Button, StyleSheet, KeyboardAvoidingView, Image,
+
 } from 'react-native'
+import { auth } from '../auth/index'
+
 
 const styles = StyleSheet.create({
 	container: {
@@ -36,9 +40,10 @@ const styles = StyleSheet.create({
 		margin: 20,
 		borderRadius: 10,
 	},
-})
+
 
 function RegisterScreen ({ navigation }) {
+   const [userName, setUserName] = useState('')
 	const [firstName, setFirstName] = useState('')
 	const [lastName, setLastName] = useState('')
 	const [phone, setPhone] = useState('')
@@ -50,9 +55,16 @@ function RegisterScreen ({ navigation }) {
 			headerBackTitle: 'Back to Login',
 		})
 	}, [navigation])
-	const register = () => {
-
-	}
+  
+	  const register = () => {
+        auth.createUserWithEmailAndPassword(email, password)
+            .then((authUser) => {
+                authUser.user.update({
+                    displayName: userName,
+                })
+            }).catch((error) => alert(error.message))
+    }
+    
 	return (
 		<KeyboardAvoidingView behavior="padding" style={styles.container}>
 			<SafeAreaView>
@@ -64,6 +76,14 @@ function RegisterScreen ({ navigation }) {
 					style={styles.logo}
 					source={require('../assets/coffee.jpg')}
 				/>
+        <TextInput
+                    placeholder="User Name"
+                    autofocus
+                    type="text"
+                    value={userName}
+                    onChangeText={(text) => setUserName(text)}
+                />  
+
 				<TextInput
 					style={styles.inputContainer}
 					placeholder="First Name"
