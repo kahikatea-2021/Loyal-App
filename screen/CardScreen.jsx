@@ -1,14 +1,22 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
 import {
-	SafeAreaView, Text, View, Image,
+	SafeAreaView, StyleSheet, Text, View,
 } from 'react-native'
+
+const styles = StyleSheet.create({
+	container: {
+		flex: 4,
+		padding: 20,
+	},
+})
 
 function CardScreen() {
 	const card = useSelector((globalState) => globalState.card)
 	return (
-		<SafeAreaView>
-			<View>
+		<SafeAreaView style={{ flex: 1 }}>
+
+			<View style={{ flex: 1 }}>
 				<Text>
 					Card name:
 					{card.name}
@@ -21,10 +29,17 @@ function CardScreen() {
 					Should redeem:
 					{card.shouldRedeem}
 				</Text>
-				<Text>Hello this is the card</Text>
-				{/* eslint-disable-next-line global-require */}
-				<Image source={require('../assets/tom-jerry.jpeg')} />
 			</View>
+
+			<View style={[styles.container, {
+				flexDirection: 'row',
+			}]}
+			>
+				<View style={{ flex: 2, backgroundColor: 'red' }} />
+				<View style={{ flex: 2, backgroundColor: 'darkorange' }} />
+				<View style={{ flex: 2, backgroundColor: 'green' }} />
+			</View>
+
 		</SafeAreaView>
 	)
 }
