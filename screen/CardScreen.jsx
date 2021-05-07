@@ -9,10 +9,21 @@ const styles = StyleSheet.create({
 		flex: 4,
 		padding: 20,
 	},
+	default: {
+		flex: 1, backgroundColor: 'red',
+	},
+	unstamped: {
+		backgroundColor: 'black',
+	},
+	stamped: {
+		backgroundColor: 'white',
+	},
 })
 
 function CardScreen() {
 	const card = useSelector((globalState) => globalState.card)
+	const finalCount = card.stampCount
+
 	return (
 		<SafeAreaView style={{ flex: 1 }}>
 
@@ -36,7 +47,7 @@ function CardScreen() {
 					flexDirection: 'row', flex: 1,
 				}}
 				>
-					<View style={{ flex: 1, backgroundColor: 'red' }} />
+					<View style={[styles.default, (finalCount > 2) ? styles.stamped : styles.unstamped]} />
 					<View style={{ flex: 1, backgroundColor: 'darkorange' }} />
 					<View style={{ flex: 1, backgroundColor: 'green' }} />
 					<View style={{ flex: 1, backgroundColor: 'pink' }} />
