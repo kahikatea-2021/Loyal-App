@@ -84,25 +84,13 @@ function LoginScreen ({ navigation }) {
 					/>
 				</SafeAreaView>
 				<Button style={styles.button} onPress={signIn} title="Login" />
-				<Button style={styles.button} onPress={() => navigation.navigate('Register')} title="Register" type="outline" />
+				<Button style={styles.button} onPress={() => navigation.navigate('Register')} title="Register as User" type="outline" />
+				<Button style={styles.button} onPress={() => navigation.navigate('StoreRegister')} title="Register as Store" type="outline" />
 				<Button style={styles.button} onPress={() => navigation.navigate('ResetPassword')} title="Reset Password" type="outline" />
 
 			</ScrollView>
 		</KeyboardAvoidingView>
 	)
 }
-{ /* <Button
-				onPress={loginUser}
-				title="Create User"
-			/> */ }
-
-// WebBrowser.maybeCompleteAuthSession()
-// firebase.auth().onAuthStateChanged((user) => {
-// 	console.log(user)
-// })
-// function loginUser () {
-// 	firebase.auth().signInWithEmailAndPassword('test@test.co.nz', 'abcdefg')
-// }
-// firebase.auth().signOut()
 
 export default LoginScreen
