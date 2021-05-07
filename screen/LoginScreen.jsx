@@ -84,6 +84,8 @@ function LoginScreen ({ navigation }) {
 				</SafeAreaView>
 				<Button style={styles.button} onPress={signIn} title="Login" />
 				<Button style={styles.button} onPress={() => navigation.navigate('Register')} title="Register" type="outline" />
+				<Button style={styles.button} onPress={() => navigation.navigate('ResetPassword')} title="Reset Password" type="outline" />
+
 			</ScrollView>
 		</KeyboardAvoidingView>
 	)
