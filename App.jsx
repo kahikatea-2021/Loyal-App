@@ -12,6 +12,7 @@ import Navigation from './navigation'
 import LoginScreen from './screen/LoginScreen'
 import firebase from './auth'
 import RegisterScreen from './screen/RegisterScreen'
+import StoreRegisterScreen from './screen/StoreRegisterScreen'
 import HomeScreen from './screen/HomeScreen'
 import ResetPasswordScreen from './screen/ResetPasswordScreen'
 
@@ -34,6 +35,10 @@ export default function App () {
 						<AppStack.Screen
 							name="Register"
 							component={RegisterScreen}
+						/>
+						<AppStack.Screen
+							name="StoreRegister"
+							component={StoreRegisterScreen}
 						/>
 						<AppStack.Screen
 							name="ResetPassword"
