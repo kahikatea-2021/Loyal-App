@@ -10,7 +10,7 @@ const styles = StyleSheet.create({
 		padding: 20,
 	},
 	default: {
-		flex: 1, backgroundColor: 'red',
+		flex: 1, borderRadius: 10, borderWidth: 3, borderColor: 'red',
 	},
 	unstamped: {
 		backgroundColor: 'black',
@@ -27,14 +27,14 @@ function CardScreen() {
 	return (
 		<SafeAreaView style={{ flex: 1 }}>
 
-			<View style={{ flex: 1 }}>
+			<View style={{ flex: 2 }}>
 				<Text>
 					Card name:
 					{card.name}
 				</Text>
 				<Text>
 					Stamp:
-					{card.stampCount}
+					{finalCount}
 				</Text>
 				<Text>
 					Should redeem:
