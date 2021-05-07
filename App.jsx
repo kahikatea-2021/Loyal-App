@@ -13,6 +13,7 @@ import LoginScreen from './screen/LoginScreen'
 import firebase from './auth'
 import RegisterScreen from './screen/RegisterScreen'
 import HomeScreen from './screen/HomeScreen'
+import ResetPasswordScreen from './screen/ResetPasswordScreen'
 
 const AppStack = createStackNavigator()
 
@@ -33,6 +34,10 @@ export default function App () {
 						<AppStack.Screen
 							name="Register"
 							component={RegisterScreen}
+						/>
+						<AppStack.Screen
+							name="ResetPassword"
+							component={ResetPasswordScreen}
 						/>
 						<AppStack.Screen
 							name="BottomNavigation"
