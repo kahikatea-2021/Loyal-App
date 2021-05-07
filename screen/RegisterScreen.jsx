@@ -1,8 +1,8 @@
 import { registerRootComponent } from 'expo'
-import request from 'superagent'
+import request, { notify } from 'superagent'
 import React, { useState, useLayoutEffect } from 'react'
 import {
-	SafeAreaView, TextInput, Text, Button, StyleSheet, KeyboardAvoidingView, Image, ScrollView,
+	SafeAreaView, TextInput, Text, Button, StyleSheet, KeyboardAvoidingView, Image, ScrollView, Alert,
 } from 'react-native'
 import { auth } from '../auth/index'
 
@@ -69,8 +69,10 @@ function RegisterScreen ({ navigation }) {
 					console.log(response.body)
 					navigation.replace('BottomNavigation')
 				}
-			}).catch((err) => {
-				console.log(err.message)
+			}).catch((error) => {
+				const errorCode = error.code
+				const errorMessage = error.message
+				alert(errorMessage)
 			})
 	}
 
@@ -89,6 +91,7 @@ function RegisterScreen ({ navigation }) {
 					<TextInput
 						style={styles.inputContainer}
 						placeholder="User Name"
+						autoCapitalize="none"
 						autofocus
 						type="text"
 						value={userName}
@@ -120,6 +123,7 @@ function RegisterScreen ({ navigation }) {
 					<TextInput
 						style={styles.inputContainer}
 						placeholder="E-mail"
+						autoCapitalize="none"
 						type="email"
 						value={email}
 						onChangeText={(text) => setEmail(text)}
@@ -128,6 +132,7 @@ function RegisterScreen ({ navigation }) {
 						style={styles.inputContainer}
 						placeholder="Password"
 						type="password"
+						autoCapitalize="none"
 						secureTextEntry
 						value={password}
 						onChangeText={(text) => setPassword(text)}

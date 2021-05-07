@@ -54,6 +54,7 @@ function LoginScreen ({ navigation }) {
 			.catch((error) => {
 				const errorCode = error.code
 				const errorMessage = error.message
+				alert(errorMessage)
 			})
 	}
 	return (

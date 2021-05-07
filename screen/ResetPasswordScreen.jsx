@@ -41,6 +41,21 @@ const styles = StyleSheet.create({
 })
 
 function ResetPassword ({ navigation }) {
+    const [email, setEmail] = useState('')
+
+    const reset = () => {
+        auth.sendPasswordResetEmail(email)
+            .then((email) {
+                if (email) {
+                    alert(email)
+                    navigation.replace('BottomNavigation')
+                }
+            }).catch((error) => {
+                const errorCode = error.code
+                const errorMessage = error.message
+                alert(errorMessage)
+            })
+    }
     useLayoutEffect(() => {
         navigation.setOptions({
             headerBackTitle: 'Back to Login',
@@ -49,7 +64,17 @@ function ResetPassword ({ navigation }) {
 
     return (
         <KeyboardAvoidingView behavior="position" style={styles.container}>
-            <Text>hello</Text>
+            <TextInput
+                style={styles.inputContainer}
+                placeholder="E-mail"
+                autoCapitalize="none"
+                type="email"
+                value={email}
+                onChangeText={(text) => setEmail(text)}
+            />
+            <SafeAreaView>
+                <Button raised style={styles.button} onPress={reset} title="Reset" />
+            </SafeAreaView>
         </KeyboardAvoidingView>
     )
 }
