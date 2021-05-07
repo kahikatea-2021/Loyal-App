@@ -18,9 +18,11 @@ export function stamp(userId, url = '/v1/api/stamp') {
 export function card(userId) {
 	const storeUser = store_users.store_users.find((storeUser) => storeUser.user_id === userId)
 	const store = stores.stores.find((store) => store.id === storeUser.store_id)
+	const { total } = cards.cards.find((card) => card.store_id === store.id)
 	return {
 		name: store.store_name,
 		stampCount: storeUser.stamp_count,
-		shouldRedeem: storeUser.stamp_count === cards.cards.find((card) => card.store_id === store.id).total,
+		shouldRedeem: storeUser.stamp_count === total,
+
 	}
 }
