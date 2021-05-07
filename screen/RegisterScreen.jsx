@@ -57,11 +57,15 @@ function RegisterScreen ({ navigation }) {
 
     const register = () => {
         auth.createUserWithEmailAndPassword(email, password)
-            .then((authUser) => {
-                authUser.user.update({
-                    displayName: userName,
-                })
-            }).catch((error) => alert(error.message))
+            .then((userCredential) => {
+                // Signed in
+                const { user } = userCredential
+                // ...
+            })
+            .catch((error) => {
+                const errorCode = error.code
+                const errorMessage = error.message
+            })
     }
 
     return (

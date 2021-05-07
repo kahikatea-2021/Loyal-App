@@ -12,19 +12,9 @@ import firebase from './auth'
 import RegisterScreen from './screen/RegisterScreen'
 import HomeScreen from './screen/HomeScreen'
 
-/* const styles = StyleSheet.create({
-	container: {
-		flex: 1,
-		backgroundColor: '#fff',
-		alignItems: 'center',
-		justifyContent: 'center',
-	},
-}) */
-
 const AppStack = createStackNavigator()
 
 export default function App () {
-	// eslint-disable-next-line no-unused-vars
 	return (
 		<SafeAreaProvider>
 			<NavigationContainer>

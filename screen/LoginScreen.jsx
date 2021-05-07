@@ -48,7 +48,12 @@ function LoginScreen ({ navigation }) {
 		return unsubscribe
 	}, [])
 	const signIn = () => {
-
+		auth
+			.signInWithEmailAndPassword(email, password)
+			.catch((error) => {
+				const errorCode = error.code
+				const errorMessage = error.message
+			})
 	}
 	return (
 		<KeyboardAvoidingView behaviour="padding" style={styles.container}>
@@ -57,8 +62,23 @@ function LoginScreen ({ navigation }) {
 					style={styles.logo}
 					source={require('../assets/coffee.jpg')}
 				/>
-				<TextInput style={styles.inputContainer} placeholder="E-mail" autofocus type="email" value={email} onChangeText={(text) => setEmail(text)} />
-				<TextInput style={styles.inputContainer} placeholder="Password" type="password" secureTextEntry value={password} onChangeText={(text) => setPassword(text)} />
+				<TextInput
+					style={styles.inputContainer}
+					placeholder="E-mail"
+					autofocus
+					type="email"
+					value={email}
+					onChangeText={(text) => setEmail(text)}
+				/>
+				<TextInput
+					style={styles.inputContainer}
+					placeholder="Password"
+					type="password"
+					secureTextEntry
+					value={password}
+					onChangeText={(text) => setPassword(text)}
+					onSubmitEditing={signIn}
+				/>
 			</SafeAreaView>
 			<Button style={styles.button} onPress={signIn} title="Login" />
 			<Button style={styles.button} onPress={() => navigation.navigate('Register')} title="Register" type="outline" />

@@ -1,11 +1,28 @@
-import React from 'react'
-import { SafeAreaView, Text, View } from 'react-native'
+import React, { useLayoutEffect } from 'react'
+import {
+	SafeAreaView, Button, Text, TouchableOpacity, View,
+} from 'react-native'
+import { auth } from '../auth'
 
-function HomeScreen() {
+function HomeScreen ({ navigation }) {
+	const signOutUser = () => {
+		auth.signOut().then(() => {
+			navigation.replace('Login')
+		})
+	}
+	useLayoutEffect(() => {
+		navigation.setOptions({
+			title: 'Loyal',
+			headerStyle: { backgroundColor: '#fff' },
+
+		})
+	}, [])
+
 	return (
 		<SafeAreaView>
 			<View>
-				<Text>Hello Wolrd</Text>
+				<Button onPress={signOutUser} title="Sign Out" />
+				<Text>Hello World</Text>
 			</View>
 		</SafeAreaView>
 	)
