@@ -45,15 +45,9 @@ function ResetPassword ({ navigation }) {
 
     const reset = () => {
         auth.sendPasswordResetEmail(email)
-            .then((email) {
-                if (email) {
-                    alert(email)
-                    navigation.replace('BottomNavigation')
-                }
-            }).catch((error) => {
-                const errorCode = error.code
-                const errorMessage = error.message
-                alert(errorMessage)
+            .then(() => {
+                navigation.navigate('Login')
+                alert('You should recieve an email shortly')
             })
     }
     useLayoutEffect(() => {
