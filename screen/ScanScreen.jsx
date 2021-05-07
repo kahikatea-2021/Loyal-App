@@ -3,7 +3,9 @@ import { Text, StyleSheet, Button } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { useNavigation } from '@react-navigation/native'
 import { BarCodeScanner } from 'expo-barcode-scanner'
+import { useDispatch } from 'react-redux'
 import { CARD } from '../navigation/screenDefinitions'
+import { stampCard } from './stampHelper'
 
 const styles = StyleSheet.create({
 	container: {
@@ -17,6 +19,7 @@ function HomeScreen() {
 	const [isPermitted, setPermit] = useState(null)
 	const [scannedCode, setScannedCode] = useState(false)
 	const navigation = useNavigation()
+	const dispatch = useDispatch()
 
 	async function requestForPermission() {
 		const { status } = await BarCodeScanner.requestPermissionsAsync()
@@ -28,6 +31,7 @@ function HomeScreen() {
 		// eslint-disable-next-line no-console
 		console.log(data)
 		// alert(data)
+		stampCard(dispatch)
 		navigation.navigate(CARD)
 	}
 
