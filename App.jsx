@@ -3,8 +3,6 @@ import { StatusBar } from 'expo-status-bar'
 import React, { useEffect } from 'react'
 import { Provider } from 'react-redux'
 
-
-
 // import { StyleSheet, Text, View } from 'react-native'
 import { NavigationContainer } from '@react-navigation/native'
 import { createStackNavigator } from '@react-navigation/stack'
@@ -20,7 +18,6 @@ import HomeScreen from './screen/HomeScreen'
 const AppStack = createStackNavigator()
 
 export default function App () {
-
 	return (
 		<SafeAreaProvider>
 			<NavigationContainer>
@@ -41,10 +38,10 @@ export default function App () {
 						name="Home"
 						component={HomeScreen}
 					/>
-    		<AppStack.Screen
-									name="BottomNavigation"
-									component={Navigation}
-								/>
+					<AppStack.Screen
+						name="BottomNavigation"
+						component={Navigation}
+					/>
 				</AppStack.Navigator>
 			</NavigationContainer>
 
