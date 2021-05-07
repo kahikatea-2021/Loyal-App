@@ -1,15 +1,15 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
 import {
-	SafeAreaView, StyleSheet, Text, View,
+	SafeAreaView, StyleSheet, Button, Text, View,
 } from 'react-native'
 
 const styles = StyleSheet.create({
-	container: {
+	loyaltyCard: {
 		flex: 4,
 		padding: 20,
 	},
-	default: {
+	defaultStamp: {
 		flex: 1, borderRadius: 10, borderWidth: 3, borderColor: 'red',
 	},
 	unstamped: {
@@ -18,7 +18,19 @@ const styles = StyleSheet.create({
 	stamped: {
 		backgroundColor: 'white',
 	},
+	separator: {
+		marginVertical: 8,
+		borderBottomColor: '#737373',
+		borderBottomWidth: StyleSheet.hairlineWidth,
+	},
+	redeemButton: {
+		backgroundColor: 'yellow', flex: 1, borderRadius: 10, borderWidth: 3, borderColor: 'red',
+	},
 })
+
+const Separator = () => (
+	<View style={styles.separator} />
+)
 
 function CardScreen() {
 	const card = useSelector((globalState) => globalState.card)
@@ -42,28 +54,61 @@ function CardScreen() {
 				</Text>
 			</View>
 
-			<View style={[styles.container]}>
+			<Separator />
+
+			<View style={[styles.loyaltyCard]}>
 				<View style={{
 					flexDirection: 'row', flex: 1,
 				}}
 				>
-					<View style={[styles.default, (finalCount >= 1) ? styles.stamped : styles.unstamped]} />
-					<View style={[styles.default, (finalCount >= 2) ? styles.stamped : styles.unstamped]} />
-					<View style={[styles.default, (finalCount >= 3) ? styles.stamped : styles.unstamped]} />
-					<View style={[styles.default, (finalCount >= 4) ? styles.stamped : styles.unstamped]} />
-					<View style={[styles.default, (finalCount >= 5) ? styles.stamped : styles.unstamped]} />
+					<View style={[styles.defaultStamp, (finalCount >= 1)
+						? styles.stamped : styles.unstamped]}
+					/>
+					<View style={[styles.defaultStamp, (finalCount >= 2)
+						? styles.stamped : styles.unstamped]}
+					/>
+					<View style={[styles.defaultStamp, (finalCount >= 3)
+						? styles.stamped : styles.unstamped]}
+					/>
+					<View style={[styles.defaultStamp, (finalCount >= 4)
+						? styles.stamped : styles.unstamped]}
+					/>
+					<View style={[styles.defaultStamp, (finalCount >= 5)
+						? styles.stamped : styles.unstamped]}
+					/>
 				</View>
 
 				<View style={{
 					flexDirection: 'row', flex: 1,
 				}}
 				>
-					<View style={[styles.default, (finalCount >= 6) ? styles.stamped : styles.unstamped]} />
-					<View style={[styles.default, (finalCount >= 7) ? styles.stamped : styles.unstamped]} />
-					<View style={[styles.default, (finalCount >= 8) ? styles.stamped : styles.unstamped]} />
-					<View style={[styles.default, (finalCount >= 9) ? styles.stamped : styles.unstamped]} />
-					<View style={[styles.default, (finalCount >= 10) ? styles.stamped : styles.unstamped]} />
+					<View style={[styles.defaultStamp, (finalCount >= 6)
+						? styles.stamped : styles.unstamped]}
+					/>
+					<View style={[styles.defaultStamp, (finalCount >= 7)
+						? styles.stamped : styles.unstamped]}
+					/>
+					<View style={[styles.defaultStamp, (finalCount >= 8)
+						? styles.stamped : styles.unstamped]}
+					/>
+					<View style={[styles.defaultStamp, (finalCount >= 9)
+						? styles.stamped : styles.unstamped]}
+					/>
+					<View style={[styles.defaultStamp, (finalCount >= 10)
+						? styles.stamped : styles.unstamped]}
+					/>
 				</View>
+			</View>
+
+			<Separator />
+
+			<View style={[styles.redeemButton]}>
+				<Button
+					// onPress={onPressLearnMore}
+					title="REDEEM"
+					color="#841584"
+					accessibilityLabel="Learn more about this purple button"
+				/>
 			</View>
 
 		</SafeAreaView>
