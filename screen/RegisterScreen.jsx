@@ -1,9 +1,8 @@
 import { registerRootComponent } from 'expo'
+import request from 'superagent'
 import React, { useState, useLayoutEffect } from 'react'
 import {
-
 	SafeAreaView, TextInput, Text, Button, StyleSheet, KeyboardAvoidingView, Image, ScrollView,
-
 } from 'react-native'
 import { auth } from '../auth/index'
 
@@ -49,22 +48,24 @@ function RegisterScreen ({ navigation }) {
 	const [email, setEmail] = useState('')
 	const [password, setPassword] = useState('')
 
-	useLayoutEffect(() => {
-		navigation.setOptions({
-			headerBackTitle: 'Back to Login',
-		})
-	}, [navigation])
-
-	const register = () => {
-		auth.createUserWithEmailAndPassword(email, password)
-			.then((userCredential) => {
-				// Signed in
-				const { user } = userCredential
-				// ...
+	const registerUser = () => {
+		request
+			.post('https://1be77e300087.ngrok.io/api/v1/account/register')
+			.send({
+				userName,
+				firstName,
+				lastName,
+				phone,
+				email,
+				password,
 			})
-			.catch((error) => {
-				const errorCode = error.code
-				const errorMessage = error.message
+			.then((response) => {
+				if (response) {
+					console.log(response.body)
+					navigation.replace('BottomNavigation')
+				}
+			}).catch((err) => {
+				console.log(err.message)
 			})
 	}
 
@@ -88,7 +89,6 @@ function RegisterScreen ({ navigation }) {
 						value={userName}
 						onChangeText={(text) => setUserName(text)}
 					/>
-
 					<TextInput
 						style={styles.inputContainer}
 						placeholder="First Name"
