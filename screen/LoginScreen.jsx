@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import {
-	SafeAreaView, TextInput, Text, Button, Platform, StyleSheet, KeyboardAvoidingView, Image,
+	SafeAreaView, TextInput, Text, Button, Platform, StyleSheet, KeyboardAvoidingView, Image, ScrollView,
 } from 'react-native'
 import * as WebBrowser from 'expo-web-browser'
 import { set } from 'react-native-reanimated'
@@ -12,6 +12,7 @@ const styles = StyleSheet.create({
 		backgroundColor: '#fff',
 		alignItems: 'center',
 		justifyContent: 'center',
+
 	},
 	inputContainer: {
 		width: 300,
@@ -56,32 +57,34 @@ function LoginScreen ({ navigation }) {
 			})
 	}
 	return (
-		<KeyboardAvoidingView behaviour="padding" style={styles.container}>
-			<SafeAreaView>
-				<Image
-					style={styles.logo}
-					source={require('../assets/coffee.jpg')}
-				/>
-				<TextInput
-					style={styles.inputContainer}
-					placeholder="E-mail"
-					autofocus
-					type="email"
-					value={email}
-					onChangeText={(text) => setEmail(text)}
-				/>
-				<TextInput
-					style={styles.inputContainer}
-					placeholder="Password"
-					type="password"
-					secureTextEntry
-					value={password}
-					onChangeText={(text) => setPassword(text)}
-					onSubmitEditing={signIn}
-				/>
-			</SafeAreaView>
-			<Button style={styles.button} onPress={signIn} title="Login" />
-			<Button style={styles.button} onPress={() => navigation.navigate('Register')} title="Register" type="outline" />
+		<KeyboardAvoidingView behaviour="position" style={styles.container}>
+			<ScrollView>
+				<SafeAreaView>
+					<Image
+						style={styles.logo}
+						source={require('../assets/coffee.jpg')}
+					/>
+					<TextInput
+						style={styles.inputContainer}
+						placeholder="E-mail"
+						autofocus
+						type="email"
+						value={email}
+						onChangeText={(text) => setEmail(text)}
+					/>
+					<TextInput
+						style={styles.inputContainer}
+						placeholder="Password"
+						type="password"
+						secureTextEntry
+						value={password}
+						onChangeText={(text) => setPassword(text)}
+						onSubmitEditing={signIn}
+					/>
+				</SafeAreaView>
+				<Button style={styles.button} onPress={signIn} title="Login" />
+				<Button style={styles.button} onPress={() => navigation.navigate('Register')} title="Register" type="outline" />
+			</ScrollView>
 		</KeyboardAvoidingView>
 	)
 }
