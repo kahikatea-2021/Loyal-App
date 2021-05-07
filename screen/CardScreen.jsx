@@ -31,13 +31,28 @@ function CardScreen() {
 				</Text>
 			</View>
 
-			<View style={[styles.container, {
-				flexDirection: 'row',
-			}]}
-			>
-				<View style={{ flex: 2, backgroundColor: 'red' }} />
-				<View style={{ flex: 2, backgroundColor: 'darkorange' }} />
-				<View style={{ flex: 2, backgroundColor: 'green' }} />
+			<View style={[styles.container]}>
+				<View style={{
+					flexDirection: 'row', flex: 1,
+				}}
+				>
+					<View style={{ flex: 1, backgroundColor: 'red' }} />
+					<View style={{ flex: 1, backgroundColor: 'darkorange' }} />
+					<View style={{ flex: 1, backgroundColor: 'green' }} />
+					<View style={{ flex: 1, backgroundColor: 'pink' }} />
+					<View style={{ flex: 1, backgroundColor: 'magenta' }} />
+				</View>
+
+				<View style={{
+					flexDirection: 'row', flex: 1,
+				}}
+				>
+					<View style={{ flex: 1, backgroundColor: 'blue' }} />
+					<View style={{ flex: 1, backgroundColor: 'yellow' }} />
+					<View style={{ flex: 1, backgroundColor: 'purple' }} />
+					<View style={{ flex: 1, backgroundColor: 'grey' }} />
+					<View style={{ flex: 1, backgroundColor: 'gold' }} />
+				</View>
 			</View>
 
 		</SafeAreaView>
