@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useLayoutEffect } from 'react'
 import {
 	SafeAreaView, TextInput, Text, Button, Platform, StyleSheet, KeyboardAvoidingView, Image, ScrollView,
 } from 'react-native'
@@ -9,30 +9,32 @@ import { auth } from '../auth'
 const styles = StyleSheet.create({
 	container: {
 		flex: 1,
-		backgroundColor: '#fff',
+		backgroundColor: '#49378E',
 		alignItems: 'center',
 		justifyContent: 'center',
 
 	},
 	inputContainer: {
 		fontSize: 20,
-		borderWidth: 1,
-		borderRadius: 10,
-		borderColor: '#0B82D6',
+		borderWidth: 0,
+		borderRadius: 12,
+		borderColor: '#1282E9',
+		backgroundColor: '#fff',
 		padding: 9,
 		margin: 4,
-
 	},
 	button: {
 		width: 200,
 		marginTop: 10,
+		color: '#FCFAF1',
 	},
 	logo: {
 		width: 170,
-		height: 168,
+		height: 205,
 		alignSelf: 'center',
-		margin: 20,
-		borderRadius: 10,
+		top: 10,
+		marginBottom: 20,
+		borderRadius: 15,
 	},
 	register: {
 		flexDirection: 'row',
@@ -41,15 +43,31 @@ const styles = StyleSheet.create({
 		alignItems: 'center',
 		borderWidth: 1,
 		borderRadius: 10,
-		borderColor: '#0B82D6',
+		borderColor: '#1282E9',
+		backgroundColor: '#FCFAF1',
 		padding: 9,
 		margin: 4,
 	},
 })
 
 function LoginScreen ({ navigation }) {
+	useLayoutEffect(() => {
+		navigation.setOptions({
+			title: 'Loyal',
+		})
+	}, [navigation])
 	const [email, setEmail] = useState('')
 	const [password, setPassword] = useState('')
+
+	useLayoutEffect(() => {
+		navigation.setOptions({
+			title: '',
+			headerStyle: {
+				backgroundColor: '#49378E',
+				shadowColor: 'transparent',
+			},
+		})
+	}, [navigation])
 
 	useEffect(() => {
 		const unsubscribe = auth.onAuthStateChanged((authUser) => {
@@ -60,21 +78,29 @@ function LoginScreen ({ navigation }) {
 		return unsubscribe
 	}, [])
 	const signIn = () => {
-		auth
-			.signInWithEmailAndPassword(email, password)
+		auth.signInWithEmailAndPassword(email, password)
 			.catch((error) => {
-				const errorCode = error.code
-				const errorMessage = error.message
-				alert(errorMessage)
+				console.log(error.code)
+				switch (error.code) {
+					case 'auth/invalid-email':
+						alert('Please use a valid email')
+						break
+					case 'auth/wrong-password':
+						alert('Please enter correct password')
+						break
+					case 'auth/user-not-found':
+						alert('This account is not registered')
+						break
+				}
 			})
 	}
 	return (
-		<KeyboardAvoidingView behaviour="position" style={styles.container}>
+		<KeyboardAvoidingView behaviour="padding" style={styles.container}>
 			<ScrollView>
 				<SafeAreaView>
 					<Image
 						style={styles.logo}
-						source={require('../assets/testIcon.png')}
+						source={require('../assets/testTitleImage.png')}
 					/>
 					<TextInput
 						style={styles.inputContainer}
