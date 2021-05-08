@@ -9,13 +9,23 @@ import { getUserCard } from '../store/actions/cardActions'
 const styles = StyleSheet.create({
 	loyaltyCard: {
 		flex: 4,
-		padding: 20,
+		padding: 15,
+		margin: 20,
+		backgroundColor: 'yellow',
+		shadowColor: '#000',
+		shadowOffset: {
+			width: 0,
+			height: 2,
+		},
+		shadowOpacity: 0.25,
+		shadowRadius: 4,
+		elevation: 5,
 	},
 	loyaltyCardRow: {
-		flexDirection: 'row', flex: 1,
+		flexDirection: 'row', flex: 1.3,
 	},
 	defaultStamp: {
-		flex: 1, borderRadius: 10, borderWidth: 3, borderColor: 'red',
+		flex: 1, margin: 5, borderRadius: 10, borderWidth: 3, borderColor: 'red',
 	},
 	unstamped: {
 		backgroundColor: 'black',
@@ -72,10 +82,13 @@ const styles = StyleSheet.create({
 		marginBottom: 15,
 		textAlign: 'center',
 	},
+	spacer: {
+		flex: 1,
+	},
 })
 
-const Separator = () => (
-	<View style={styles.separator} />
+const Spacer = () => (
+	<View style={styles.spacer} />
 )
 
 function CardScreen() {
@@ -91,7 +104,10 @@ function CardScreen() {
 
 	return (
 		<SafeAreaView style={{ flex: 1 }}>
+			<Spacer />
 			<View style={[styles.loyaltyCard]}>
+				<Spacer />
+
 				<View style={[styles.loyaltyCardRow]}>
 					<View style={[styles.defaultStamp, (stampCount >= 1)
 						? styles.stamped : styles.unstamped]}
@@ -127,7 +143,8 @@ function CardScreen() {
 					/>
 				</View>
 			</View>
-			<Separator />
+			<Spacer />
+
 			{(shouldRedeem)
 				? (
 					<View style={styles.centeredView}>
@@ -193,6 +210,8 @@ function CardScreen() {
 						</Text>
 					</View>
 				)}
+			<Spacer />
+
 		</SafeAreaView>
 	)
 }
