@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useLayoutEffect } from 'react'
 import {
 	SafeAreaView, TextInput, Text, Button, Platform, StyleSheet, KeyboardAvoidingView, Image, ScrollView,
 } from 'react-native'
@@ -48,6 +48,11 @@ const styles = StyleSheet.create({
 })
 
 function LoginScreen ({ navigation }) {
+	useLayoutEffect(() => {
+		navigation.setOptions({
+			title: 'Loyal',
+		})
+	}, [navigation])
 	const [email, setEmail] = useState('')
 	const [password, setPassword] = useState('')
 
@@ -60,16 +65,24 @@ function LoginScreen ({ navigation }) {
 		return unsubscribe
 	}, [])
 	const signIn = () => {
-		auth
-			.signInWithEmailAndPassword(email, password)
+		auth.signInWithEmailAndPassword(email, password)
 			.catch((error) => {
-				const errorCode = error.code
-				const errorMessage = error.message
-				alert(errorMessage)
+				console.log(error.code)
+				switch (error.code) {
+					case 'auth/invalid-email':
+						alert('Please use a valid email')
+						break
+					case 'auth/wrong-password':
+						alert('Please enter correct password')
+						break
+					case 'auth/user-not-found':
+						alert('This account is not registered')
+						break
+				}
 			})
 	}
 	return (
-		<KeyboardAvoidingView behaviour="position" style={styles.container}>
+		<KeyboardAvoidingView behaviour="padding" style={styles.container}>
 			<ScrollView>
 				<SafeAreaView>
 					<Image
