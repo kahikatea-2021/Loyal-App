@@ -95,7 +95,7 @@ function LoginScreen ({ navigation }) {
 			})
 	}
 	return (
-		<KeyboardAvoidingView behaviour="padding" style={styles.container}>
+		<KeyboardAvoidingView behaviour="position" style={styles.container}>
 			<ScrollView>
 				<SafeAreaView>
 					<Image
@@ -122,21 +122,22 @@ function LoginScreen ({ navigation }) {
 					/>
 				</SafeAreaView>
 				<SafeAreaView style={styles.wrap}>
-					<Button style={styles.button} onPress={signIn} title="Login" />
+					<Button color="#49378E" style={styles.button} onPress={signIn} title="Login" />
 				</SafeAreaView>
 				<SafeAreaView style={styles.register}>
 					<SafeAreaView style={styles.wrap}>
-						<Button style={styles.button} onPress={() => navigation.navigate('Register')} title="Register as User" type="outline" />
+						<Button color="#49378E" style={styles.button} onPress={() => navigation.navigate('Register')} title="Register as User" type="outline" />
 					</SafeAreaView>
 					<SafeAreaView style={styles.wrap}>
-						<Button style={styles.button} onPress={() => navigation.navigate('StoreRegister')} title="Register as Store" type="outline" />
+						<Button color="#49378E" style={styles.button} onPress={() => navigation.navigate('StoreRegister')} title="Register as Store" type="outline" />
 					</SafeAreaView>
 				</SafeAreaView>
 				<SafeAreaView style={styles.wrap}>
-					<Button style={styles.button} onPress={() => navigation.navigate('ResetPassword')} title="Forgot Password ?" type="outline" />
+					<Button color="#49378E" style={styles.button} onPress={() => navigation.navigate('ResetPassword')} title="Forgot Password ?" type="outline" />
 				</SafeAreaView>
 			</ScrollView>
 		</KeyboardAvoidingView>
+
 	)
 }
 
