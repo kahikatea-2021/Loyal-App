@@ -9,7 +9,7 @@ import { auth } from '../auth/index'
 const styles = StyleSheet.create({
 	container: {
 		flex: 1,
-		backgroundColor: '#fff',
+		backgroundColor: '#49378E',
 		alignItems: 'center',
 		justifyContent: 'center',
 	},
@@ -17,7 +17,8 @@ const styles = StyleSheet.create({
 		width: 300,
 		borderWidth: 1,
 		borderRadius: 10,
-		borderColor: '#0B82D6',
+		borderColor: '#1282E9',
+		backgroundColor: '#fff',
 		padding: 9,
 		margin: 4,
 
@@ -38,12 +39,29 @@ const styles = StyleSheet.create({
 		margin: 20,
 		borderRadius: 10,
 	},
+	wrap: {
+		alignItems: 'center',
+		borderWidth: 1,
+		borderRadius: 10,
+		borderColor: '#1282E9',
+		backgroundColor: '#3C97EA',
+		padding: 9,
+		margin: 4,
+	},
 })
 
 function RegisterScreen ({ navigation }) {
 	useLayoutEffect(() => {
 		navigation.setOptions({
 			title: 'Create your Loyal Account',
+			headerTitleStyle: {
+				color: '#fff',
+			},
+			headerStyle: {
+				backgroundColor: '#49378E',
+				shadowColor: 'transparent',
+			},
+			headerTintColor: '#fff',
 		})
 	}, [navigation])
 	const [userName, setUserName] = useState('')
@@ -91,7 +109,7 @@ function RegisterScreen ({ navigation }) {
 				<SafeAreaView>
 					<Image
 						style={styles.logo}
-						source={require('../assets/coffee.jpg')}
+						source={require('../assets/testIcon.png')}
 					/>
 					<TextInput
 						style={styles.inputContainer}
@@ -143,8 +161,8 @@ function RegisterScreen ({ navigation }) {
 						onChangeText={(text) => setPassword(text)}
 					/>
 				</SafeAreaView>
-				<SafeAreaView>
-					<Button raised style={styles.button} onPress={registerUser} title="Register" />
+				<SafeAreaView style={styles.wrap}>
+					<Button color="#fff" raised style={styles.button} onPress={registerUser} title="Register" />
 				</SafeAreaView>
 			</ScrollView>
 		</KeyboardAvoidingView>

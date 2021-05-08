@@ -44,18 +44,13 @@ const styles = StyleSheet.create({
 		borderWidth: 1,
 		borderRadius: 10,
 		borderColor: '#1282E9',
-		backgroundColor: '#FCFAF1',
+		backgroundColor: '#3C97EA',
 		padding: 9,
 		margin: 4,
 	},
 })
 
 function LoginScreen ({ navigation }) {
-	useLayoutEffect(() => {
-		navigation.setOptions({
-			title: 'Loyal',
-		})
-	}, [navigation])
 	const [email, setEmail] = useState('')
 	const [password, setPassword] = useState('')
 
@@ -122,18 +117,18 @@ function LoginScreen ({ navigation }) {
 					/>
 				</SafeAreaView>
 				<SafeAreaView style={styles.wrap}>
-					<Button style={styles.button} onPress={signIn} title="Login" />
+					<Button color="#fff" style={styles.button} onPress={signIn} title="Login" />
 				</SafeAreaView>
 				<SafeAreaView style={styles.register}>
 					<SafeAreaView style={styles.wrap}>
-						<Button style={styles.button} onPress={() => navigation.navigate('Register')} title="Register as User" type="outline" />
+						<Button color="#fff" style={styles.button} onPress={() => navigation.navigate('Register')} title="Register as User" type="outline" />
 					</SafeAreaView>
 					<SafeAreaView style={styles.wrap}>
-						<Button style={styles.button} onPress={() => navigation.navigate('StoreRegister')} title="Register as Store" type="outline" />
+						<Button color="#fff" style={styles.button} onPress={() => navigation.navigate('StoreRegister')} title="Register as Store" type="outline" />
 					</SafeAreaView>
 				</SafeAreaView>
 				<SafeAreaView style={styles.wrap}>
-					<Button style={styles.button} onPress={() => navigation.navigate('ResetPassword')} title="Forgot Password ?" type="outline" />
+					<Button color="#fff" style={styles.button} onPress={() => navigation.navigate('ResetPassword')} title="Forgot Password ?" type="outline" />
 				</SafeAreaView>
 			</ScrollView>
 		</KeyboardAvoidingView>
