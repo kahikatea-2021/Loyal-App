@@ -1,13 +1,16 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { useSelector } from 'react-redux'
 import {
-	SafeAreaView, StyleSheet, Button, Text, View,
+	SafeAreaView, StyleSheet, Button, Text, View, Alert, Modal, Pressable,
 } from 'react-native'
 
 const styles = StyleSheet.create({
 	loyaltyCard: {
 		flex: 4,
 		padding: 20,
+	},
+	loyaltyCardRow: {
+		flexDirection: 'row', flex: 1,
 	},
 	defaultStamp: {
 		flex: 1, borderRadius: 10, borderWidth: 3, borderColor: 'red',
@@ -26,6 +29,50 @@ const styles = StyleSheet.create({
 	redeemButton: {
 		backgroundColor: 'yellow', flex: 1, borderRadius: 10, borderWidth: 3, borderColor: 'red',
 	},
+	redeemPlaceholder: {
+		backgroundColor: '#C3C6CA', flex: 1, borderRadius: 10, borderWidth: 3, borderColor: '#C3C6CA',
+	},
+	centeredView: {
+		flex: 1,
+		justifyContent: 'center',
+		alignItems: 'center',
+		marginTop: 22,
+	},
+	modalView: {
+		margin: 20,
+		backgroundColor: 'white',
+		borderRadius: 20,
+		padding: 35,
+		alignItems: 'center',
+		shadowColor: '#000',
+		shadowOffset: {
+			width: 0,
+			height: 2,
+		},
+		shadowOpacity: 0.25,
+		shadowRadius: 4,
+		elevation: 5,
+	},
+	button: {
+		borderRadius: 20,
+		padding: 10,
+		elevation: 2,
+	},
+	buttonOpen: {
+		backgroundColor: '#F194FF',
+	},
+	buttonClose: {
+		backgroundColor: '#2196F3',
+	},
+	textStyle: {
+		color: 'white',
+		fontWeight: 'bold',
+		textAlign: 'center',
+	},
+	modalText: {
+		marginBottom: 15,
+		textAlign: 'center',
+	},
 })
 
 const Separator = () => (
@@ -34,7 +81,8 @@ const Separator = () => (
 
 function CardScreen() {
 	const card = useSelector((globalState) => globalState.card)
-	const finalCount = card.stampCount
+	const { stampCount } = card
+	const [modalVisible, setModalVisible] = useState(false)
 
 	return (
 		<SafeAreaView style={{ flex: 1 }}>
@@ -46,7 +94,7 @@ function CardScreen() {
 				</Text>
 				<Text>
 					Stamp:
-					{finalCount}
+					{stampCount}
 				</Text>
 				<Text>
 					Should redeem:
@@ -57,44 +105,37 @@ function CardScreen() {
 			<Separator />
 
 			<View style={[styles.loyaltyCard]}>
-				<View style={{
-					flexDirection: 'row', flex: 1,
-				}}
-				>
-					<View style={[styles.defaultStamp, (finalCount >= 1)
+				<View style={[styles.loyaltyCardRow]}>
+					<View style={[styles.defaultStamp, (stampCount >= 1)
 						? styles.stamped : styles.unstamped]}
 					/>
-					<View style={[styles.defaultStamp, (finalCount >= 2)
+					<View style={[styles.defaultStamp, (stampCount >= 2)
 						? styles.stamped : styles.unstamped]}
 					/>
-					<View style={[styles.defaultStamp, (finalCount >= 3)
+					<View style={[styles.defaultStamp, (stampCount >= 3)
 						? styles.stamped : styles.unstamped]}
 					/>
-					<View style={[styles.defaultStamp, (finalCount >= 4)
+					<View style={[styles.defaultStamp, (stampCount >= 4)
 						? styles.stamped : styles.unstamped]}
 					/>
-					<View style={[styles.defaultStamp, (finalCount >= 5)
+					<View style={[styles.defaultStamp, (stampCount >= 5)
 						? styles.stamped : styles.unstamped]}
 					/>
 				</View>
-
-				<View style={{
-					flexDirection: 'row', flex: 1,
-				}}
-				>
-					<View style={[styles.defaultStamp, (finalCount >= 6)
+				<View style={[styles.loyaltyCardRow]}>
+					<View style={[styles.defaultStamp, (stampCount >= 6)
 						? styles.stamped : styles.unstamped]}
 					/>
-					<View style={[styles.defaultStamp, (finalCount >= 7)
+					<View style={[styles.defaultStamp, (stampCount >= 7)
 						? styles.stamped : styles.unstamped]}
 					/>
-					<View style={[styles.defaultStamp, (finalCount >= 8)
+					<View style={[styles.defaultStamp, (stampCount >= 8)
 						? styles.stamped : styles.unstamped]}
 					/>
-					<View style={[styles.defaultStamp, (finalCount >= 9)
+					<View style={[styles.defaultStamp, (stampCount >= 9)
 						? styles.stamped : styles.unstamped]}
 					/>
-					<View style={[styles.defaultStamp, (finalCount >= 10)
+					<View style={[styles.defaultStamp, (stampCount >= 10)
 						? styles.stamped : styles.unstamped]}
 					/>
 				</View>
@@ -102,14 +143,45 @@ function CardScreen() {
 
 			<Separator />
 
-			<View style={[styles.redeemButton]}>
-				<Button
-					// onPress={onPressLearnMore}
-					title="REDEEM"
-					color="#841584"
-					accessibilityLabel="Learn more about this purple button"
-				/>
-			</View>
+			{(stampCount === 10)
+				? (
+					<View style={styles.centeredView}>
+						<Modal
+							animationType="slide"
+							transparent
+							visible={modalVisible}
+							onRequestClose={() => {
+								Alert.alert('Modal has been closed.')
+								setModalVisible(!modalVisible)
+							}}
+						>
+							<View style={styles.centeredView}>
+								<View style={styles.modalView}>
+									<Text style={styles.modalText}>Hello World!</Text>
+									<Pressable
+										style={[styles.button, styles.buttonClose]}
+										onPress={() => setModalVisible(!modalVisible)}
+									>
+										<Text style={styles.textStyle}>Hide Modal</Text>
+									</Pressable>
+								</View>
+							</View>
+						</Modal>
+						<Pressable
+							style={[styles.button, styles.buttonOpen]}
+							onPress={() => setModalVisible(true)}
+						>
+							<Text style={styles.textStyle}>Redeem</Text>
+						</Pressable>
+					</View>
+				)
+				: (
+					<View style={[styles.redeemPlaceholder]}>
+						<Text>
+							Collect ten stamps to claim a free coffee
+						</Text>
+					</View>
+				)}
 
 		</SafeAreaView>
 	)
