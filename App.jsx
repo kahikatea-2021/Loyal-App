@@ -13,7 +13,7 @@ import firebase from './auth'
 
 import Navigation from './navigation'
 import LoginScreen from './screen/LoginScreen'
-
+import BottomNavigation from './navigation'
 import RegisterScreen from './screen/RegisterScreen'
 import StoreRegisterScreen from './screen/StoreRegisterScreen'
 import HomeScreen from './screen/HomeScreen'
@@ -51,7 +51,7 @@ export default function App () {
 						/>
 						<AppStack.Screen
 							name="BottomNavigation"
-							component={StoreDetailScreen}
+							component={BottomNavigation}
 						/>
 					</AppStack.Navigator>
 				</NavigationContainer>

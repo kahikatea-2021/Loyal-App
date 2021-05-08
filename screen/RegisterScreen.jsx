@@ -2,7 +2,7 @@ import { registerRootComponent } from 'expo'
 import request, { notify } from 'superagent'
 import React, { useState, useLayoutEffect } from 'react'
 import {
-	SafeAreaView, TextInput, Text, Button, StyleSheet, KeyboardAvoidingView, Image, ScrollView, Alert,
+	ActivityIndicator, SafeAreaView, TextInput, Text, Button, StyleSheet, KeyboardAvoidingView, Image, ScrollView, Alert,
 } from 'react-native'
 import { auth } from '../auth/index'
 
@@ -164,6 +164,7 @@ function RegisterScreen ({ navigation }) {
 				<SafeAreaView style={styles.wrap}>
 					<Button color="#fff" raised style={styles.button} onPress={registerUser} title="Register" />
 				</SafeAreaView>
+				<ActivityIndicator color="green" />
 			</ScrollView>
 		</KeyboardAvoidingView>
 	)
