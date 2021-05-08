@@ -1,13 +1,15 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useLayoutEffect } from 'react'
 import {
-	 StyleSheet, Image, Text,
+	 StyleSheet, Image, Text, View,
 } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import consume from '../consume'
 
 const styles = StyleSheet.create({
 	container: {
-		paddingTop: 50,
+		flex: 1,
+		paddingTop: 0,
+		backgroundColor: '#49378E',
 	},
 	tinyLogo: {
 		width: 50,
@@ -21,13 +23,15 @@ const styles = StyleSheet.create({
 	textMain: {
 		fontSize: 30,
 		textAlign: 'center',
+		color: '#FCFAF1',
 	},
 	textSub: {
 		textAlign: 'center',
+		color: '#FCFAF1',
 	},
 })
 
-function StoreDetailScreen() {
+function StoreDetailScreen({ navigation }) {
 	const [store, setStore] = useState({
 		id: 1,
 		name: 'Rocket Cafe',
@@ -41,9 +45,23 @@ function StoreDetailScreen() {
 		// })
 	}, [])
 
+	useLayoutEffect(() => {
+		navigation.setOptions({
+			title: '',
+			headerStyle: {
+				backgroundColor: '#49378E',
+				shadowColor: 'transparent',
+			},
+		})
+	})
+
 	return (
-		<SafeAreaView>
-			{store
+		<SafeAreaView style={{
+			 flex: 1, backgroundColor: '#49378E',
+		}}
+		>
+			<View style={styles.container}>
+				{store
 			&& (
 
 				<Image
@@ -53,13 +71,14 @@ function StoreDetailScreen() {
 					}}
 				/>
 			)}
-			<Text style={styles.textMain}>
-				Welcome to
-				{' '}
-				{store.name}
-				{'\n'}
-			</Text>
-			<Text style={styles.textSub}>Scan the code to save for a free coffee</Text>
+				<Text style={styles.textMain}>
+					Welcome to
+					{' '}
+					{store.name}
+					{'\n'}
+				</Text>
+				<Text style={styles.textSub}>Scan the code to save for a free coffee</Text>
+			</View>
 		</SafeAreaView>
 	)
 }
