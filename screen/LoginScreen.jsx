@@ -74,7 +74,7 @@ function LoginScreen ({ navigation }) {
 				<SafeAreaView>
 					<Image
 						style={styles.logo}
-						source={require('../assets/coffee.jpg')}
+						source={require('../assets/testIcon.png')}
 					/>
 					<TextInput
 						style={styles.inputContainer}
