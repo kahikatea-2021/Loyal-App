@@ -43,7 +43,7 @@ const styles = StyleSheet.create({
 function RegisterScreen ({ navigation }) {
 	useLayoutEffect(() => {
 		navigation.setOptions({
-			title: 'Create your Loyal Account'
+			title: 'Create your Loyal Account',
 		})
 	}, [navigation])
 	const [userName, setUserName] = useState('')
@@ -55,7 +55,7 @@ function RegisterScreen ({ navigation }) {
 
 	const registerUser = () => {
 		request
-			.post('https://1be77e300087.ngrok.io/api/v1/account/register')
+			.post('https://effc9dad5017.ngrok.io/api/v1/account/register')
 			.send({
 				userName,
 				firstName,
@@ -70,9 +70,18 @@ function RegisterScreen ({ navigation }) {
 					navigation.replace('BottomNavigation')
 				}
 			}).catch((error) => {
-				const errorCode = error.code
-				const errorMessage = error.message
-				alert(errorMessage)
+				console.log(error)
+				switch (error.code) {
+					case 'auth/invalid-email':
+						alert('Please use a valid email')
+						break
+					case 'auth/wrong-password':
+						alert('Please enter correct password')
+						break
+					case 'auth/user-not-found':
+						alert('This account is not registered')
+						break
+				}
 			})
 	}
 
