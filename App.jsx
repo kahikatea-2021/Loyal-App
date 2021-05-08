@@ -22,6 +22,7 @@ export default function App () {
 	return (
 		<Provider store={store}>
 			<SafeAreaProvider>
+				<StatusBar />
 				<NavigationContainer>
 					<AppStack.Navigator
 						screenOptions={{
