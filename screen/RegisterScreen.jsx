@@ -43,7 +43,7 @@ const styles = StyleSheet.create({
 function RegisterScreen ({ navigation }) {
 	useLayoutEffect(() => {
 		navigation.setOptions({
-			headerBackTitle: 'Login',
+			title: 'Create your Loyal Account'
 		})
 	}, [navigation])
 	const [userName, setUserName] = useState('')
@@ -80,10 +80,6 @@ function RegisterScreen ({ navigation }) {
 		<KeyboardAvoidingView behavior="position" style={styles.container}>
 			<ScrollView>
 				<SafeAreaView>
-					<Text style={styles.text}>
-						Create a Loyal Account
-
-					</Text>
 					<Image
 						style={styles.logo}
 						source={require('../assets/coffee.jpg')}

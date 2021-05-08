@@ -53,7 +53,7 @@ function ResetPassword ({ navigation }) {
 	}
 	useLayoutEffect(() => {
 		navigation.setOptions({
-			headerBackTitle: 'Back to Login',
+			title: 'Reset your Password',
 		})
 	}, [navigation])
 
