@@ -59,7 +59,7 @@ const styles = StyleSheet.create({
 		elevation: 2,
 	},
 	buttonOpen: {
-		backgroundColor: '#F194FF',
+		backgroundColor: 'blue',
 	},
 	buttonClose: {
 		backgroundColor: '#2196F3',
@@ -100,6 +100,7 @@ function CardScreen() {
 					Should redeem:
 					{card.shouldRedeem}
 				</Text>
+
 			</View>
 
 			<Separator />
@@ -157,12 +158,12 @@ function CardScreen() {
 						>
 							<View style={styles.centeredView}>
 								<View style={styles.modalView}>
-									<Text style={styles.modalText}>Hello World!</Text>
+									<Text style={styles.modalText}>Placeholder text for countdown timer</Text>
 									<Pressable
 										style={[styles.button, styles.buttonClose]}
 										onPress={() => setModalVisible(!modalVisible)}
 									>
-										<Text style={styles.textStyle}>Hide Modal</Text>
+										<Text style={styles.textStyle}>Close</Text>
 									</Pressable>
 								</View>
 							</View>
