@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { useSelector } from 'react-redux'
 import {
-	SafeAreaView, StyleSheet, Button, Text, View, Alert, Modal, Pressable,
+	SafeAreaView, StyleSheet, Text, View, Alert, Modal, Pressable,
 } from 'react-native'
 
 const styles = StyleSheet.create({
@@ -25,9 +25,6 @@ const styles = StyleSheet.create({
 		marginVertical: 8,
 		borderBottomColor: '#737373',
 		borderBottomWidth: StyleSheet.hairlineWidth,
-	},
-	redeemButton: {
-		backgroundColor: 'yellow', flex: 1, borderRadius: 10, borderWidth: 3, borderColor: 'red',
 	},
 	redeemPlaceholder: {
 		backgroundColor: '#C3C6CA', flex: 1, borderRadius: 10, borderWidth: 3, borderColor: '#C3C6CA',
@@ -83,28 +80,12 @@ function CardScreen() {
 	const card = useSelector((globalState) => globalState.card)
 	const { stampCount } = card
 	const [modalVisible, setModalVisible] = useState(false)
+	const handleLongPress = () => {
+		setModalVisible(true)
+	}
 
 	return (
 		<SafeAreaView style={{ flex: 1 }}>
-
-			<View style={{ flex: 2 }}>
-				<Text>
-					Card name:
-					{card.name}
-				</Text>
-				<Text>
-					Stamp:
-					{stampCount}
-				</Text>
-				<Text>
-					Should redeem:
-					{card.shouldRedeem}
-				</Text>
-
-			</View>
-
-			<Separator />
-
 			<View style={[styles.loyaltyCard]}>
 				<View style={[styles.loyaltyCardRow]}>
 					<View style={[styles.defaultStamp, (stampCount >= 1)
@@ -141,9 +122,7 @@ function CardScreen() {
 					/>
 				</View>
 			</View>
-
 			<Separator />
-
 			{(stampCount === 10)
 				? (
 					<View style={styles.centeredView}>
@@ -158,7 +137,10 @@ function CardScreen() {
 						>
 							<View style={styles.centeredView}>
 								<View style={styles.modalView}>
-									<Text style={styles.modalText}>Placeholder text for countdown timer</Text>
+									<Text style={styles.modalText}>
+										Show this to your barista to redeem
+										your free coffee.
+									</Text>
 									<Pressable
 										style={[styles.button, styles.buttonClose]}
 										onPress={() => setModalVisible(!modalVisible)}
@@ -169,10 +151,18 @@ function CardScreen() {
 							</View>
 						</Modal>
 						<Pressable
-							style={[styles.button, styles.buttonOpen]}
-							onPress={() => setModalVisible(true)}
+							style={({ pressed }) => [
+								{
+									borderRadius: 20,
+									padding: 10,
+									elevation: 2,
+									opacity: pressed ? 0.5 : 1,
+									backgroundColor: pressed ? 'red' : 'orange',
+								},
+							]}
+							onLongPress={handleLongPress}
 						>
-							<Text style={styles.textStyle}>Redeem</Text>
+							<Text style={styles.textStyle}>Hold to redeem</Text>
 						</Pressable>
 					</View>
 				)
@@ -183,7 +173,6 @@ function CardScreen() {
 						</Text>
 					</View>
 				)}
-
 		</SafeAreaView>
 	)
 }
