@@ -7,10 +7,13 @@ import { NavigationContainer } from '@react-navigation/native'
 import { createStackNavigator } from '@react-navigation/stack'
 import { SafeAreaProvider } from 'react-native-safe-area-context'
 import { useState } from 'react/cjs/react.development'
+
 import store from './store'
+import firebase from './auth'
+
 import Navigation from './navigation'
 import LoginScreen from './screen/LoginScreen'
-import firebase from './auth'
+
 import RegisterScreen from './screen/RegisterScreen'
 import StoreRegisterScreen from './screen/StoreRegisterScreen'
 import HomeScreen from './screen/HomeScreen'
