@@ -18,6 +18,7 @@ import RegisterScreen from './screen/RegisterScreen'
 import StoreRegisterScreen from './screen/StoreRegisterScreen'
 import HomeScreen from './screen/HomeScreen'
 import ResetPasswordScreen from './screen/ResetPasswordScreen'
+import StoreDetailScreen from './screen/StoreDetailScreen'
 
 const AppStack = createStackNavigator()
 
@@ -50,7 +51,7 @@ export default function App () {
 						/>
 						<AppStack.Screen
 							name="BottomNavigation"
-							component={Navigation}
+							component={StoreDetailScreen}
 						/>
 					</AppStack.Navigator>
 				</NavigationContainer>
