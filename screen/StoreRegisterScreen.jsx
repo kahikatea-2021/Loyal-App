@@ -1,9 +1,11 @@
-import { registerRootComponent } from 'expo'
-import request, { notify } from 'superagent'
+
+import request from 'superagent'
 import React, { useState, useLayoutEffect } from 'react'
+
 import {
-	SafeAreaView, TextInput, Text, Button, StyleSheet, KeyboardAvoidingView, Image, ScrollView, Alert,
+	SafeAreaView, TextInput, Text, Button, StyleSheet, KeyboardAvoidingView, Image, ScrollView,
 } from 'react-native'
+
 import { auth } from '../auth/index'
 
 const styles = StyleSheet.create({
@@ -25,7 +27,6 @@ const styles = StyleSheet.create({
 	},
 	button: {
 		width: 200,
-		// marginTop: 10,
 	},
 	text: {
 		textAlign: 'center',
@@ -50,10 +51,10 @@ const styles = StyleSheet.create({
 	},
 })
 
-function RegisterScreen ({ navigation }) {
+function StoreRegister ({ navigation }) {
 	useLayoutEffect(() => {
 		navigation.setOptions({
-			title: 'Create your Loyal Account',
+			title: 'Register your Store',
 			headerTitleStyle: {
 				color: '#fff',
 			},
@@ -64,42 +65,43 @@ function RegisterScreen ({ navigation }) {
 			headerTintColor: '#fff',
 		})
 	}, [navigation])
-	const [userName, setUserName] = useState('')
-	const [firstName, setFirstName] = useState('')
-	const [lastName, setLastName] = useState('')
+	const [storeName, setStoreName] = useState('')
+	const [adminFirstName, setAdminFirstName] = useState('')
+	const [adminLastName, setAdminLastName] = useState('')
 	const [phone, setPhone] = useState('')
 	const [email, setEmail] = useState('')
 	const [password, setPassword] = useState('')
 
-	const registerUser = () => {
-		request
-			.post('https://effc9dad5017.ngrok.io/api/v1/account/register')
-			.send({
-				userName,
-				firstName,
-				lastName,
-				phone,
-				email,
-				password,
+	// const registerStore = () => {
+	// 	request
+	// 		.post('https://effc9dad5017.ngrok.io/v1/api/')
+	// 		.send({
+	// 			storeName,
+	// 			adminFirstName,
+	// 			adminLastName,
+	// 			phone,
+	// 			email,
+	// 			password,
+	// 		})
+	// 		.then((response) => {
+	// 			if (response) {
+	// 				console.log(response.body)
+	// 				navigation.replace('BottomNavigation')
+	// 			}
+	// 		}).catch((error) => {
+	// 			const errorCode = error.code
+	// 			const errorMessage = error.message
+	// 			alert(errorMessage)
+	// 		})
+	// }
+	const registerStore = () => {
+		auth.createUserWithEmailAndPassword(email, password)
+			.then((userCredential) => {
+				const { user } = userCredential
 			})
-			.then((response) => {
-				if (response) {
-					console.log(response.body)
-					navigation.replace('BottomNavigation')
-				}
-			}).catch((error) => {
-				console.log(error)
-				switch (error.code) {
-					case 'auth/invalid-email':
-						alert('Please use a valid email')
-						break
-					case 'auth/wrong-password':
-						alert('Please enter correct password')
-						break
-					case 'auth/user-not-found':
-						alert('This account is not registered')
-						break
-				}
+			.catch((error) => {
+				const errorCode = error.code
+				const errorMessage = error.message
 			})
 	}
 
@@ -113,34 +115,37 @@ function RegisterScreen ({ navigation }) {
 					/>
 					<TextInput
 						style={styles.inputContainer}
-						placeholder="User Name"
+						placeholder="Store Name"
 						autoCapitalize="none"
 						autofocus
 						type="text"
-						value={userName}
-						onChangeText={(text) => setUserName(text)}
+						value={storeName}
+						onChangeText={(text) => setStoreName(text)}
 					/>
 					<TextInput
 						style={styles.inputContainer}
 						placeholder="First Name"
+						autoCapitalize="none"
 						autofocus
 						type="text"
-						value={firstName}
-						onChangeText={(text) => setFirstName(text)}
+						value={adminFirstName}
+						onChangeText={(text) => setAdminFirstName(text)}
 					/>
 					<TextInput
 						style={styles.inputContainer}
 						placeholder="Last Name"
+						autoCapitalize="none"
+						autofocus
 						type="text"
-						value={lastName}
-						onChangeText={(text) => setLastName(text)}
+						value={adminLastName}
+						onChangeText={(text) => setAdminLastName(text)}
 					/>
 					<TextInput
 						style={styles.inputContainer}
 						placeholder="Phone Number"
 						type="tel"
-						value={phone}
 						keyboardType="numeric"
+						value={phone}
 						onChangeText={(num) => setPhone(num)}
 					/>
 					<TextInput
@@ -162,11 +167,11 @@ function RegisterScreen ({ navigation }) {
 					/>
 				</SafeAreaView>
 				<SafeAreaView style={styles.wrap}>
-					<Button color="#fff" raised style={styles.button} onPress={registerUser} title="Register" />
+					<Button color="#fff" raised style={styles.button} onPress={registerStore} title="Register" />
 				</SafeAreaView>
 			</ScrollView>
 		</KeyboardAvoidingView>
 	)
 }
 
-export default RegisterScreen
+export default StoreRegister

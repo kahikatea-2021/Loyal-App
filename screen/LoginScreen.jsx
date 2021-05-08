@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useLayoutEffect } from 'react'
 import {
-	SafeAreaView, TextInput, Text, Button, Platform, StyleSheet, KeyboardAvoidingView, Image,
+	SafeAreaView, TextInput, Text, Button, Platform, StyleSheet, KeyboardAvoidingView, Image, ScrollView,
 } from 'react-native'
 import * as WebBrowser from 'expo-web-browser'
 import { set } from 'react-native-reanimated'
@@ -9,35 +9,60 @@ import { auth } from '../auth'
 const styles = StyleSheet.create({
 	container: {
 		flex: 1,
-		backgroundColor: '#fff',
+		backgroundColor: '#49378E',
 		alignItems: 'center',
 		justifyContent: 'center',
+
 	},
 	inputContainer: {
-		width: 300,
-		borderWidth: 1,
-		borderRadius: 10,
-		borderColor: '#0B82D6',
+		fontSize: 20,
+		borderWidth: 0,
+		borderRadius: 12,
+		borderColor: '#1282E9',
+		backgroundColor: '#fff',
 		padding: 9,
 		margin: 4,
-
 	},
 	button: {
 		width: 200,
 		marginTop: 10,
+		color: '#FCFAF1',
 	},
 	logo: {
 		width: 170,
-		height: 168,
+		height: 205,
 		alignSelf: 'center',
-		margin: 20,
+		top: 10,
+		marginBottom: 20,
+		borderRadius: 15,
+	},
+	register: {
+		flexDirection: 'row',
+	},
+	wrap: {
+		alignItems: 'center',
+		borderWidth: 1,
 		borderRadius: 10,
+		borderColor: '#1282E9',
+		backgroundColor: '#3C97EA',
+		padding: 9,
+		margin: 4,
 	},
 })
 
 function LoginScreen ({ navigation }) {
 	const [email, setEmail] = useState('')
 	const [password, setPassword] = useState('')
+
+	useLayoutEffect(() => {
+		navigation.setOptions({
+			title: '',
+			headerStyle: {
+				backgroundColor: '#49378E',
+				shadowColor: 'transparent',
+			},
+		})
+	}, [navigation])
 
 	useEffect(() => {
 		const unsubscribe = auth.onAuthStateChanged((authUser) => {
@@ -48,55 +73,66 @@ function LoginScreen ({ navigation }) {
 		return unsubscribe
 	}, [])
 	const signIn = () => {
-		auth
-			.signInWithEmailAndPassword(email, password)
+		auth.signInWithEmailAndPassword(email, password)
 			.catch((error) => {
-				const errorCode = error.code
-				const errorMessage = error.message
+				console.log(error.code)
+				switch (error.code) {
+					case 'auth/invalid-email':
+						alert('Please use a valid email')
+						break
+					case 'auth/wrong-password':
+						alert('Please enter correct password')
+						break
+					case 'auth/user-not-found':
+						alert('This account is not registered')
+						break
+				}
 			})
 	}
 	return (
 		<KeyboardAvoidingView behaviour="padding" style={styles.container}>
-			<SafeAreaView>
-				<Image
-					style={styles.logo}
-					source={require('../assets/coffee.jpg')}
-				/>
-				<TextInput
-					style={styles.inputContainer}
-					placeholder="E-mail"
-					autofocus
-					type="email"
-					value={email}
-					onChangeText={(text) => setEmail(text)}
-				/>
-				<TextInput
-					style={styles.inputContainer}
-					placeholder="Password"
-					type="password"
-					secureTextEntry
-					value={password}
-					onChangeText={(text) => setPassword(text)}
-					onSubmitEditing={signIn}
-				/>
-			</SafeAreaView>
-			<Button style={styles.button} onPress={signIn} title="Login" />
-			<Button style={styles.button} onPress={() => navigation.navigate('Register')} title="Register" type="outline" />
+			<ScrollView>
+				<SafeAreaView>
+					<Image
+						style={styles.logo}
+						source={require('../assets/testTitleImage.png')}
+					/>
+					<TextInput
+						style={styles.inputContainer}
+						placeholder="E-mail"
+						autoCapitalize="none"
+						autofocus
+						type="email"
+						value={email}
+						onChangeText={(text) => setEmail(text)}
+					/>
+					<TextInput
+						style={styles.inputContainer}
+						placeholder="Password"
+						type="password"
+						secureTextEntry
+						value={password}
+						onChangeText={(text) => setPassword(text)}
+						onSubmitEditing={signIn}
+					/>
+				</SafeAreaView>
+				<SafeAreaView style={styles.wrap}>
+					<Button color="#fff" style={styles.button} onPress={signIn} title="Login" />
+				</SafeAreaView>
+				<SafeAreaView style={styles.register}>
+					<SafeAreaView style={styles.wrap}>
+						<Button color="#fff" style={styles.button} onPress={() => navigation.navigate('Register')} title="Register as User" type="outline" />
+					</SafeAreaView>
+					<SafeAreaView style={styles.wrap}>
+						<Button color="#fff" style={styles.button} onPress={() => navigation.navigate('StoreRegister')} title="Register as Store" type="outline" />
+					</SafeAreaView>
+				</SafeAreaView>
+				<SafeAreaView style={styles.wrap}>
+					<Button color="#fff" style={styles.button} onPress={() => navigation.navigate('ResetPassword')} title="Forgot Password ?" type="outline" />
+				</SafeAreaView>
+			</ScrollView>
 		</KeyboardAvoidingView>
 	)
 }
-{ /* <Button
-				onPress={loginUser}
-				title="Create User"
-			/> */ }
-
-// WebBrowser.maybeCompleteAuthSession()
-// firebase.auth().onAuthStateChanged((user) => {
-// 	console.log(user)
-// })
-// function loginUser () {
-// 	firebase.auth().signInWithEmailAndPassword('test@test.co.nz', 'abcdefg')
-// }
-// firebase.auth().signOut()
 
 export default LoginScreen
