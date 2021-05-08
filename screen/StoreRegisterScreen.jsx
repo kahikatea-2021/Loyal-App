@@ -6,6 +6,8 @@ import {
 	SafeAreaView, TextInput, Text, Button, StyleSheet, KeyboardAvoidingView, Image, ScrollView,
 } from 'react-native'
 
+import { auth } from '../auth/index'
+
 const styles = StyleSheet.create({
 	container: {
 		flex: 1,
@@ -42,7 +44,7 @@ const styles = StyleSheet.create({
 function StoreRegister ({ navigation }) {
 	useLayoutEffect(() => {
 		navigation.setOptions({
-			headerBackTitle: 'Login',
+			title: 'Register your Store',
 		})
 	}, [navigation])
 
@@ -53,26 +55,36 @@ function StoreRegister ({ navigation }) {
 	const [email, setEmail] = useState('')
 	const [password, setPassword] = useState('')
 
+	// const registerStore = () => {
+	// 	request
+	// 		.post('https://effc9dad5017.ngrok.io/v1/api/')
+	// 		.send({
+	// 			storeName,
+	// 			adminFirstName,
+	// 			adminLastName,
+	// 			phone,
+	// 			email,
+	// 			password,
+	// 		})
+	// 		.then((response) => {
+	// 			if (response) {
+	// 				console.log(response.body)
+	// 				navigation.replace('BottomNavigation')
+	// 			}
+	// 		}).catch((error) => {
+	// 			const errorCode = error.code
+	// 			const errorMessage = error.message
+	// 			alert(errorMessage)
+	// 		})
+	// }
 	const registerStore = () => {
-		request
-			.post('https://effc9dad5017.ngrok.io/v1/api/')
-			.send({
-				storeName,
-				adminFirstName,
-				adminLastName,
-				phone,
-				email,
-				password,
+		auth.createUserWithEmailAndPassword(email, password)
+			.then((userCredential) => {
+				const { user } = userCredential
 			})
-			.then((response) => {
-				if (response) {
-					console.log(response.body)
-					navigation.replace('BottomNavigation')
-				}
-			}).catch((error) => {
+			.catch((error) => {
 				const errorCode = error.code
 				const errorMessage = error.message
-				alert(errorMessage)
 			})
 	}
 
@@ -80,9 +92,6 @@ function StoreRegister ({ navigation }) {
 		<KeyboardAvoidingView behavior="position" style={styles.container}>
 			<ScrollView>
 				<SafeAreaView>
-					<Text style={styles.text}>
-						Create a Loyal Account
-					</Text>
 					<Image
 						style={styles.logo}
 						source={require('../assets/coffee.jpg')}
