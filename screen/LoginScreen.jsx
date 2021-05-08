@@ -15,7 +15,7 @@ const styles = StyleSheet.create({
 
 	},
 	inputContainer: {
-		width: 300,
+		fontSize: 20,
 		borderWidth: 1,
 		borderRadius: 10,
 		borderColor: '#0B82D6',
@@ -33,6 +33,17 @@ const styles = StyleSheet.create({
 		alignSelf: 'center',
 		margin: 20,
 		borderRadius: 10,
+	},
+	register: {
+		flexDirection: 'row',
+	},
+	wrap: {
+		alignItems: 'center',
+		borderWidth: 1,
+		borderRadius: 10,
+		borderColor: '#0B82D6',
+		padding: 9,
+		margin: 4,
 	},
 })
 
@@ -83,11 +94,20 @@ function LoginScreen ({ navigation }) {
 						onSubmitEditing={signIn}
 					/>
 				</SafeAreaView>
-				<Button style={styles.button} onPress={signIn} title="Login" />
-				<Button style={styles.button} onPress={() => navigation.navigate('Register')} title="Register as User" type="outline" />
-				<Button style={styles.button} onPress={() => navigation.navigate('StoreRegister')} title="Register as Store" type="outline" />
-				<Button style={styles.button} onPress={() => navigation.navigate('ResetPassword')} title="Reset Password" type="outline" />
-
+				<SafeAreaView style={styles.wrap}>
+					<Button style={styles.button} onPress={signIn} title="Login" />
+				</SafeAreaView>
+				<SafeAreaView style={styles.register}>
+					<SafeAreaView style={styles.wrap}>
+						<Button style={styles.button} onPress={() => navigation.navigate('Register')} title="Register as User" type="outline" />
+					</SafeAreaView>
+					<SafeAreaView style={styles.wrap}>
+						<Button style={styles.button} onPress={() => navigation.navigate('StoreRegister')} title="Register as Store" type="outline" />
+					</SafeAreaView>
+				</SafeAreaView>
+				<SafeAreaView style={styles.wrap}>
+					<Button style={styles.button} onPress={() => navigation.navigate('ResetPassword')} title="Forgot Password ?" type="outline" />
+				</SafeAreaView>
 			</ScrollView>
 		</KeyboardAvoidingView>
 	)

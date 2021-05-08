@@ -43,7 +43,7 @@ const styles = StyleSheet.create({
 function RegisterScreen ({ navigation }) {
 	useLayoutEffect(() => {
 		navigation.setOptions({
-			headerBackTitle: 'Back to Login',
+			headerBackTitle: 'Login',
 		})
 	}, [navigation])
 	const [userName, setUserName] = useState('')
