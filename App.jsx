@@ -1,6 +1,6 @@
 import 'react-native-gesture-handler'
 import { StatusBar } from 'expo-status-bar'
-import React, { useEffect } from 'react'
+import React from 'react'
 import { Provider } from 'react-redux'
 // import { StyleSheet, Text, View } from 'react-native'
 import { NavigationContainer } from '@react-navigation/native'
