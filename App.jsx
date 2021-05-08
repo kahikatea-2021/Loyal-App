@@ -30,7 +30,7 @@ export default function App () {
 				<NavigationContainer>
 					<AppStack.Navigator
 						screenOptions={{
-							headerShown: true,
+							headerShown: false,
 						}}
 					>
 						<AppStack.Screen
@@ -40,14 +40,23 @@ export default function App () {
 						<AppStack.Screen
 							name="Register"
 							component={RegisterScreen}
+							options={{
+								headerShown: true,
+							}}
 						/>
 						<AppStack.Screen
 							name="StoreRegister"
 							component={StoreRegisterScreen}
+							options={{
+								headerShown: true,
+							}}
 						/>
 						<AppStack.Screen
 							name="ResetPassword"
 							component={ResetPasswordScreen}
+							options={{
+								headerShown: true,
+							}}
 						/>
 						<AppStack.Screen
 							name="BottomNavigation"
