@@ -1,10 +1,14 @@
 import React from 'react'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
-import { MaterialIcons } from '@expo/vector-icons'
+import { MaterialIcons, Ionicons } from '@expo/vector-icons'
 import ScanNavigator from './ScanNavigator'
 import HomeScreen from '../screen/HomeScreen'
 import CardScreen from '../screen/CardScreen'
-import { CARD, HOME, SCAN } from './screenDefinitions'
+import {
+	CARD, HOME, SCAN, WALLET,
+} from './screenDefinitions'
+import WalletScreen from '../screen/WalletScreen'
+import WalletNavigationItem from './WalletNavigationItem'
 
 const AppTab = createBottomTabNavigator()
 
@@ -24,6 +28,14 @@ function Index () {
 				component={CardScreen}
 				options={{
 					tabBarIcon: ({ color }) => <TabIcon color={color} name="home" />,
+				}}
+			/>
+			<AppTab.Screen
+				name={WALLET}
+				component={WalletNavigationItem}
+				options={{
+					title: 'Wallet',
+					tabBarIcon: ({ color }) => <Ionicons name="md-wallet-sharp" size={24} color={color} />,
 				}}
 			/>
 			<AppTab.Screen
