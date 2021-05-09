@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useLayoutEffect } from 'react'
 import {
-	TouchableOpacity, SafeAreaView, TextInput, Text, Button, Platform, StyleSheet, KeyboardAvoidingView, Image, ScrollView,
+	TouchableOpacity, SafeAreaView, TextInput, Text, Button, Platform, StyleSheet, KeyboardAvoidingView, Image, ScrollView, ActivityIndicator,
 } from 'react-native'
 import * as WebBrowser from 'expo-web-browser'
 import { set } from 'react-native-reanimated'
@@ -57,6 +57,7 @@ const styles = StyleSheet.create({
 function LoginScreen ({ navigation }) {
 	const [email, setEmail] = useState('')
 	const [password, setPassword] = useState('')
+	const [loading, setLoading] = useState(false)
 
 	useLayoutEffect(() => {
 		navigation.setOptions({
@@ -77,6 +78,8 @@ function LoginScreen ({ navigation }) {
 		return unsubscribe
 	}, [])
 	const signIn = () => {
+		setLoading(true)
+
 		auth.signInWithEmailAndPassword(email, password)
 			.catch((error) => {
 				console.log(error.code)
@@ -133,6 +136,8 @@ function LoginScreen ({ navigation }) {
 					<TouchableOpacity style={styles.wrap} onPress={() => navigation.navigate('ResetPassword')}>
 						<Text style={styles.text}>Forgot Password ?</Text>
 					</TouchableOpacity>
+					<ActivityIndicator color="white" animating={loading} size="large" />
+
 				</SafeAreaView>
 			</ScrollView>
 		</KeyboardAvoidingView>

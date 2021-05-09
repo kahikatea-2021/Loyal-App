@@ -64,7 +64,7 @@ function StoreRegister ({ navigation }) {
 			},
 			headerStyle: {
 				backgroundColor: '#49378E',
-				shadowColor: 'transparent',
+				shadowColor: 'white',
 			},
 			headerTintColor: '#fff',
 		})

@@ -3,7 +3,7 @@ import request from 'superagent'
 import React, { useState, useLayoutEffect } from 'react'
 
 import {
-	TouchableOpacity, SafeAreaView, TextInput, Text, Button, StyleSheet, KeyboardAvoidingView, Image, ScrollView,
+	TouchableOpacity, SafeAreaView, TextInput, Text, Button, StyleSheet, KeyboardAvoidingView, Image, ScrollView, ActivityIndicator,
 } from 'react-native'
 
 import { auth } from '../auth/index'
@@ -52,8 +52,11 @@ const styles = StyleSheet.create({
 
 function ResetPassword ({ navigation }) {
 	const [email, setEmail] = useState('')
+	const [loading, setLoading] = useState(false)
 
 	const reset = () => {
+		setLoading(true)
+
 		auth.sendPasswordResetEmail(email)
 			.then(() => {
 				navigation.navigate('Login')
@@ -68,6 +71,8 @@ function ResetPassword ({ navigation }) {
 						alert('This account is not registered')
 						break
 				}
+			}).finally(() => {
+				setLoading(false)
 			})
 	}
 	useLayoutEffect(() => {
@@ -78,7 +83,7 @@ function ResetPassword ({ navigation }) {
 			},
 			headerStyle: {
 				backgroundColor: '#49378E',
-				shadowColor: 'transparent',
+				shadowColor: 'white',
 			},
 			headerTintColor: '#fff',
 		})
@@ -103,6 +108,7 @@ function ResetPassword ({ navigation }) {
 					<TouchableOpacity style={styles.wrap} onPress={reset}>
 						<Text style={styles.text}>Reset</Text>
 					</TouchableOpacity>
+					<ActivityIndicator color="white" animating={loading} size="large" />
 				</SafeAreaView>
 			</ScrollView>
 		</KeyboardAvoidingView>

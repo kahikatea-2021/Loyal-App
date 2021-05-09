@@ -58,7 +58,7 @@ function RegisterScreen ({ navigation }) {
 			},
 			headerStyle: {
 				backgroundColor: '#49378E',
-				shadowColor: 'transparent',
+				shadowColor: 'white',
 			},
 			headerTintColor: '#fff',
 		})
@@ -70,7 +70,9 @@ function RegisterScreen ({ navigation }) {
 	const [email, setEmail] = useState('')
 	const [password, setPassword] = useState('')
 
+	const [loading, setLoading] = useState(false)
 	const registerUser = () => {
+		setLoading(true)
 		request
 			.post('https://effc9dad5017.ngrok.io/api/v1/account/register')
 			.send({
@@ -99,6 +101,9 @@ function RegisterScreen ({ navigation }) {
 						alert('This account is not registered')
 						break
 				}
+			})
+			.finally(() => {
+				setLoading(false)
 			})
 	}
 	return (
@@ -162,6 +167,7 @@ function RegisterScreen ({ navigation }) {
 						<Text style={styles.text}>Create Account</Text>
 					</TouchableOpacity>
 				</SafeAreaView>
+				<ActivityIndicator color="white" animating={loading} size="large" />
 			</ScrollView>
 		</KeyboardAvoidingView>
 	)
