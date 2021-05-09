@@ -13,23 +13,23 @@ const styles = StyleSheet.create({
 		margin: 20,
 		borderRadius: 20,
 		backgroundColor: '#49378E',
-		shadowColor: '#000',
+		shadowColor: 'rgba(0, 0, 0, 0.75)',
 		shadowOffset: {
-			width: 0,
-			height: 2,
+			width: 5,
+			height: 10,
 		},
-		shadowOpacity: 0.25,
+		shadowOpacity: 0.5,
 		shadowRadius: 4,
 		elevation: 5,
 		alignItems: 'center',
 		justifyContent: 'center',
 	},
 	loyaltyCardRow: {
-		flexDirection: 'row', height: 70, borderWidth: 5, borderColor: 'red',
+		flexDirection: 'row', height: 70,
 
 	},
 	defaultStamp: {
-		flex: 1, margin: 5, borderRadius: 10, borderWidth: 1, borderColor: 'red',
+		flex: 1, margin: 5, borderRadius: 10,
 	},
 	unstamped: {
 		backgroundColor: 'black',
@@ -93,7 +93,27 @@ const styles = StyleSheet.create({
 		width: 60, height: 60, margin: 5,
 	},
 	cardHeader: {
-		flexDirection: 'row', height: 70, borderWidth: 5, borderColor: 'red',
+		flexDirection: 'row', height: 70,
+	},
+	storeInfo: {
+		flex: 4,
+	},
+	cardTitle: {
+		color: 'white',
+		fontSize: 20,
+		fontWeight: 'bold',
+		textAlign: 'left',
+		textShadowColor: 'rgba(0, 0, 0, 0.75)',
+		textShadowOffset: { width: -1, height: 1 },
+		textShadowRadius: 10,
+	},
+	cardDetails: {
+		color: 'white',
+		textAlign: 'left',
+		marginTop: 5,
+	},
+	cardLogo: {
+		flex: 1, width: 60, height: 60,
 	},
 })
 
@@ -117,7 +137,19 @@ function CardScreen() {
 			<Spacer />
 
 			<View style={[styles.loyaltyCard]}>
-				<View style={[styles.cardHeader]}><Text>Helllo!</Text></View>
+
+				<View style={[styles.cardHeader]}>
+					<View style={[styles.storeInfo]}>
+						<Text style={[styles.cardTitle]}>Mutual Friends</Text>
+						<Text style={[styles.cardDetails]}>
+							12 Morgan Street, Newmarket
+							{'\n'}
+							@mutualfriendsespresso
+						</Text>
+					</View>
+
+					<Image style={[styles.cardLogo]} source={require('../assets/adaptive-icon.png')} />
+				</View>
 
 				<View style={[styles.loyaltyCardRow]}>
 					<Image
