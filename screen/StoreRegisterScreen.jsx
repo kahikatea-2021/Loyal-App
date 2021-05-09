@@ -3,7 +3,7 @@ import request from 'superagent'
 import React, { useState, useLayoutEffect } from 'react'
 
 import {
-	SafeAreaView, TextInput, Text, Button, StyleSheet, KeyboardAvoidingView, Image, ScrollView,
+	TouchableOpacity, SafeAreaView, TextInput, Text, Button, StyleSheet, KeyboardAvoidingView, Image, ScrollView,
 } from 'react-native'
 
 import { auth } from '../auth/index'
@@ -48,6 +48,10 @@ const styles = StyleSheet.create({
 		backgroundColor: '#3C97EA',
 		padding: 9,
 		margin: 4,
+	},
+	text: {
+		color: '#fff',
+		fontSize: 20,
 	},
 })
 
@@ -125,8 +129,6 @@ function StoreRegister ({ navigation }) {
 					<TextInput
 						style={styles.inputContainer}
 						placeholder="First Name"
-						autoCapitalize="none"
-						autofocus
 						type="text"
 						value={adminFirstName}
 						onChangeText={(text) => setAdminFirstName(text)}
@@ -134,8 +136,6 @@ function StoreRegister ({ navigation }) {
 					<TextInput
 						style={styles.inputContainer}
 						placeholder="Last Name"
-						autoCapitalize="none"
-						autofocus
 						type="text"
 						value={adminLastName}
 						onChangeText={(text) => setAdminLastName(text)}
@@ -166,9 +166,10 @@ function StoreRegister ({ navigation }) {
 						onChangeText={(text) => setPassword(text)}
 					/>
 				</SafeAreaView>
-				<SafeAreaView style={styles.wrap}>
-					<Button color="#fff" raised style={styles.button} onPress={registerStore} title="Register" />
-				</SafeAreaView>
+				<TouchableOpacity style={styles.wrap} onPress={registerStore}>
+					<Text style={styles.text}>Register</Text>
+				</TouchableOpacity>
+
 			</ScrollView>
 		</KeyboardAvoidingView>
 	)

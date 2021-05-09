@@ -2,7 +2,7 @@ import { registerRootComponent } from 'expo'
 import request, { notify } from 'superagent'
 import React, { useState, useLayoutEffect } from 'react'
 import {
-	ActivityIndicator, SafeAreaView, TextInput, Text, Button, StyleSheet, KeyboardAvoidingView, Image, ScrollView, Alert,
+	TouchableOpacity, ActivityIndicator, SafeAreaView, TextInput, Text, Button, StyleSheet, KeyboardAvoidingView, Image, ScrollView, Alert,
 } from 'react-native'
 import { auth } from '../auth/index'
 
@@ -28,9 +28,8 @@ const styles = StyleSheet.create({
 		// marginTop: 10,
 	},
 	text: {
-		textAlign: 'center',
+		color: '#fff',
 		fontSize: 20,
-		fontWeight: 'bold',
 	},
 	logo: {
 		width: 170,
@@ -102,8 +101,8 @@ function RegisterScreen ({ navigation }) {
 				}
 			})
 	}
-
 	return (
+
 		<KeyboardAvoidingView behavior="position" style={styles.container}>
 			<ScrollView>
 				<SafeAreaView>
@@ -123,7 +122,6 @@ function RegisterScreen ({ navigation }) {
 					<TextInput
 						style={styles.inputContainer}
 						placeholder="First Name"
-						autofocus
 						type="text"
 						value={firstName}
 						onChangeText={(text) => setFirstName(text)}
@@ -160,11 +158,10 @@ function RegisterScreen ({ navigation }) {
 						value={password}
 						onChangeText={(text) => setPassword(text)}
 					/>
+					<TouchableOpacity style={styles.wrap} onPress={registerUser}>
+						<Text style={styles.text}>Create Account</Text>
+					</TouchableOpacity>
 				</SafeAreaView>
-				<SafeAreaView style={styles.wrap}>
-					<Button color="#fff" raised style={styles.button} onPress={registerUser} title="Register" />
-				</SafeAreaView>
-				<ActivityIndicator color="green" />
 			</ScrollView>
 		</KeyboardAvoidingView>
 	)

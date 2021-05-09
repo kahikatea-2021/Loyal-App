@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useLayoutEffect } from 'react'
 import {
-	SafeAreaView, TextInput, Text, Button, Platform, StyleSheet, KeyboardAvoidingView, Image, ScrollView,
+	TouchableOpacity, SafeAreaView, TextInput, Text, Button, Platform, StyleSheet, KeyboardAvoidingView, Image, ScrollView,
 } from 'react-native'
 import * as WebBrowser from 'expo-web-browser'
 import { set } from 'react-native-reanimated'
@@ -48,6 +48,10 @@ const styles = StyleSheet.create({
 		padding: 9,
 		margin: 4,
 	},
+	text: {
+		color: '#fff',
+		fontSize: 20,
+	},
 })
 
 function LoginScreen ({ navigation }) {
@@ -90,7 +94,7 @@ function LoginScreen ({ navigation }) {
 			})
 	}
 	return (
-		<KeyboardAvoidingView behaviour="padding" style={styles.container}>
+		<KeyboardAvoidingView behaviour="position" style={styles.container}>
 			<ScrollView>
 				<SafeAreaView>
 					<Image
@@ -101,7 +105,6 @@ function LoginScreen ({ navigation }) {
 						style={styles.inputContainer}
 						placeholder="E-mail"
 						autoCapitalize="none"
-						autofocus
 						type="email"
 						value={email}
 						onChangeText={(text) => setEmail(text)}
@@ -115,20 +118,21 @@ function LoginScreen ({ navigation }) {
 						onChangeText={(text) => setPassword(text)}
 						onSubmitEditing={signIn}
 					/>
-				</SafeAreaView>
-				<SafeAreaView style={styles.wrap}>
-					<Button color="#fff" style={styles.button} onPress={signIn} title="Login" />
-				</SafeAreaView>
-				<SafeAreaView style={styles.register}>
-					<SafeAreaView style={styles.wrap}>
-						<Button color="#fff" style={styles.button} onPress={() => navigation.navigate('Register')} title="Register as User" type="outline" />
+
+					<TouchableOpacity style={styles.wrap} onPress={signIn}>
+						<Text style={styles.text}>Login</Text>
+					</TouchableOpacity>
+					<SafeAreaView style={styles.register}>
+						<TouchableOpacity color="#fff" style={styles.wrap} onPress={() => navigation.navigate('Register')}>
+							<Text style={styles.text}>Register as User</Text>
+						</TouchableOpacity>
+						<TouchableOpacity color="#fff" style={styles.wrap} onPress={() => navigation.navigate('StoreRegister')}>
+							<Text style={styles.text}>Register as Store</Text>
+						</TouchableOpacity>
 					</SafeAreaView>
-					<SafeAreaView style={styles.wrap}>
-						<Button color="#fff" style={styles.button} onPress={() => navigation.navigate('StoreRegister')} title="Register as Store" type="outline" />
-					</SafeAreaView>
-				</SafeAreaView>
-				<SafeAreaView style={styles.wrap}>
-					<Button color="#fff" style={styles.button} onPress={() => navigation.navigate('ResetPassword')} title="Forgot Password ?" type="outline" />
+					<TouchableOpacity style={styles.wrap} onPress={() => navigation.navigate('ResetPassword')}>
+						<Text style={styles.text}>Forgot Password ?</Text>
+					</TouchableOpacity>
 				</SafeAreaView>
 			</ScrollView>
 		</KeyboardAvoidingView>
