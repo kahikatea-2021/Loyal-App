@@ -3,7 +3,7 @@ import request from 'superagent'
 import React, { useState, useLayoutEffect } from 'react'
 
 import {
-	SafeAreaView, TextInput, Text, Button, StyleSheet, KeyboardAvoidingView, Image, ScrollView,
+	TouchableOpacity, SafeAreaView, TextInput, Text, Button, StyleSheet, KeyboardAvoidingView, Image, ScrollView, ActivityIndicator,
 } from 'react-native'
 
 import { auth } from '../auth/index'
@@ -29,9 +29,8 @@ const styles = StyleSheet.create({
 		width: 200,
 	},
 	text: {
-		textAlign: 'center',
+		color: '#fff',
 		fontSize: 20,
-		fontWeight: 'bold',
 	},
 	logo: {
 		width: 170,
@@ -53,12 +52,27 @@ const styles = StyleSheet.create({
 
 function ResetPassword ({ navigation }) {
 	const [email, setEmail] = useState('')
+	const [loading, setLoading] = useState(false)
 
 	const reset = () => {
+		setLoading(true)
+
 		auth.sendPasswordResetEmail(email)
 			.then(() => {
 				navigation.navigate('Login')
 				alert('You should recieve an email shortly')
+			}).catch((error) => {
+				console.log(error.code)
+				switch (error.code) {
+					case 'auth/invalid-email':
+						alert('Please use a valid email')
+						break
+					case 'auth/user-not-found':
+						alert('This account is not registered')
+						break
+				}
+			}).finally(() => {
+				setLoading(false)
 			})
 	}
 	useLayoutEffect(() => {
@@ -69,7 +83,7 @@ function ResetPassword ({ navigation }) {
 			},
 			headerStyle: {
 				backgroundColor: '#49378E',
-				shadowColor: 'transparent',
+				shadowColor: 'white',
 			},
 			headerTintColor: '#fff',
 		})
@@ -91,9 +105,10 @@ function ResetPassword ({ navigation }) {
 						value={email}
 						onChangeText={(text) => setEmail(text)}
 					/>
-					<SafeAreaView style={styles.wrap}>
-						<Button color="#fff" raised style={styles.button} onPress={reset} title="Reset" />
-					</SafeAreaView>
+					<TouchableOpacity style={styles.wrap} onPress={reset}>
+						<Text style={styles.text}>Reset</Text>
+					</TouchableOpacity>
+					<ActivityIndicator color="white" animating={loading} size="large" />
 				</SafeAreaView>
 			</ScrollView>
 		</KeyboardAvoidingView>

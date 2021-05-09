@@ -4,16 +4,12 @@ import HomeScreen from '../screen/HomeScreen'
 
 const StackNavigator = createStackNavigator()
 
-function HomeNavigationItem() {
+function HomeNavigationItem () {
 	return (
 		<StackNavigator.Navigator>
 			<StackNavigator.Screen
 				name="Home"
 				component={HomeScreen}
-				options={{
-					title: 'Home Stamp',
-					headerTitleAlign: 'center',
-				}}
 			/>
 		</StackNavigator.Navigator>
 	)

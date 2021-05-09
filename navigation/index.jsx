@@ -5,6 +5,7 @@ import ScanNavigator from './ScanNavigator'
 import HomeScreen from '../screen/HomeScreen'
 import CardScreen from '../screen/CardScreen'
 import { CARD, HOME, SCAN } from './screenDefinitions'
+import HomeNavigationItem from './HomeNavigationItem'
 
 const AppTab = createBottomTabNavigator()
 
@@ -28,9 +29,9 @@ function Index () {
 			/>
 			<AppTab.Screen
 				name={HOME}
-				component={HomeScreen}
+				component={HomeNavigationItem}
 				options={{
-					title: 'Home',
+					title: 'Account',
 					tabBarIcon: ({ color }) => <TabIcon color={color} name="supervised-user-circle" />,
 				}}
 			/>
