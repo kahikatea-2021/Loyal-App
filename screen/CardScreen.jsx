@@ -43,7 +43,23 @@ const styles = StyleSheet.create({
 		borderBottomWidth: StyleSheet.hairlineWidth,
 	},
 	redeemPlaceholder: {
-		backgroundColor: '#C3C6CA', flex: 1, borderRadius: 10, borderWidth: 3, borderColor: '#C3C6CA',
+		margin: 20,
+		backgroundColor: '#e0e0e0',
+		borderRadius: 20,
+		padding: 35,
+		alignItems: 'center',
+		shadowColor: '#000',
+		shadowOffset: {
+			width: 0,
+			height: 2,
+		},
+		shadowOpacity: 0.25,
+		shadowRadius: 4,
+		elevation: 5,
+
+	},
+	redeemPlaceholderText: {
+		color: '#8d8d8d',
 	},
 	centeredView: {
 		flex: 1,
@@ -89,6 +105,9 @@ const styles = StyleSheet.create({
 	spacer: {
 		flex: 1,
 	},
+	halfSpacer: {
+		flex: 0.3,
+	},
 	stampIcon: {
 		width: 60, height: 60, margin: 5,
 	},
@@ -113,12 +132,16 @@ const styles = StyleSheet.create({
 		marginTop: 5,
 	},
 	cardLogo: {
-		flex: 1, width: 60, height: 60,
+		flex: 1.5, width: 60, height: 60,
 	},
 })
 
 const Spacer = () => (
 	<View style={styles.spacer} />
+)
+
+const HalfSpacer = () => (
+	<View style={styles.halfSpacer} />
 )
 
 function CardScreen() {
@@ -132,6 +155,10 @@ function CardScreen() {
 		setModalVisible(true)
 	}
 
+	function showNumber() {
+		const num = JSON.stringify(card.stampCount)
+		return num
+	}
 	return (
 		<SafeAreaView style={{ flex: 1 }}>
 			<Spacer />
@@ -148,7 +175,7 @@ function CardScreen() {
 						</Text>
 					</View>
 
-					<Image style={[styles.cardLogo]} source={require('../assets/adaptive-icon.png')} />
+					<Image style={[styles.cardLogo]} source={require('../assets/mutual-friends.png')} />
 				</View>
 
 				<View style={[styles.loyaltyCardRow]}>
@@ -206,7 +233,7 @@ function CardScreen() {
 					/>
 				</View>
 			</View>
-			<Spacer />
+			<HalfSpacer />
 
 			{(shouldRedeem)
 				? (
@@ -268,9 +295,10 @@ function CardScreen() {
 				)
 				: (
 					<View style={[styles.redeemPlaceholder]}>
-						<Text>
+						<Text style={[styles.redeemPlaceholderText]}>
 							Collect ten stamps to claim a free coffee
 						</Text>
+
 					</View>
 				)}
 			<Spacer />
