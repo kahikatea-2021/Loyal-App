@@ -22,14 +22,6 @@ function Index () {
 					tabBarIcon: ({ color }) => <TabIcon color={color} name="qr-code-scanner" />,
 				}}
 			/>
-
-			<AppTab.Screen
-				name={CARD}
-				component={CardScreen}
-				options={{
-					tabBarIcon: ({ color }) => <TabIcon color={color} name="home" />,
-				}}
-			/>
 			<AppTab.Screen
 				name={WALLET}
 				component={WalletNavigationItem}

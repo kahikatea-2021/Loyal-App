@@ -11,7 +11,7 @@ import { auth } from '../auth/index'
 const styles = StyleSheet.create({
 	container: {
 		flex: 1,
-		backgroundColor: '#fff',
+		backgroundColor: '#49378E',
 		alignItems: 'center',
 		justifyContent: 'center',
 	},
@@ -19,7 +19,8 @@ const styles = StyleSheet.create({
 		width: 300,
 		borderWidth: 1,
 		borderRadius: 10,
-		borderColor: '#0B82D6',
+		borderColor: '#1282E9',
+		backgroundColor: '#fff',
 		padding: 9,
 		margin: 4,
 
@@ -39,6 +40,15 @@ const styles = StyleSheet.create({
 		margin: 20,
 		borderRadius: 10,
 	},
+	wrap: {
+		alignItems: 'center',
+		borderWidth: 1,
+		borderRadius: 10,
+		borderColor: '#1282E9',
+		backgroundColor: '#3C97EA',
+		padding: 9,
+		margin: 4,
+	},
 })
 
 function ResetPassword ({ navigation }) {
@@ -54,22 +64,38 @@ function ResetPassword ({ navigation }) {
 	useLayoutEffect(() => {
 		navigation.setOptions({
 			title: 'Reset your Password',
+			headerTitleStyle: {
+				color: '#fff',
+			},
+			headerStyle: {
+				backgroundColor: '#49378E',
+				shadowColor: 'transparent',
+			},
+			headerTintColor: '#fff',
 		})
 	}, [navigation])
 
 	return (
 		<KeyboardAvoidingView behavior="position" style={styles.container}>
-			<TextInput
-				style={styles.inputContainer}
-				placeholder="E-mail"
-				autoCapitalize="none"
-				type="email"
-				value={email}
-				onChangeText={(text) => setEmail(text)}
-			/>
-			<SafeAreaView>
-				<Button raised style={styles.button} onPress={reset} title="Reset" />
-			</SafeAreaView>
+			<ScrollView>
+				<SafeAreaView>
+					<Image
+						style={styles.logo}
+						source={require('../assets/testIcon.png')}
+					/>
+					<TextInput
+						style={styles.inputContainer}
+						placeholder="E-mail"
+						autoCapitalize="none"
+						type="email"
+						value={email}
+						onChangeText={(text) => setEmail(text)}
+					/>
+					<SafeAreaView style={styles.wrap}>
+						<Button color="#fff" raised style={styles.button} onPress={reset} title="Reset" />
+					</SafeAreaView>
+				</SafeAreaView>
+			</ScrollView>
 		</KeyboardAvoidingView>
 	)
 }

@@ -34,8 +34,7 @@ function HomeScreen ({ navigation }) {
 
 	return (
 		<SafeAreaView>
-			<View>
-
+			<View style={{ marginTop: 30 }}>
 				<Button onPress={signOutUser} title="Sign Out" />
 				<Text>Hello World</Text>
 			</View>

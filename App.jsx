@@ -1,17 +1,19 @@
 import 'react-native-gesture-handler'
 import { StatusBar } from 'expo-status-bar'
-import { Provider } from 'react-redux'
 import React from 'react'
+import { Provider } from 'react-redux'
 import { NavigationContainer } from '@react-navigation/native'
 import { createStackNavigator } from '@react-navigation/stack'
 import { SafeAreaProvider } from 'react-native-safe-area-context'
 import store from './store'
-import Navigation from './navigation'
 import LoginScreen from './screen/LoginScreen'
+import BottomNavigation from './navigation'
+import StoreDetailScreen from './screen/StoreDetailScreen'
 import RegisterScreen from './screen/RegisterScreen'
 import StoreRegisterScreen from './screen/StoreRegisterScreen'
-import HomeScreen from './screen/HomeScreen'
 import ResetPasswordScreen from './screen/ResetPasswordScreen'
+import { CARD } from './navigation/screenDefinitions'
+import CardScreen from './screen/CardScreen'
 
 const AppStack = createStackNavigator()
 
@@ -19,6 +21,7 @@ export default function App () {
 	return (
 		<Provider store={store}>
 			<SafeAreaProvider>
+				<StatusBar />
 				<NavigationContainer>
 					<AppStack.Navigator
 						screenOptions={{
@@ -40,14 +43,24 @@ export default function App () {
 						<AppStack.Screen
 							name="StoreRegister"
 							component={StoreRegisterScreen}
+							options={{
+								headerShown: true,
+							}}
 						/>
 						<AppStack.Screen
 							name="ResetPassword"
 							component={ResetPasswordScreen}
+							options={{
+								headerShown: true,
+							}}
+						/>
+						<AppStack.Screen
+							name={CARD}
+							component={CardScreen}
 						/>
 						<AppStack.Screen
 							name="BottomNavigation"
-							component={Navigation}
+							component={BottomNavigation}
 						/>
 					</AppStack.Navigator>
 				</NavigationContainer>

@@ -2,14 +2,14 @@ import { registerRootComponent } from 'expo'
 import request, { notify } from 'superagent'
 import React, { useState, useLayoutEffect } from 'react'
 import {
-	SafeAreaView, TextInput, Text, Button, StyleSheet, KeyboardAvoidingView, Image, ScrollView, Alert,
+	ActivityIndicator, SafeAreaView, TextInput, Text, Button, StyleSheet, KeyboardAvoidingView, Image, ScrollView, Alert,
 } from 'react-native'
 import { auth } from '../auth/index'
 
 const styles = StyleSheet.create({
 	container: {
 		flex: 1,
-		backgroundColor: '#fff',
+		backgroundColor: '#49378E',
 		alignItems: 'center',
 		justifyContent: 'center',
 	},
@@ -17,7 +17,8 @@ const styles = StyleSheet.create({
 		width: 300,
 		borderWidth: 1,
 		borderRadius: 10,
-		borderColor: '#0B82D6',
+		borderColor: '#1282E9',
+		backgroundColor: '#fff',
 		padding: 9,
 		margin: 4,
 
@@ -38,12 +39,29 @@ const styles = StyleSheet.create({
 		margin: 20,
 		borderRadius: 10,
 	},
+	wrap: {
+		alignItems: 'center',
+		borderWidth: 1,
+		borderRadius: 10,
+		borderColor: '#1282E9',
+		backgroundColor: '#3C97EA',
+		padding: 9,
+		margin: 4,
+	},
 })
 
 function RegisterScreen ({ navigation }) {
 	useLayoutEffect(() => {
 		navigation.setOptions({
-			title: 'Create your Loyal Account'
+			title: 'Create your Loyal Account',
+			headerTitleStyle: {
+				color: '#fff',
+			},
+			headerStyle: {
+				backgroundColor: '#49378E',
+				shadowColor: 'transparent',
+			},
+			headerTintColor: '#fff',
 		})
 	}, [navigation])
 	const [userName, setUserName] = useState('')
@@ -55,7 +73,7 @@ function RegisterScreen ({ navigation }) {
 
 	const registerUser = () => {
 		request
-			.post('https://1be77e300087.ngrok.io/api/v1/account/register')
+			.post('https://effc9dad5017.ngrok.io/api/v1/account/register')
 			.send({
 				userName,
 				firstName,
@@ -70,9 +88,18 @@ function RegisterScreen ({ navigation }) {
 					navigation.replace('BottomNavigation')
 				}
 			}).catch((error) => {
-				const errorCode = error.code
-				const errorMessage = error.message
-				alert(errorMessage)
+				console.log(error)
+				switch (error.code) {
+					case 'auth/invalid-email':
+						alert('Please use a valid email')
+						break
+					case 'auth/wrong-password':
+						alert('Please enter correct password')
+						break
+					case 'auth/user-not-found':
+						alert('This account is not registered')
+						break
+				}
 			})
 	}
 
@@ -82,7 +109,7 @@ function RegisterScreen ({ navigation }) {
 				<SafeAreaView>
 					<Image
 						style={styles.logo}
-						source={require('../assets/coffee.jpg')}
+						source={require('../assets/testIcon.png')}
 					/>
 					<TextInput
 						style={styles.inputContainer}
@@ -134,9 +161,10 @@ function RegisterScreen ({ navigation }) {
 						onChangeText={(text) => setPassword(text)}
 					/>
 				</SafeAreaView>
-				<SafeAreaView>
-					<Button raised style={styles.button} onPress={registerUser} title="Register" />
+				<SafeAreaView style={styles.wrap}>
+					<Button color="#fff" raised style={styles.button} onPress={registerUser} title="Register" />
 				</SafeAreaView>
+				<ActivityIndicator color="green" />
 			</ScrollView>
 		</KeyboardAvoidingView>
 	)
