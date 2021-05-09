@@ -1,5 +1,7 @@
-import React, { useEffect, useState } from 'react'
-import { Text, StyleSheet, Button } from 'react-native'
+import React, { useEffect, useState, useLayoutEffect } from 'react'
+import {
+	Text, StyleSheet, Button, Dimensions, View, Image,
+} from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { useNavigation } from '@react-navigation/native'
 import { BarCodeScanner } from 'expo-barcode-scanner'
@@ -13,6 +15,28 @@ const styles = StyleSheet.create({
 		flexDirection: 'column',
 		justifyContent: 'center',
 	},
+	scanBox: {
+		width: 220,
+		height: 218,
+		alignSelf: 'center',
+		margin: 60,
+		borderRadius: 3,
+	},
+	scan: {
+		color: '#FCFAF1',
+		textAlign: 'center',
+		fontSize: 30,
+		marginBottom: 5,
+	},
+	wrap: {
+		alignItems: 'center',
+		borderWidth: 1,
+		borderRadius: 10,
+		borderColor: '#1282E9',
+		backgroundColor: '#3C97EA',
+		padding: 9,
+		margin: 4,
+	},
 })
 
 function HomeScreen() {
@@ -20,6 +44,16 @@ function HomeScreen() {
 	const [scannedCode, setScannedCode] = useState(false)
 	const navigation = useNavigation()
 	const dispatch = useDispatch()
+
+	useLayoutEffect(() => {
+		navigation.setOptions({
+			title: '',
+			headerStyle: {
+				backgroundColor: '#49378E',
+				shadowColor: 'transparent',
+			},
+		})
+	}, [navigation])
 
 	async function requestForPermission() {
 		const { status } = await BarCodeScanner.requestPermissionsAsync()
@@ -49,13 +83,22 @@ function HomeScreen() {
 
 	return (
 		<SafeAreaView style={styles.container}>
+
 			<BarCodeScanner
 				onBarCodeScanned={scannedCode ? undefined : handleCodeScanned}
 				style={StyleSheet.absoluteFillObject}
+
 			/>
+			<Text style={styles.scan}>Scan QR Code</Text>
+			<Image
+				style={styles.scanBox}
+				source={require('../assets/scanFrame.png')}
+			/>
+
 			<Text>
-				{scannedCode && <Button title="Tap to Scan Again" onPress={() => setScannedCode(false)} />}
+				{scannedCode && <Button color="#FCFAF1" alignSelf="center" title="Tap to Scan Again" onPress={() => setScannedCode(false)} />}
 			</Text>
+
 		</SafeAreaView>
 	)
 }
