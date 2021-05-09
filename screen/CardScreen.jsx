@@ -5,6 +5,7 @@ import {
 	SafeAreaView, StyleSheet, Text, View, Alert, Modal, Pressable, Image,
 } from 'react-native'
 import request from 'superagent'
+import { AuthError } from 'expo-auth-session'
 import { getUserCard } from '../store/actions/cardActions'
 
 const styles = StyleSheet.create({
@@ -152,7 +153,7 @@ function CardScreen() {
 	}
 
 	return (
-		<SafeAreaView style={{ flex: 1 }}>
+		<SafeAreaView style={{ flex: 1, backgroundColor: 'white' }}>
 			<Spacer />
 			<View style={[styles.loyaltyCard]}>
 				<View style={[styles.cardHeader]}>
@@ -268,9 +269,20 @@ function CardScreen() {
 						<Pressable
 							style={({ pressed }) => [
 								{
+									width: '90%',
+									margin: 20,
 									borderRadius: 20,
-									padding: 10,
-									elevation: 2,
+									padding: 35,
+									alignItems: 'center',
+									shadowColor: '#000',
+									shadowOffset: {
+										width: 0,
+										height: 2,
+									},
+									shadowOpacity: 0.25,
+									shadowRadius: 4,
+									elevation: 5,
+									// elevation: 2,
 									opacity: pressed ? 0.5 : 1,
 									backgroundColor: pressed ? 'red' : 'orange',
 								},
