@@ -84,15 +84,15 @@ function LoginScreen ({ navigation }) {
 			.catch((error) => {
 				console.log(error.code)
 				switch (error.code) {
-					case 'auth/invalid-email':
-						alert('Please use a valid email')
-						break
-					case 'auth/wrong-password':
-						alert('Please enter correct password')
-						break
-					case 'auth/user-not-found':
-						alert('This account is not registered')
-						break
+				case 'auth/invalid-email':
+					alert('Please use a valid email')
+					break
+				case 'auth/wrong-password':
+					alert('Please enter correct password')
+					break
+				case 'auth/user-not-found':
+					alert('This account is not registered')
+					break
 				}
 			})
 	}
