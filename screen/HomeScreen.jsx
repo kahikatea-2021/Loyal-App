@@ -67,11 +67,11 @@ function HomeScreen ({ navigation }) {
 			// ...
 		}
 	})
+
 	const signOutUser = () => {
-		auth.signOut().then(() => {
-			navigation.replace('Login')
-		})
+		auth.signOut()
 	}
+
 	useLayoutEffect(() => {
 		navigation.setOptions({
 			title: 'Account',

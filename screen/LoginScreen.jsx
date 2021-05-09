@@ -9,6 +9,7 @@ import {
 	ScrollView,
 	ActivityIndicator,
 } from 'react-native'
+import { FORGOT_PASSWORD, REGISTER } from '../navigationNames'
 import { auth } from '../auth'
 
 const styles = StyleSheet.create({
@@ -74,17 +75,6 @@ function LoginScreen ({ navigation }) {
 		})
 	}, [navigation])
 
-	 useEffect(() => {
-		const unsubscribe = auth.onAuthStateChanged((authUser) => {
-			if (authUser) {
-				authUser.getIdTokenResult(true).then((idToken) => {
-					if (!idToken.claims.shop) { navigation.replace('BottomNavigation') } else navigation.replace('StoreNavigation')
-				})
-				// navigation.replace('BottomNavigation')
-			}
-		})
-		return unsubscribe
-	}, [])
 	const signIn = () => {
 		setLoading(true)
 
@@ -136,14 +126,17 @@ function LoginScreen ({ navigation }) {
 						<Text style={styles.text}>Login</Text>
 					</TouchableOpacity>
 					<SafeAreaView style={styles.register}>
-						<TouchableOpacity color="#fff" style={styles.wrap} onPress={() => navigation.navigate('Register')}>
+						<TouchableOpacity color="#fff" style={styles.wrap} onPress={() => navigation.navigate(REGISTER)}>
 							<Text style={styles.text}>Register as User</Text>
 						</TouchableOpacity>
 						<TouchableOpacity color="#fff" style={styles.wrap} onPress={() => navigation.navigate('StoreRegister')}>
 							<Text style={styles.text}>Register as Store</Text>
 						</TouchableOpacity>
 					</SafeAreaView>
-					<TouchableOpacity style={styles.wrap} onPress={() => navigation.navigate('ResetPassword')}>
+					<TouchableOpacity
+						style={styles.wrap}
+						onPress={() => navigation.navigate(FORGOT_PASSWORD)}
+					>
 						<Text style={styles.text}>Forgot Password ?</Text>
 					</TouchableOpacity>
 					<ActivityIndicator color="white" animating={loading} size="large" />
