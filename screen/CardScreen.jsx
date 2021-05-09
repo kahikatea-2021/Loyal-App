@@ -1,21 +1,35 @@
+/* eslint-disable global-require */
 import React, { useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import {
-	SafeAreaView, StyleSheet, Text, View, Alert, Modal, Pressable,
+	SafeAreaView, StyleSheet, Text, View, Alert, Modal, Pressable, Image,
 } from 'react-native'
 import request from 'superagent'
 import { getUserCard } from '../store/actions/cardActions'
 
 const styles = StyleSheet.create({
 	loyaltyCard: {
-		flex: 4,
-		padding: 20,
+		padding: 15,
+		margin: 20,
+		borderRadius: 20,
+		backgroundColor: '#49378E',
+		shadowColor: 'rgba(0, 0, 0, 0.75)',
+		shadowOffset: {
+			width: 5,
+			height: 10,
+		},
+		shadowOpacity: 0.5,
+		shadowRadius: 4,
+		elevation: 5,
+		alignItems: 'center',
+		justifyContent: 'center',
 	},
 	loyaltyCardRow: {
-		flexDirection: 'row', flex: 1,
+		flexDirection: 'row', height: 70,
+
 	},
 	defaultStamp: {
-		flex: 1, borderRadius: 10, borderWidth: 3, borderColor: 'red',
+		flex: 1, margin: 5, borderRadius: 10,
 	},
 	unstamped: {
 		backgroundColor: 'black',
@@ -23,13 +37,24 @@ const styles = StyleSheet.create({
 	stamped: {
 		backgroundColor: 'white',
 	},
-	separator: {
-		marginVertical: 8,
-		borderBottomColor: '#737373',
-		borderBottomWidth: StyleSheet.hairlineWidth,
-	},
 	redeemPlaceholder: {
-		backgroundColor: '#C3C6CA', flex: 1, borderRadius: 10, borderWidth: 3, borderColor: '#C3C6CA',
+		margin: 20,
+		backgroundColor: '#e0e0e0',
+		borderRadius: 20,
+		padding: 35,
+		alignItems: 'center',
+		shadowColor: '#000',
+		shadowOffset: {
+			width: 0,
+			height: 2,
+		},
+		shadowOpacity: 0.25,
+		shadowRadius: 4,
+		elevation: 5,
+
+	},
+	redeemPlaceholderText: {
+		color: '#8d8d8d',
 	},
 	centeredView: {
 		flex: 1,
@@ -72,10 +97,46 @@ const styles = StyleSheet.create({
 		marginBottom: 15,
 		textAlign: 'center',
 	},
+	spacer: {
+		flex: 1,
+	},
+	halfSpacer: {
+		flex: 0.3,
+	},
+	stampIcon: {
+		width: 60, height: 60, margin: 5,
+	},
+	cardHeader: {
+		flexDirection: 'row', height: 70,
+	},
+	storeInfo: {
+		flex: 4,
+	},
+	cardTitle: {
+		color: 'white',
+		fontSize: 20,
+		fontWeight: 'bold',
+		textAlign: 'left',
+		textShadowColor: 'rgba(0, 0, 0, 0.75)',
+		textShadowOffset: { width: -1, height: 1 },
+		textShadowRadius: 10,
+	},
+	cardDetails: {
+		color: 'white',
+		textAlign: 'left',
+		marginTop: 5,
+	},
+	cardLogo: {
+		flex: 1.5, width: 60, height: 60,
+	},
 })
 
-const Separator = () => (
-	<View style={styles.separator} />
+const Spacer = () => (
+	<View style={styles.spacer} />
+)
+
+const HalfSpacer = () => (
+	<View style={styles.halfSpacer} />
 )
 
 function CardScreen() {
@@ -91,43 +152,76 @@ function CardScreen() {
 
 	return (
 		<SafeAreaView style={{ flex: 1 }}>
+			<Spacer />
 			<View style={[styles.loyaltyCard]}>
+				<View style={[styles.cardHeader]}>
+					<View style={[styles.storeInfo]}>
+						<Text style={[styles.cardTitle]}>Mutual Friends</Text>
+						<Text style={[styles.cardDetails]}>
+							12 Morgan Street, Newmarket
+							{'\n'}
+							@mutualfriendsespresso
+						</Text>
+					</View>
+					<Image style={[styles.cardLogo]} source={require('../assets/mutual-friends.png')} />
+				</View>
 				<View style={[styles.loyaltyCardRow]}>
-					<View style={[styles.defaultStamp, (stampCount >= 1)
-						? styles.stamped : styles.unstamped]}
+					<Image
+						style={[styles.stampIcon]}
+						source={(stampCount >= 1)
+							? require('../assets/stampUp.png') : require('../assets/stampDown.png')}
 					/>
-					<View style={[styles.defaultStamp, (stampCount >= 2)
-						? styles.stamped : styles.unstamped]}
+					<Image
+						style={[styles.stampIcon]}
+						source={(stampCount >= 2)
+							? require('../assets/stampUp.png') : require('../assets/stampDown.png')}
 					/>
-					<View style={[styles.defaultStamp, (stampCount >= 3)
-						? styles.stamped : styles.unstamped]}
+					<Image
+						style={[styles.stampIcon]}
+						source={(stampCount >= 3)
+							? require('../assets/stampUp.png') : require('../assets/stampDown.png')}
 					/>
-					<View style={[styles.defaultStamp, (stampCount >= 4)
-						? styles.stamped : styles.unstamped]}
+					<Image
+						style={[styles.stampIcon]}
+						source={(stampCount >= 4)
+							? require('../assets/stampUp.png') : require('../assets/stampDown.png')}
 					/>
-					<View style={[styles.defaultStamp, (stampCount >= 5)
-						? styles.stamped : styles.unstamped]}
+					<Image
+						style={[styles.stampIcon]}
+						source={(stampCount >= 5)
+							? require('../assets/stampUp.png') : require('../assets/stampDown.png')}
 					/>
 				</View>
 				<View style={[styles.loyaltyCardRow]}>
-					<View style={[styles.defaultStamp, (stampCount >= 6)
-						? styles.stamped : styles.unstamped]}
+					<Image
+						style={[styles.stampIcon]}
+						source={(stampCount >= 6)
+							? require('../assets/stampUp.png') : require('../assets/stampDown.png')}
 					/>
-					<View style={[styles.defaultStamp, (stampCount >= 7)
-						? styles.stamped : styles.unstamped]}
+					<Image
+						style={[styles.stampIcon]}
+						source={(stampCount >= 7)
+							? require('../assets/stampUp.png') : require('../assets/stampDown.png')}
 					/>
-					<View style={[styles.defaultStamp, (stampCount >= 8)
-						? styles.stamped : styles.unstamped]}
+					<Image
+						style={[styles.stampIcon]}
+						source={(stampCount >= 8)
+							? require('../assets/stampUp.png') : require('../assets/stampDown.png')}
 					/>
-					<View style={[styles.defaultStamp, (stampCount >= 9)
-						? styles.stamped : styles.unstamped]}
+					<Image
+						style={[styles.stampIcon]}
+						source={(stampCount >= 9)
+							? require('../assets/stampUp.png') : require('../assets/stampDown.png')}
 					/>
-					<View style={[styles.defaultStamp, (stampCount >= 10)
-						? styles.stamped : styles.unstamped]}
+					<Image
+						style={[styles.stampIcon]}
+						source={(stampCount >= 10)
+							? require('../assets/stampUp.png') : require('../assets/stampDown.png')}
 					/>
 				</View>
 			</View>
-			<Separator />
+			<HalfSpacer />
+
 			{(shouldRedeem)
 				? (
 					<View style={styles.centeredView}>
@@ -188,11 +282,13 @@ function CardScreen() {
 				)
 				: (
 					<View style={[styles.redeemPlaceholder]}>
-						<Text>
+						<Text style={[styles.redeemPlaceholderText]}>
 							Collect ten stamps to claim a free coffee
 						</Text>
+
 					</View>
 				)}
+			<Spacer />
 		</SafeAreaView>
 	)
 }
