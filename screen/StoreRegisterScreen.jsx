@@ -6,6 +6,7 @@ import {
 } from 'react-native'
 
 import consume from '../consume'
+import { registerStoreUser } from './accountHelper'
 
 const styles = StyleSheet.create({
 	container: {
@@ -76,7 +77,7 @@ function StoreRegister ({ navigation }) {
 	const [password, setPassword] = useState('')
 
 	function registerStore() {
-		consume('/account/store/register', 'post', {
+		registerStoreUser, 'post', {
 			storeName,
 			adminFirstName,
 			adminLastName,

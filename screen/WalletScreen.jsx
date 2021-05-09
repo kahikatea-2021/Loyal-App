@@ -1,60 +1,49 @@
-import React, { useEffect } from 'react'
 import {
-	SafeAreaView, StyleSheet, Text, View,
+	TouchableHighlight,
+	SafeAreaView,
+	FlatList,
+	Stylesheet,
+	Text,
+	View,
 } from 'react-native'
-import { useDispatch, useSelector } from 'react-redux'
-import { getUserWallet } from './walletHelper'
+import Swipeable from 'react-native-swipeable-row'
+import React from 'react'
 
-const styles = StyleSheet.create({
-	text: {
-		fontSize: 20,
-		color: 'white',
+const styles = Stylesheet.create({
+	container: {
+		flex: 1,
 	},
 })
 
-function WalletScreen() {
-	const dispatch = useDispatch()
-	const wallets = useSelector((globalState) => globalState.wallet)
-	/* const wallets = [
-		{
-			id: 1,
-			store_id: 1,
-			reward_threshold: 10,
-			reward: '1 free coffee',
-		},
-		{
-			id: 1,
-			store_id: 3,
-			reward_threshold: 10,
-			reward: '20% off',
-		},
-	] */
+const rightButtons = [
+	<TouchableHighlight><Text>Button</Text></TouchableHighlight>,
+]
 
-	useEffect(() => {
-		getUserWallet(dispatch)
-	}, [])
+const DATA = [
+	{
+		id: 1,
+		title: 'First Item',
+	},
+]
 
+function Item({ title }) {
 	return (
-		<SafeAreaView>
-			{ wallets && wallets.map((wallet) => (
-				<View style={{
-					marginTop: 10,
-					marginRight: 15,
-					marginLeft: 15,
-					borderRadius: 10,
-					height: 230,
-					padding: 10,
-					shadowColor: 'blue',
-					backgroundColor: 'lightgray',
-				}}
-				>
-					<Text style={styles.text}>
-						 { wallet.name}
-					</Text>
+		<View>
+			<Text>{title}</Text>
+		</View>
+	)
+}
 
-					<Text>{ wallet.reward}</Text>
-				</View>
-			))}
+function WalletScreen() {
+	return (
+		<SafeAreaView style={styles.container}>
+			<Swipeable rightButtons={rightButtons}>
+				<FlatList
+					data={DATA}
+					renderItem={({ item }) => <Item title={item.title} />}
+					keyExtractor={(item) => item.id}
+				/>
+			</Swipeable>
 		</SafeAreaView>
 	)
 }

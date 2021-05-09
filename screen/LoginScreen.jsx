@@ -80,6 +80,22 @@ function LoginScreen ({ navigation }) {
 	const signIn = () => {
 		setLoading(true)
 		loginUser({ email, password }, dispatch)
+
+		/* auth.signInWithEmailAndPassword(email, password)
+			.catch((error) => {
+				console.log(error.code)
+				switch (error.code) {
+				case 'auth/invalid-email':
+					alert('Please use a valid email')
+					break
+				case 'auth/wrong-password':
+					alert('Please enter correct password')
+					break
+				case 'auth/user-not-found':
+					alert('This account is not registered')
+					break
+				}
+			}) */
 	}
 	return (
 		<KeyboardAvoidingView behaviour="height" style={styles.container}>
