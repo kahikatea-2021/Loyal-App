@@ -37,11 +37,6 @@ const styles = StyleSheet.create({
 	stamped: {
 		backgroundColor: 'white',
 	},
-	separator: {
-		marginVertical: 8,
-		borderBottomColor: '#737373',
-		borderBottomWidth: StyleSheet.hairlineWidth,
-	},
 	redeemPlaceholder: {
 		margin: 20,
 		backgroundColor: '#e0e0e0',
@@ -155,16 +150,10 @@ function CardScreen() {
 		setModalVisible(true)
 	}
 
-	function showNumber() {
-		const num = JSON.stringify(card.stampCount)
-		return num
-	}
 	return (
 		<SafeAreaView style={{ flex: 1 }}>
 			<Spacer />
-
 			<View style={[styles.loyaltyCard]}>
-
 				<View style={[styles.cardHeader]}>
 					<View style={[styles.storeInfo]}>
 						<Text style={[styles.cardTitle]}>Mutual Friends</Text>
@@ -174,10 +163,8 @@ function CardScreen() {
 							@mutualfriendsespresso
 						</Text>
 					</View>
-
 					<Image style={[styles.cardLogo]} source={require('../assets/mutual-friends.png')} />
 				</View>
-
 				<View style={[styles.loyaltyCardRow]}>
 					<Image
 						style={[styles.stampIcon]}
@@ -302,7 +289,6 @@ function CardScreen() {
 					</View>
 				)}
 			<Spacer />
-
 		</SafeAreaView>
 	)
 }
