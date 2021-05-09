@@ -1,17 +1,18 @@
+/* eslint-disable global-require */
 import React, { useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import {
-	SafeAreaView, StyleSheet, Text, View, Alert, Modal, Pressable,
+	SafeAreaView, StyleSheet, Text, View, Alert, Modal, Pressable, Image,
 } from 'react-native'
 import request from 'superagent'
 import { getUserCard } from '../store/actions/cardActions'
 
 const styles = StyleSheet.create({
 	loyaltyCard: {
-		flex: 4,
 		padding: 15,
 		margin: 20,
-		backgroundColor: 'yellow',
+		borderRadius: 20,
+		backgroundColor: '#49378E',
 		shadowColor: '#000',
 		shadowOffset: {
 			width: 0,
@@ -20,12 +21,15 @@ const styles = StyleSheet.create({
 		shadowOpacity: 0.25,
 		shadowRadius: 4,
 		elevation: 5,
+		alignItems: 'center',
+		justifyContent: 'center',
 	},
 	loyaltyCardRow: {
-		flexDirection: 'row', flex: 1.3,
+		flexDirection: 'row', height: 70, borderWidth: 5, borderColor: 'red',
+
 	},
 	defaultStamp: {
-		flex: 1, margin: 5, borderRadius: 10, borderWidth: 3, borderColor: 'red',
+		flex: 1, margin: 5, borderRadius: 10, borderWidth: 1, borderColor: 'red',
 	},
 	unstamped: {
 		backgroundColor: 'black',
@@ -85,6 +89,12 @@ const styles = StyleSheet.create({
 	spacer: {
 		flex: 1,
 	},
+	stampIcon: {
+		width: 60, height: 60, margin: 5,
+	},
+	cardHeader: {
+		flexDirection: 'row', height: 70, borderWidth: 5, borderColor: 'red',
+	},
 })
 
 const Spacer = () => (
@@ -105,41 +115,62 @@ function CardScreen() {
 	return (
 		<SafeAreaView style={{ flex: 1 }}>
 			<Spacer />
+
 			<View style={[styles.loyaltyCard]}>
-				<Spacer />
+				<View style={[styles.cardHeader]}><Text>Helllo!</Text></View>
 
 				<View style={[styles.loyaltyCardRow]}>
-					<View style={[styles.defaultStamp, (stampCount >= 1)
-						? styles.stamped : styles.unstamped]}
+					<Image
+						style={[styles.stampIcon]}
+						source={(stampCount >= 1)
+							? require('../assets/stampUp.png') : require('../assets/stampDown.png')}
 					/>
-					<View style={[styles.defaultStamp, (stampCount >= 2)
-						? styles.stamped : styles.unstamped]}
+					<Image
+						style={[styles.stampIcon]}
+						source={(stampCount >= 2)
+							? require('../assets/stampUp.png') : require('../assets/stampDown.png')}
 					/>
-					<View style={[styles.defaultStamp, (stampCount >= 3)
-						? styles.stamped : styles.unstamped]}
+					<Image
+						style={[styles.stampIcon]}
+						source={(stampCount >= 3)
+							? require('../assets/stampUp.png') : require('../assets/stampDown.png')}
 					/>
-					<View style={[styles.defaultStamp, (stampCount >= 4)
-						? styles.stamped : styles.unstamped]}
+					<Image
+						style={[styles.stampIcon]}
+						source={(stampCount >= 4)
+							? require('../assets/stampUp.png') : require('../assets/stampDown.png')}
 					/>
-					<View style={[styles.defaultStamp, (stampCount >= 5)
-						? styles.stamped : styles.unstamped]}
+					<Image
+						style={[styles.stampIcon]}
+						source={(stampCount >= 5)
+							? require('../assets/stampUp.png') : require('../assets/stampDown.png')}
 					/>
 				</View>
 				<View style={[styles.loyaltyCardRow]}>
-					<View style={[styles.defaultStamp, (stampCount >= 6)
-						? styles.stamped : styles.unstamped]}
+					<Image
+						style={[styles.stampIcon]}
+						source={(stampCount >= 6)
+							? require('../assets/stampUp.png') : require('../assets/stampDown.png')}
 					/>
-					<View style={[styles.defaultStamp, (stampCount >= 7)
-						? styles.stamped : styles.unstamped]}
+					<Image
+						style={[styles.stampIcon]}
+						source={(stampCount >= 7)
+							? require('../assets/stampUp.png') : require('../assets/stampDown.png')}
 					/>
-					<View style={[styles.defaultStamp, (stampCount >= 8)
-						? styles.stamped : styles.unstamped]}
+					<Image
+						style={[styles.stampIcon]}
+						source={(stampCount >= 8)
+							? require('../assets/stampUp.png') : require('../assets/stampDown.png')}
 					/>
-					<View style={[styles.defaultStamp, (stampCount >= 9)
-						? styles.stamped : styles.unstamped]}
+					<Image
+						style={[styles.stampIcon]}
+						source={(stampCount >= 9)
+							? require('../assets/stampUp.png') : require('../assets/stampDown.png')}
 					/>
-					<View style={[styles.defaultStamp, (stampCount >= 10)
-						? styles.stamped : styles.unstamped]}
+					<Image
+						style={[styles.stampIcon]}
+						source={(stampCount >= 10)
+							? require('../assets/stampUp.png') : require('../assets/stampDown.png')}
 					/>
 				</View>
 			</View>
