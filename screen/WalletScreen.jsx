@@ -2,14 +2,14 @@ import {
 	TouchableHighlight,
 	SafeAreaView,
 	FlatList,
-	Stylesheet,
+	StyleSheet,
 	Text,
 	View,
 } from 'react-native'
 import Swipeable from 'react-native-swipeable-row'
 import React from 'react'
 
-const styles = Stylesheet.create({
+const styles = StyleSheet.create({
 	container: {
 		flex: 1,
 	},

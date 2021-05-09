@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useLayoutEffect, useState } from 'react'
 import {
 	TouchableOpacity, ActivityIndicator, SafeAreaView, TextInput, Text, Button, StyleSheet, KeyboardAvoidingView, Image, ScrollView, Alert,
 } from 'react-native'
@@ -50,7 +50,7 @@ const styles = StyleSheet.create({
 
 function RegisterScreen ({ navigation }) {
 	const dispatch = useDispatch()
-	/* useLayoutEffect(() => {
+	useLayoutEffect(() => {
 		navigation.setOptions({
 			title: 'Create your Loyal Account',
 			headerTitleStyle: {
@@ -62,7 +62,7 @@ function RegisterScreen ({ navigation }) {
 			},
 			headerTintColor: '#fff',
 		})
-	}, [navigation]) */
+	}, [navigation])
 
 	const [userName, setUserName] = useState('')
 	const [firstName, setFirstName] = useState('')
@@ -81,7 +81,9 @@ function RegisterScreen ({ navigation }) {
 			phone,
 			email,
 			password,
-		}, dispatch)
+		}, dispatch).finally(() => {
+			setLoading(false)
+		})
 		/* request
 			.post('https://effc9dad5017.ngrok.io/api/v1/account/register')
 			.send({

@@ -77,7 +77,7 @@ function StoreRegister ({ navigation }) {
 	const [password, setPassword] = useState('')
 
 	function registerStore() {
-		registerStoreUser, 'post', {
+		registerStoreUser({
 			storeName,
 			adminFirstName,
 			adminLastName,

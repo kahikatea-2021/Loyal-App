@@ -3,7 +3,7 @@ import consume from '../consume'
 import { showAlertAction } from '../store/actions/infoActions'
 
 export function registerUser(data, dispatch) {
-	consume('/account/register', 'post', data).catch((err) => {
+	return consume('/account/register', 'post', data).catch((err) => {
 		dispatch(showAlertAction(
 			{
 				show: true,
@@ -16,6 +16,7 @@ export function registerUser(data, dispatch) {
 
 export function registerStoreUser(data, dispatch) {
 	consume('/account/store/register', 'post', data).catch((err) => {
+		console.log('hhdhdhdhdh')
 		dispatch(showAlertAction(
 			{
 				show: true,
