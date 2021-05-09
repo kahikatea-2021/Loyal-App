@@ -11,7 +11,6 @@ import { auth } from '../auth/index'
 const styles = StyleSheet.create({
 	container: {
 		flex: 1,
-		backgroundColor: '#49378E',
 		alignItems: 'center',
 		justifyContent: 'center',
 	},
@@ -64,12 +63,12 @@ function ResetPassword ({ navigation }) {
 			}).catch((error) => {
 				console.log(error.code)
 				switch (error.code) {
-					case 'auth/invalid-email':
-						alert('Please use a valid email')
-						break
-					case 'auth/user-not-found':
-						alert('This account is not registered')
-						break
+				case 'auth/invalid-email':
+					alert('Please use a valid email')
+					break
+				case 'auth/user-not-found':
+					alert('This account is not registered')
+					break
 				}
 			}).finally(() => {
 				setLoading(false)

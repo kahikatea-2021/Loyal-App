@@ -1,17 +1,15 @@
 
-import request from 'superagent'
-import React, { useState, useLayoutEffect } from 'react'
+import React, { useState } from 'react'
 
 import {
 	TouchableOpacity, SafeAreaView, TextInput, Text, Button, StyleSheet, KeyboardAvoidingView, Image, ScrollView,
 } from 'react-native'
 
-import { auth } from '../auth/index'
+import consume from '../consume'
 
 const styles = StyleSheet.create({
 	container: {
 		flex: 1,
-		backgroundColor: '#49378E',
 		alignItems: 'center',
 		justifyContent: 'center',
 	},
@@ -56,7 +54,7 @@ const styles = StyleSheet.create({
 })
 
 function StoreRegister ({ navigation }) {
-	useLayoutEffect(() => {
+	/* useLayoutEffect(() => {
 		navigation.setOptions({
 			title: 'Register your Store',
 			headerTitleStyle: {
@@ -68,7 +66,8 @@ function StoreRegister ({ navigation }) {
 			},
 			headerTintColor: '#fff',
 		})
-	}, [navigation])
+	}, [navigation]) */
+
 	const [storeName, setStoreName] = useState('')
 	const [adminFirstName, setAdminFirstName] = useState('')
 	const [adminLastName, setAdminLastName] = useState('')
@@ -76,37 +75,15 @@ function StoreRegister ({ navigation }) {
 	const [email, setEmail] = useState('')
 	const [password, setPassword] = useState('')
 
-	// const registerStore = () => {
-	// 	request
-	// 		.post('https://effc9dad5017.ngrok.io/v1/api/')
-	// 		.send({
-	// 			storeName,
-	// 			adminFirstName,
-	// 			adminLastName,
-	// 			phone,
-	// 			email,
-	// 			password,
-	// 		})
-	// 		.then((response) => {
-	// 			if (response) {
-	// 				console.log(response.body)
-	// 				navigation.replace('BottomNavigation')
-	// 			}
-	// 		}).catch((error) => {
-	// 			const errorCode = error.code
-	// 			const errorMessage = error.message
-	// 			alert(errorMessage)
-	// 		})
-	// }
-	const registerStore = () => {
-		auth.createUserWithEmailAndPassword(email, password)
-			.then((userCredential) => {
-				const { user } = userCredential
-			})
-			.catch((error) => {
-				const errorCode = error.code
-				const errorMessage = error.message
-			})
+	function registerStore() {
+		consume('/account/store/register', 'post', {
+			storeName,
+			adminFirstName,
+			adminLastName,
+			phone,
+			email,
+			password,
+		})
 	}
 
 	return (

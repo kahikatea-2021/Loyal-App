@@ -29,9 +29,10 @@ function HomeScreen() {
 	function handleCodeScanned({ data }) {
 		setScannedCode(true)
 		// eslint-disable-next-line no-console
-		console.log(data)
+		const storeInfo = JSON.parse(data)
+		console.log(storeInfo)
 		// alert(data)
-		stampCard(dispatch)
+		stampCard(dispatch, storeInfo.id)
 		navigation.navigate(CARD)
 	}
 

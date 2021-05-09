@@ -9,13 +9,14 @@ import {
 	ScrollView,
 	ActivityIndicator,
 } from 'react-native'
+import { useDispatch } from 'react-redux'
 import { FORGOT_PASSWORD, REGISTER } from '../navigationNames'
 import { auth } from '../auth'
+import { loginUser } from './accountHelper'
 
 const styles = StyleSheet.create({
 	container: {
 		flex: 1,
-		backgroundColor: '#49378E',
 		alignItems: 'center',
 		justifyContent: 'center',
 
@@ -61,6 +62,7 @@ const styles = StyleSheet.create({
 })
 
 function LoginScreen ({ navigation }) {
+	const dispatch = useDispatch()
 	const [email, setEmail] = useState('')
 	const [password, setPassword] = useState('')
 	const [loading, setLoading] = useState(false)
@@ -77,29 +79,13 @@ function LoginScreen ({ navigation }) {
 
 	const signIn = () => {
 		setLoading(true)
-
-		auth.signInWithEmailAndPassword(email, password)
-			.catch((error) => {
-				console.log(error.code)
-				switch (error.code) {
-				case 'auth/invalid-email':
-					alert('Please use a valid email')
-					break
-				case 'auth/wrong-password':
-					alert('Please enter correct password')
-					break
-				case 'auth/user-not-found':
-					alert('This account is not registered')
-					break
-				default:
-					break
-				}
-			})
+		loginUser({ email, password }, dispatch)
 	}
 	return (
-		<KeyboardAvoidingView behaviour="position" style={styles.container}>
-			<ScrollView>
-				<SafeAreaView>
+		<KeyboardAvoidingView behaviour="height" style={styles.container}>
+			<SafeAreaView>
+				<ScrollView keyboardDismissMode="interactive">
+
 					<Image
 						style={styles.logo}
 						source={require('../assets/testTitleImage.png')}
@@ -126,7 +112,7 @@ function LoginScreen ({ navigation }) {
 						<Text style={styles.text}>Login</Text>
 					</TouchableOpacity>
 					<SafeAreaView style={styles.register}>
-						<TouchableOpacity color="#fff" style={styles.wrap} onPress={() => navigation.navigate(REGISTER)}>
+						<TouchableOpacity color="#fff" style={styles.wrap} onPress={() => { navigation.navigate(REGISTER) }}>
 							<Text style={styles.text}>Register as User</Text>
 						</TouchableOpacity>
 						<TouchableOpacity color="#fff" style={styles.wrap} onPress={() => navigation.navigate('StoreRegister')}>
@@ -140,10 +126,10 @@ function LoginScreen ({ navigation }) {
 						<Text style={styles.text}>Forgot Password ?</Text>
 					</TouchableOpacity>
 					<ActivityIndicator color="white" animating={loading} size="large" />
-
-				</SafeAreaView>
-			</ScrollView>
+				</ScrollView>
+			</SafeAreaView>
 		</KeyboardAvoidingView>
+
 	)
 }
 

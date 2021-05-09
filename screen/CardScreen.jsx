@@ -141,6 +141,7 @@ const HalfSpacer = () => (
 
 function CardScreen() {
 	const card = useSelector((globalState) => globalState.card)
+	console.log(card)
 	const { shouldRedeem } = card
 	const { stampCount } = card
 	const [modalVisible, setModalVisible] = useState(false)
@@ -158,7 +159,7 @@ function CardScreen() {
 					<View style={[styles.storeInfo]}>
 						<Text style={[styles.cardTitle]}>Mutual Friends</Text>
 						<Text style={[styles.cardDetails]}>
-							12 Morgan Street, Newmarket
+							{card.address}
 							{'\n'}
 							@mutualfriendsespresso
 						</Text>

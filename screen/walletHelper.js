@@ -1,4 +1,3 @@
-import request from 'superagent'
 import consume from '../consume'
 import { getUserWalletAction } from '../store/actions/walletAction'
 

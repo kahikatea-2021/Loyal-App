@@ -2,10 +2,11 @@ import 'react-native-gesture-handler'
 import { StatusBar } from 'expo-status-bar'
 import React, { useCallback, useEffect, useState } from 'react'
 import { Provider } from 'react-redux'
-import { NavigationContainer } from '@react-navigation/native'
+import { NavigationContainer, DarkTheme } from '@react-navigation/native'
 import { createStackNavigator } from '@react-navigation/stack'
 import { SafeAreaProvider } from 'react-native-safe-area-context'
 import * as SplashScreen from 'expo-splash-screen'
+import { Alert } from 'react-native'
 import store from './store'
 import LoginScreen from './screen/LoginScreen'
 import BottomNavigation from './navigation'
@@ -17,21 +18,35 @@ import ResetPasswordScreen from './screen/ResetPasswordScreen'
 import { CARD } from './navigation/screenDefinitions'
 import CardScreen from './screen/CardScreen'
 import { auth } from './auth'
+import colors from './theme/color'
+
 import { FORGOT_PASSWORD, LOGIN, REGISTER } from './navigationNames'
 
 const AppStack = createStackNavigator()
+// const SPLASH_SCREEN_TIME = 3000
+
+const AppLightTheme = {
+	...DarkTheme,
+	colors: {
+		...DarkTheme.colors,
+		...colors.light,
+	},
+}
 
 export default function App () {
-	// const [appState, setAppState]
-	const [appIsReady, setAppIsReady] = useState(false)
-	const [isAuthenticated, setIsAuthenticated] = useState(false)
-	const [claim, setClaim] = useState({
-		isStore: false,
-		isUser: false,
+	// const colorSchema = useColorScheme()
+	const [appState, setAppState] = useState({
+		appIsReady: false,
+		isAuthenticated: false,
+		claim: {
+			isStore: false,
+			isUser: false,
+		},
 	})
 
+	const { appIsReady, isAuthenticated, claim } = appState
+
 	useEffect(() => {
-		setAppIsReady(false)
 		async function prepare() {
 			try {
 				// Keep the splash screen visible while we fetch resources
@@ -42,29 +57,60 @@ export default function App () {
 		}
 		prepare()
 
+		store.subscribe(() => {
+			const { info } = store.getState()
+			if (info.show) {
+				switch (info.message) {
+				case 'auth/invalid-email':
+					Alert.alert('Error', 'Please use a valid email')
+					break
+				case 'auth/wrong-password':
+					Alert.alert('Error', 'Please enter correct password')
+					break
+				case 'auth/user-not-found':
+					Alert.alert('Error', 'This account is not registered')
+					break
+				default:
+					Alert.alert('Error', info.message)
+					break
+				}
+			}
+		})
+
 		auth.onAuthStateChanged((user) => {
 			console.log(user)
 			if (user) {
-				setIsAuthenticated(true)
 				user.getIdTokenResult(true).then((idToken) => {
 					if (idToken.claims.shop) {
-						setClaim({
-							isStore: true,
-							isUser: false,
+						setAppState({
+							appIsReady: true,
+							isAuthenticated: true,
+							claim: {
+								isStore: true,
+								isUser: false,
+							},
 						})
 					} else {
-						setClaim({
-							isStore: false,
-							isUser: true,
+						setAppState({
+							appIsReady: true,
+							isAuthenticated: true,
+							claim: {
+								isStore: false,
+								isUser: true,
+							},
 						})
 					}
 				})
 			} else {
-				setIsAuthenticated(false)
+				setAppState({
+					appIsReady: true,
+					isAuthenticated: false,
+					claim: {
+						isStore: false,
+						isUser: false,
+					},
+				})
 			}
-			setTimeout(() => {
-				setAppIsReady(true)
-			}, 3000)
 		})
 	}, [])
 
@@ -77,17 +123,19 @@ export default function App () {
 	if (!appIsReady) {
 		return null
 	}
-
 	return (
 		<Provider store={store}>
 			<SafeAreaProvider>
 				<StatusBar style={{ }} />
-				<NavigationContainer onReady={onLayoutRootView}>
-
+				<NavigationContainer theme={AppLightTheme} onReady={onLayoutRootView}>
 					<AppStack.Navigator screenOptions={{
 						headerShown: false,
+						headerStyle: {
+							backgroundColor: colors.light.primary,
+						},
 					}}
 					>
+
 						{ !isAuthenticated
 							&& (
 								<>
@@ -104,6 +152,7 @@ export default function App () {
 										name="StoreRegister"
 										component={StoreRegisterScreen}
 										options={{
+											title: 'Store Register',
 											headerShown: true,
 										}}
 									/>
@@ -122,6 +171,7 @@ export default function App () {
 										name={CARD}
 										component={CardScreen}
 									/>
+
 								</>
 							)
 						}
@@ -137,7 +187,6 @@ export default function App () {
 									</>
 								)
 						}
-
 						<AppStack.Screen
 							name={FORGOT_PASSWORD}
 							component={ResetPasswordScreen}

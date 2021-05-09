@@ -1,4 +1,4 @@
-import request from 'superagent'
+import consume from '../consume'
 // import { stamp, card } from '../mockServer/stampRouter'
 import { getUserCard } from '../store/actions/cardActions'
 
@@ -7,11 +7,17 @@ import { getUserCard } from '../store/actions/cardActions'
 // dispatch(getUserCard(card(1)))
 // }
 
-export function stampCard(dispatch) {
+export function stampCard(dispatch, storeId) {
 	// console.log('heheheheheheh')
 	// stamp(1)
 	// dispatch(getUserCard(card(1)))
-	return request.patch('https://effc9dad5017.ngrok.io/api/v1/stamp')
+	console.log(storeId)
+	consume('/stamp', 'patch', {
+		storeId,
+	}).then((res) => {
+		dispatch(getUserCard(res.body))
+	})
+	/* return request.patch('https://effc9dad5017.ngrok.io/api/v1/stamp')
 		.set({
 			Accept: 'application/json',
 		})
@@ -22,7 +28,7 @@ export function stampCard(dispatch) {
 		.then((res) => {
 			console.log(res.body)
 			dispatch(getUserCard(res.body))
-		})
+		})( */
 }
 
 export default {
