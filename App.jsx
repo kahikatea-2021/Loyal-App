@@ -8,7 +8,8 @@ import { SafeAreaProvider } from 'react-native-safe-area-context'
 import store from './store'
 import LoginScreen from './screen/LoginScreen'
 import BottomNavigation from './navigation'
-import StoreDetailScreen from './screen/StoreDetailScreen'
+import StoreNavigation from './storeNavigation'
+
 import RegisterScreen from './screen/RegisterScreen'
 import StoreRegisterScreen from './screen/StoreRegisterScreen'
 import ResetPasswordScreen from './screen/ResetPasswordScreen'
@@ -57,6 +58,10 @@ export default function App () {
 						<AppStack.Screen
 							name={CARD}
 							component={CardScreen}
+						/>
+						<AppStack.Screen
+							name="StoreNavigation"
+							component={StoreNavigation}
 						/>
 						<AppStack.Screen
 							name="BottomNavigation"

@@ -2,7 +2,7 @@ import React from 'react'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import { MaterialIcons, Ionicons } from '@expo/vector-icons'
 import ScanNavigator from './ScanNavigator'
-import HomeScreen from '../screen/HomeScreen'
+import HomeNavigationItem from './HomeNavigationItem'
 import CardScreen from '../screen/CardScreen'
 import {
 	CARD, HOME, SCAN, WALLET,

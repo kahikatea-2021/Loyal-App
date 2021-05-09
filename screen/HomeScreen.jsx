@@ -59,6 +59,7 @@ function HomeScreen ({ navigation }) {
 			// User is signed in.
 			user.getIdToken().then((token) => {
 				console.log(token)
+				console.log(token)
 			})
 			// ...
 		} else {

@@ -1,9 +1,14 @@
 import React, { useState, useEffect, useLayoutEffect } from 'react'
 import {
-	TouchableOpacity, SafeAreaView, TextInput, Text, Button, Platform, StyleSheet, KeyboardAvoidingView, Image, ScrollView, ActivityIndicator,
+	TouchableOpacity,
+	SafeAreaView,
+	TextInput, Text,
+	StyleSheet,
+	KeyboardAvoidingView,
+	Image,
+	ScrollView,
+	ActivityIndicator,
 } from 'react-native'
-import * as WebBrowser from 'expo-web-browser'
-import { set } from 'react-native-reanimated'
 import { auth } from '../auth'
 
 const styles = StyleSheet.create({
@@ -69,10 +74,13 @@ function LoginScreen ({ navigation }) {
 		})
 	}, [navigation])
 
-	useEffect(() => {
+	 useEffect(() => {
 		const unsubscribe = auth.onAuthStateChanged((authUser) => {
 			if (authUser) {
-				navigation.replace('BottomNavigation')
+				authUser.getIdTokenResult(true).then((idToken) => {
+					if (!idToken.claims.shop) { navigation.replace('BottomNavigation') } else navigation.replace('StoreNavigation')
+				})
+				// navigation.replace('BottomNavigation')
 			}
 		})
 		return unsubscribe
@@ -84,15 +92,17 @@ function LoginScreen ({ navigation }) {
 			.catch((error) => {
 				console.log(error.code)
 				switch (error.code) {
-					case 'auth/invalid-email':
-						alert('Please use a valid email')
-						break
-					case 'auth/wrong-password':
-						alert('Please enter correct password')
-						break
-					case 'auth/user-not-found':
-						alert('This account is not registered')
-						break
+				case 'auth/invalid-email':
+					alert('Please use a valid email')
+					break
+				case 'auth/wrong-password':
+					alert('Please enter correct password')
+					break
+				case 'auth/user-not-found':
+					alert('This account is not registered')
+					break
+				default:
+					break
 				}
 			})
 	}
