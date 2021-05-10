@@ -5,13 +5,16 @@ import {
 	StyleSheet,
 	Text,
 	View,
+	TouchableOpacity,
 } from 'react-native'
 import Swipeable from 'react-native-swipeable-row'
-import React from 'react'
+import React, { useLayoutEffect } from 'react'
 
 const styles = StyleSheet.create({
 	container: {
 		flex: 1,
+		flexDirection: 'column',
+		justifyContent: 'center',
 	},
 })
 
@@ -26,7 +29,7 @@ const DATA = [
 	},
 ]
 
-function Item({ title }) {
+function Item ({ title }) {
 	return (
 		<View>
 			<Text>{title}</Text>
@@ -34,7 +37,17 @@ function Item({ title }) {
 	)
 }
 
-function WalletScreen() {
+function WalletScreen ({ navigation }) {
+	useLayoutEffect(() => {
+		navigation.setOptions({
+			title: 'Wallet',
+			headerStyle: {
+				backgroundColor: '#49378E',
+				shadowColor: 'transparent',
+			},
+			headerTintColor: '#fff',
+		})
+	}, [navigation])
 	return (
 		<SafeAreaView style={styles.container}>
 			<Swipeable rightButtons={rightButtons}>

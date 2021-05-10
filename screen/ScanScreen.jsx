@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useLayoutEffect } from 'react'
 import {
-	Text, StyleSheet, Button, Dimensions, View, Image,
+	Text, StyleSheet, Button, Dimensions, View, Image, TouchableOpacity,
 } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { useNavigation } from '@react-navigation/native'
@@ -37,9 +37,17 @@ const styles = StyleSheet.create({
 		padding: 9,
 		margin: 4,
 	},
+	tap: {
+		backgroundColor: 'transparent',
+		alignItems: 'center',
+	},
+	tapText: {
+		color: '#fff',
+		fontSize: 20,
+	},
 })
 
-function HomeScreen() {
+function HomeScreen () {
 	const [isPermitted, setPermit] = useState(null)
 	const [scannedCode, setScannedCode] = useState(false)
 	const navigation = useNavigation()
@@ -47,20 +55,21 @@ function HomeScreen() {
 
 	useLayoutEffect(() => {
 		navigation.setOptions({
-			title: '',
+			title: 'Scanner',
 			headerStyle: {
 				backgroundColor: '#49378E',
 				shadowColor: 'transparent',
 			},
+			headerTintColor: '#fff',
 		})
 	}, [navigation])
 
-	async function requestForPermission() {
+	async function requestForPermission () {
 		const { status } = await BarCodeScanner.requestPermissionsAsync()
 		setPermit(status === 'granted')
 	}
 
-	function handleCodeScanned({ data }) {
+	function handleCodeScanned ({ data }) {
 		setScannedCode(true)
 		const storeInfo = JSON.parse(data)
 		stampCard(dispatch, storeInfo.id)
@@ -92,10 +101,15 @@ function HomeScreen() {
 				style={styles.scanBox}
 				source={require('../assets/scanFrame.png')}
 			/>
-			<Text>
-				{scannedCode && <Button color="#FCFAF1" alignSelf="center" title="Tap to Scan Again" onPress={() => setScannedCode(false)} />}
-			</Text>
 
+			{scannedCode
+				&& (
+					<TouchableOpacity style={styles.tap} onPress={() => setScannedCode(false)}>
+						<Text style={styles.tapText}>
+							Tap to Scan Again
+						</Text>
+					</TouchableOpacity>
+				)}
 		</SafeAreaView>
 	)
 }
