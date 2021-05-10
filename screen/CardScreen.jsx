@@ -192,13 +192,14 @@ function CardScreen ({ navigation }) {
 	const [modalVisible, setModalVisible] = useState(false)
 	const [finalModalVisible, setFinalModalVisible] = useState(false)
 	const dispatch = useDispatch()
+
 	const handleLongPress = () => {
 		setModalVisible(true)
 	}
 
 	function handleUserHasReedem () {
 		resetCard(dispatch, storeId)
-		setModalVisible(!modalVisible)
+		// setModalVisible(!modalVisible)
 		setFinalModalVisible(!finalModalVisible)
 	}
 
