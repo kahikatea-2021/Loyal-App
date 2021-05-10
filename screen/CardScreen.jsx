@@ -7,12 +7,17 @@ import {
 
 import { resetCard } from './stampHelper'
 
+import request from 'superagent'
+import { AuthError } from 'expo-auth-session'
+import { getUserCard } from '../store/actions/cardActions'
+
+
 const styles = StyleSheet.create({
 	loyaltyCard: {
 		padding: 15,
 		margin: 20,
 		borderRadius: 20,
-		backgroundColor: '#49378E',
+		backgroundColor: '#87878a',
 		shadowColor: 'rgba(0, 0, 0, 0.75)',
 		shadowOffset: {
 			width: 5,
@@ -77,16 +82,33 @@ const styles = StyleSheet.create({
 		shadowRadius: 4,
 		elevation: 5,
 	},
+	modalFinalView: {
+		flex: 0.8,
+		margin: 20,
+		backgroundColor: 'white',
+		borderRadius: 20,
+		padding: 35,
+		alignItems: 'center',
+		shadowColor: '#000',
+		shadowOffset: {
+			width: 0,
+			height: 2,
+		},
+		shadowOpacity: 0.25,
+		shadowRadius: 4,
+		elevation: 5,
+	},
 	button: {
 		borderRadius: 20,
 		padding: 10,
+		margin: 20,
 		elevation: 2,
 	},
 	buttonOpen: {
-		backgroundColor: 'blue',
+		backgroundColor: '#1282e9',
 	},
 	buttonClose: {
-		backgroundColor: '#2196F3',
+		backgroundColor: '#1282e9',
 	},
 	textStyle: {
 		color: 'white',
@@ -129,6 +151,19 @@ const styles = StyleSheet.create({
 	cardLogo: {
 		flex: 1.5, width: 60, height: 60,
 	},
+	redeemModalButtons: {
+		flexDirection: 'row',
+	},
+	notYetButton: {
+		backgroundColor: 'grey',
+		borderRadius: 20,
+		padding: 10,
+		margin: 20,
+		elevation: 2,
+	},
+	notYetbuttonClose: {
+		backgroundColor: 'grey',
+	},
 })
 
 const Spacer = () => (
@@ -142,19 +177,29 @@ const HalfSpacer = () => (
 function CardScreen() {
 	const card = useSelector((globalState) => globalState.card)
 	const { shouldRedeem, storeId, stampCount } = card
+
 	const [modalVisible, setModalVisible] = useState(false)
+	const [finalModalVisible, setFinalModalVisible] = useState(false)
 	const dispatch = useDispatch()
 	const handleLongPress = () => {
 		setModalVisible(true)
 	}
-
+  
 	function handleUserHasReedem() {
 		resetCard(dispatch, storeId)
 		setModalVisible(!modalVisible)
+    setFinalModalVisible(!finalModalVisible)
+
+  }
+  
+	const handleFinalPress = () => {
+		setModalVisible(!modalVisible)
+		setFinalModalVisible(true)
+    
 	}
 
 	return (
-		<SafeAreaView style={{ flex: 1 }}>
+		<SafeAreaView style={{ flex: 1, backgroundColor: 'white' }}>
 			<Spacer />
 			<View style={[styles.loyaltyCard]}>
 				<View style={[styles.cardHeader]}>
@@ -228,6 +273,31 @@ function CardScreen() {
 			{(shouldRedeem)
 				? (
 					<View style={styles.centeredView}>
+
+						<Modal
+							animationType="slide"
+							transparent
+							visible={finalModalVisible}
+							onRequestClose={() => {
+								Alert.alert('Modal has been closed.')
+								setFinalModalVisible(!finalModalVisible)
+							}}
+						>
+							<View style={styles.centeredView}>
+								<View style={styles.modalFinalView}>
+									<Text style={styles.modalText}>
+										Show this to barrista to redeem your free coffee.
+									</Text>
+									<Pressable
+										style={[styles.button, styles.buttonClose]}
+										onPress={handleUserHasReedem}
+									>
+										<Text style={styles.textStyle}>Done</Text>
+									</Pressable>
+								</View>
+							</View>
+						</Modal>
+
 						<Modal
 							animationType="slide"
 							transparent
@@ -240,26 +310,45 @@ function CardScreen() {
 							<View style={styles.centeredView}>
 								<View style={styles.modalView}>
 									<Text style={styles.modalText}>
-										Show this to your barista to redeem
-										your free coffee.
+										Are you sure you would like to redeem now?
+										Redeeming will clear your stamp balance.
 									</Text>
-									<Pressable
-										style={[styles.button, styles.buttonClose]}
-										onPress={handleUserHasReedem}
-									>
-										<Text style={styles.textStyle}>Close</Text>
-									</Pressable>
+									<View style={styles.redeemModalButtons}>
+										<Pressable
+											style={[styles.button, styles.buttonClose]}
+											onPress={handleFinalPress}
+										>
+											<Text style={styles.textStyle}>Yes! Redeem now</Text>
+										</Pressable>
+										<Pressable
+											style={[styles.notYetButton, styles.notYetButtonClose]}
+											onPress={() => {
+												setModalVisible(!modalVisible)
+											}}
+										>
+											<Text style={styles.textStyle}>Not yet</Text>
+										</Pressable>
+									</View>
 								</View>
 							</View>
 						</Modal>
 						<Pressable
 							style={({ pressed }) => [
 								{
+									width: '90%',
+									margin: 20,
 									borderRadius: 20,
-									padding: 10,
-									elevation: 2,
-									opacity: pressed ? 0.5 : 1,
-									backgroundColor: pressed ? 'red' : 'orange',
+									padding: 35,
+									alignItems: 'center',
+									shadowColor: '#000',
+									shadowOffset: {
+										width: 0,
+										height: 2,
+									},
+									shadowOpacity: 0.25,
+									shadowRadius: 4,
+									elevation: 5,
+									backgroundColor: pressed ? '#1282e9' : '#49378E',
 								},
 							]}
 							onLongPress={handleLongPress}
