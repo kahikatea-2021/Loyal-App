@@ -95,53 +95,52 @@ export default function App () {
 		})
 	}, [])
 
+	function onAlert(message) {
+		Alert.alert('Error', message, [
+			{
+				onPress: () => {
+					store.dispatch(showAlertAction({
+						show: false,
+						message: '',
+					}))
+				},
+			},
+		])
+	}
 	const onLayoutRootView = useCallback(async () => {
 		if (appIsReady) {
-
 			await SplashScreen.hideAsync()
-			if (unsubcribed)
-				unsubcribed()
+			if (unsubcribed) { unsubcribed() }
 			unsubcribed = store.subscribe(() => {
 				const { info } = store.getState()
 				if (info.show) {
 					switch (info.message) {
 					case 'auth/invalid-email':
-						Alert.alert('Error', 'Please use a valid email')
+						onAlert('Please use a valid email')
 						break
 					case 'auth/wrong-password':
-						Alert.alert('Error', 'Please enter correct password')
+						onAlert('Please enter correct password')
 						break
 					case 'auth/user-not-found':
-						Alert.alert('Error', 'This account is not registered')
-						break
-					case 'auth/invalid-email':
-						Alert.alert('Error', 'Please use a valid email')
-						break
-					case 'auth/wrong-password':
-						Alert.alert('Error', 'Please enter correct password')
-						break
-					case 'auth/user-not-found':
-						Alert.alert('Error', 'This account is not registered')
+						onAlert('This account is not registered')
 						break
 					case 'auth/email-already-exists':
-						Alert.alert('Error', 'This account is already registered')
+						onAlert('This account is already registered')
 						break
 					default:
-						Alert.alert('Error', info.message)
+						onAlert(info.message)
 						break
 					}
-	
-					
 				}
-	
-				/*if (store) {
+
+				/* if (store) {
 					store.dispatch(showAlertAction(
 						{
 							show: false,
 							message: "",
 						},
 					))
-				}*/
+				} */
 			})
 		}
 	}, [appIsReady])
@@ -194,9 +193,9 @@ export default function App () {
 										component={BottomNavigation}
 									/>
 									<AppStack.Screen
-									options={{
-										animationTypeForReplace:'pop'
-									}}
+										options={{
+											animationTypeForReplace: 'pop',
+										}}
 										name={CARD}
 										component={CardScreen}
 									/>

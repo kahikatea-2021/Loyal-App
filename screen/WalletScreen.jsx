@@ -70,9 +70,9 @@ function WalletScreen({ onOpen, onClose }) {
 			<SafeAreaView style={styles.container}>
 				{wallet
           && wallet.map((card) => (
-          	<Swipeable
+	<Swipeable
           		leftContent={(
-		<View style={styles.leftSwipeItem}>
+			<View style={styles.leftSwipeItem}>
 	<Text />
           			</View>
           		)}
@@ -90,7 +90,7 @@ function WalletScreen({ onOpen, onClose }) {
           		]}
           		onRightButtonsOpenRelease={onOpen}
           		onRightButtonsCloseRelease={onClose}
-	>
+          	>
           		<View style={[styles.listItem, { backgroundColor: '#FCFAF1' }]}>
           			<TouchableOpacity
           				activeOpacity={1}
@@ -105,8 +105,8 @@ function WalletScreen({ onOpen, onClose }) {
           					source={require('../assets/walletCardTest.png')}
 	/>
 	</TouchableOpacity>
-	</View>
-	</Swipeable>
+		</View>
+          	</Swipeable>
           ))}
 			</SafeAreaView>
 		</ScrollView>
