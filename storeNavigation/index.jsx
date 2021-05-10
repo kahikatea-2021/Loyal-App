@@ -28,6 +28,7 @@ function Index () {
 					tabBarIcon: ({ color }) => <TabIcon color={color} name="library-add" />,
 				}}
 			/>
+
 			<AppTab.Screen
 				name="StoreAccount"
 				component={StoreAccount}

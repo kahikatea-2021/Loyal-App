@@ -4,7 +4,7 @@ import {
 } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { useDispatch, useSelector } from 'react-redux'
-import consume from '../consume'
+import { ScrollView } from 'react-native-gesture-handler'
 import { getStoreDetail } from './storeHelper'
 
 const styles = StyleSheet.create({
@@ -56,25 +56,28 @@ function StoreDetailScreen({ navigation }) {
 			flex: 1, backgroundColor: '#49378E',
 		}}
 		>
-			<View style={styles.container}>
+			<ScrollView style={styles.container}>
 				{store
-			&& (
+					&& (
+						<>
+							<Image
+								style={styles.logo}
+								source={{
+									uri: `${store.qrCode}`,
+								}}
+							/>
+							<Text style={styles.textMain}>
+								Welcome to
+								{' '}
+								{store.name}
+								{'\n'}
+							</Text>
+							<Text style={styles.textSub}>Scan the code to save for a free coffee</Text>
 
-				<Image
-					style={styles.logo}
-					source={{
-						uri: `${store.qrCode}`,
-					}}
-				/>
-			)}
-				<Text style={styles.textMain}>
-					Welcome to
-					{' '}
-					{store.name}
-					{'\n'}
-				</Text>
-				<Text style={styles.textSub}>Scan the code to save for a free coffee</Text>
-			</View>
+						</>
+					)}
+
+			</ScrollView>
 		</SafeAreaView>
 	)
 }
