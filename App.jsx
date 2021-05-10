@@ -20,7 +20,6 @@ import { auth } from './auth'
 import colors from './theme/color'
 
 import { FORGOT_PASSWORD, LOGIN, REGISTER } from './navigationNames'
-import { showAlertAction } from './store/actions/infoActions'
 
 const AppStack = createStackNavigator()
 // const SPLASH_SCREEN_TIME = 3000
@@ -44,7 +43,6 @@ export default function App () {
 			isUser: false,
 		},
 	})
-
 	const { appIsReady, isAuthenticated, claim } = appState
 
 	useEffect(() => {
@@ -96,6 +94,18 @@ export default function App () {
 		})
 	}, [])
 
+	function onAlert(message) {
+		Alert.alert('Error', message, [
+			{
+				onPress: () => {
+					store.dispatch(showAlertAction({
+						show: false,
+						message: '',
+					}))
+				},
+			},
+		])
+	}
 	const onLayoutRootView = useCallback(async () => {
 		if (appIsReady) {
 			await SplashScreen.hideAsync()
@@ -104,30 +114,22 @@ export default function App () {
 				const { info } = store.getState()
 				if (info.show) {
 					switch (info.message) {
-						case 'auth/invalid-email':
-							Alert.alert('Error', 'Please use a valid email')
-							break
-						case 'auth/wrong-password':
-							Alert.alert('Error', 'Please enter correct password')
-							break
-						case 'auth/user-not-found':
-							Alert.alert('Error', 'This account is not registered')
-							break
-						case 'auth/invalid-email':
-							Alert.alert('Error', 'Please use a valid email')
-							break
-						case 'auth/wrong-password':
-							Alert.alert('Error', 'Please enter correct password')
-							break
-						case 'auth/user-not-found':
-							Alert.alert('Error', 'This account is not registered')
-							break
-						case 'auth/email-already-exists':
-							Alert.alert('Error', 'This account is already registered')
-							break
-						default:
-							Alert.alert('Error', info.message)
-							break
+					case 'auth/invalid-email':
+						onAlert('Please use a valid email')
+						break
+					case 'auth/wrong-password':
+						onAlert('Please enter correct password')
+						break
+					case 'auth/user-not-found':
+
+						onAlert('This account is not registered')
+						break
+					case 'auth/email-already-exists':
+						onAlert('This account is already registered')
+						break
+					default:
+						onAlert(info.message)
+						break
 					}
 				}
 

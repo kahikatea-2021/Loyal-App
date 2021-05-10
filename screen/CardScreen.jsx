@@ -196,7 +196,7 @@ function CardScreen ({ navigation }) {
 		setModalVisible(true)
 	}
 
-	function handleUserHasReedem () {
+	function handleUserHasReedem() {
 		resetCard(dispatch, storeId)
 		setModalVisible(!modalVisible)
 		setFinalModalVisible(!finalModalVisible)
