@@ -20,7 +20,6 @@ import { auth } from './auth'
 import colors from './theme/color'
 
 import { FORGOT_PASSWORD, LOGIN, REGISTER } from './navigationNames'
-import { showAlertAction } from './store/actions/infoActions'
 
 const AppStack = createStackNavigator()
 // const SPLASH_SCREEN_TIME = 3000
@@ -44,7 +43,6 @@ export default function App () {
 			isUser: false,
 		},
 	})
-
 	const { appIsReady, isAuthenticated, claim } = appState
 
 	useEffect(() => {
@@ -97,23 +95,12 @@ export default function App () {
 
 	const onLayoutRootView = useCallback(async () => {
 		if (appIsReady) {
-
 			await SplashScreen.hideAsync()
-			if (unsubcribed)
-				unsubcribed()
+			if (unsubcribed) { unsubcribed() }
 			unsubcribed = store.subscribe(() => {
 				const { info } = store.getState()
 				if (info.show) {
 					switch (info.message) {
-					case 'auth/invalid-email':
-						Alert.alert('Error', 'Please use a valid email')
-						break
-					case 'auth/wrong-password':
-						Alert.alert('Error', 'Please enter correct password')
-						break
-					case 'auth/user-not-found':
-						Alert.alert('Error', 'This account is not registered')
-						break
 					case 'auth/invalid-email':
 						Alert.alert('Error', 'Please use a valid email')
 						break
@@ -130,18 +117,16 @@ export default function App () {
 						Alert.alert('Error', info.message)
 						break
 					}
-	
-					
 				}
-	
-				/*if (store) {
+
+				/* if (store) {
 					store.dispatch(showAlertAction(
 						{
 							show: false,
 							message: "",
 						},
 					))
-				}*/
+				} */
 			})
 		}
 	}, [appIsReady])
@@ -194,9 +179,9 @@ export default function App () {
 										component={BottomNavigation}
 									/>
 									<AppStack.Screen
-									options={{
-										animationTypeForReplace:'pop'
-									}}
+										options={{
+											animationTypeForReplace: 'pop',
+										}}
 										name={CARD}
 										component={CardScreen}
 									/>
