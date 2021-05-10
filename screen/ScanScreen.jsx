@@ -71,10 +71,7 @@ function HomeScreen () {
 
 	function handleCodeScanned ({ data }) {
 		setScannedCode(true)
-		// eslint-disable-next-line no-console
 		const storeInfo = JSON.parse(data)
-		console.log(storeInfo)
-		// alert(data)
 		stampCard(dispatch, storeInfo.id)
 		navigation.navigate(CARD)
 	}
@@ -104,6 +101,7 @@ function HomeScreen () {
 				style={styles.scanBox}
 				source={require('../assets/scanFrame.png')}
 			/>
+
 			{scannedCode
 				&& (
 					<TouchableOpacity style={styles.tap} onPress={() => setScannedCode(false)}>

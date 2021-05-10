@@ -3,6 +3,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import { MaterialIcons, Ionicons } from '@expo/vector-icons'
 import { Button, View } from 'react-native'
 import StoreDetailScreen from '../screen/StoreDetailScreen'
+import StoreCardCreator from '../screen/StoreCardCreator'
 import { auth } from '../auth'
 
 const AppTab = createBottomTabNavigator()
@@ -19,20 +20,11 @@ function Index () {
 				}}
 			/>
 			<AppTab.Screen
-				name="Setting"
-				component={() => (
-					<View style={{ marginTop: 50 }}>
-						<Button
-							onPress={() => {
-								auth.signOut()
-							}}
-							title="heheh"
-						/>
-					</View>
-				)}
+				name="createCard"
+				component={StoreCardCreator}
 				options={{
-					title: 'Account',
-					tabBarIcon: ({ color }) => <TabIcon color={color} name="supervised-user-circle" />,
+					title: 'Create Card',
+					tabBarIcon: ({ color }) => <TabIcon color={color} name="library-add" />,
 				}}
 			/>
 		</AppTab.Navigator>
