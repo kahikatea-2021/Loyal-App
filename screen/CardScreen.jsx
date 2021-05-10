@@ -4,8 +4,8 @@ import { useSelector, useDispatch } from 'react-redux'
 import {
 	SafeAreaView, StyleSheet, Text, View, Alert, Modal, Pressable, Image,
 } from 'react-native'
-import request from 'superagent'
-import { getUserCard } from '../store/actions/cardActions'
+
+import { resetCard } from './stampHelper'
 
 const styles = StyleSheet.create({
 	loyaltyCard: {
@@ -141,14 +141,16 @@ const HalfSpacer = () => (
 
 function CardScreen() {
 	const card = useSelector((globalState) => globalState.card)
-	console.log(card)
-	const { shouldRedeem } = card
-	const { stampCount } = card
+	const { shouldRedeem, storeId, stampCount } = card
 	const [modalVisible, setModalVisible] = useState(false)
 	const dispatch = useDispatch()
-
 	const handleLongPress = () => {
 		setModalVisible(true)
+	}
+
+	function handleUserHasReedem() {
+		resetCard(dispatch, storeId)
+		setModalVisible(!modalVisible)
 	}
 
 	return (
@@ -243,22 +245,7 @@ function CardScreen() {
 									</Text>
 									<Pressable
 										style={[styles.button, styles.buttonClose]}
-										onPress={() => {
-											request.patch('https://effc9dad5017.ngrok.io/api/v1/card')
-												.set({
-													Accept: 'application/json',
-												})
-												.send({
-													userId: 'abc123',
-													storeId: 1,
-												})
-												.then((res) => {
-													dispatch(getUserCard(res.body))
-													// shouldRedeem = false
-													// dispatch(getUserCard(res.body))
-												})
-											setModalVisible(!modalVisible)
-										}}
+										onPress={handleUserHasReedem}
 									>
 										<Text style={styles.textStyle}>Close</Text>
 									</Pressable>
