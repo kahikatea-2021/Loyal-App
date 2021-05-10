@@ -43,10 +43,10 @@ function StoreDetailScreen({ navigation }) {
 
 	useLayoutEffect(() => {
 		navigation.setOptions({
-			title: '',
+			title: 'Store',
 			headerStyle: {
 				backgroundColor: '#49378E',
-				shadowColor: 'transparent',
+				shadowColor: '#fff',
 			},
 		})
 	})
