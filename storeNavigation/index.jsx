@@ -27,23 +27,7 @@ function Index () {
 					tabBarIcon: ({ color }) => <TabIcon color={color} name="library-add" />,
 				}}
 			/>
-			<AppTab.Screen
-				name="Setting"
-				component={() => (
-					<View style={{ marginTop: 50 }}>
-						<Button
-							onPress={() => {
-								auth.signOut()
-							}}
-							title="heheh"
-						/>
-					</View>
-				)}
-				options={{
-					title: 'Account',
-					tabBarIcon: ({ color }) => <TabIcon color={color} name="supervised-user-circle" />,
-				}}
-			/>
+
 		</AppTab.Navigator>
 	)
 }
