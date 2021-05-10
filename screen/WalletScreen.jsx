@@ -12,7 +12,7 @@ import {
 } from 'react-native'
 import Swipeable from 'react-native-swipeable-row'
 import { Feather } from '@expo/vector-icons'
-import React from 'react'
+import React, { useLayoutEffect } from 'react'
 
 const styles = StyleSheet.create({
 	container: {
@@ -46,7 +46,16 @@ const styles = StyleSheet.create({
 	},
 })
 
-function WalletScreen({ onOpen, onClose }) {
+function WalletScreen ({ navigation, onOpen, onClose }) {
+	useLayoutEffect(() => {
+		navigation.setOptions({
+			title: 'My Wallet',
+			headerStyle: {
+				backgroundColor: '#49378E',
+				shadowColor: '#fff',
+			},
+		})
+	}, [navigation])
 	return (
 		<ScrollView>
 			<SafeAreaView style={styles.container}>

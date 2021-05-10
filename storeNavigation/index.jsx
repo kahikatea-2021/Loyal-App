@@ -5,6 +5,7 @@ import { Button, View } from 'react-native'
 import StoreDetailScreen from '../screen/StoreDetailScreen'
 import StoreCardCreator from '../screen/StoreCardCreator'
 import { auth } from '../auth'
+import StoreAccount from '../screen/StoreAccountScreen'
 
 const AppTab = createBottomTabNavigator()
 
@@ -27,7 +28,16 @@ function Index () {
 					tabBarIcon: ({ color }) => <TabIcon color={color} name="library-add" />,
 				}}
 			/>
-   		</AppTab.Navigator>
+
+			<AppTab.Screen
+				name="StoreAccount"
+				component={StoreAccount}
+				options={{
+					title: 'Store Account',
+					tabBarIcon: ({ color }) => <TabIcon color={color} name="supervised-user-circle" />,
+				}}
+			/>
+		</AppTab.Navigator>
 	)
 }
 
