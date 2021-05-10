@@ -7,8 +7,10 @@ import {
 
 import request from 'superagent'
 
+import { Ionicons } from '@expo/vector-icons'
 import { TouchableOpacity } from 'react-native-gesture-handler'
 import { AuthError } from 'expo-auth-session'
+import { getRandomBytes } from 'expo-random'
 import { resetCard } from './stampHelper'
 import { getUserCard } from '../store/actions/cardActions'
 
@@ -155,15 +157,21 @@ const styles = StyleSheet.create({
 	cardLogo: {
 		flex: 1.5, width: 60, height: 60,
 	},
-
-	done: {
+	closeIcon: {
 		padding: 15,
-		margin: 20,
+		// margin: 20,
 		borderRadius: 20,
-		backgroundColor: '#3C97EA',
 		elevation: 5,
-		alignItems: 'center',
-		justifyContent: 'center',
+		color: 'red',
+		opacity: 0.5,
+		shadowColor: '#000',
+		shadowOffset: {
+			width: 0,
+			height: 2,
+		},
+		shadowOpacity: 0.25,
+		shadowRadius: 4,
+		top: 5,
 	},
 	redeemModalButtons: {
 		flexDirection: 'row',
@@ -226,7 +234,8 @@ function CardScreen ({ navigation }) {
 
 	return (
 		<SafeAreaView style={{ flex: 1, backgroundColor: 'white' }}>
-			<Spacer />
+			<Ionicons name="chevron-back" size={50} style={[styles.closeIcon]} onPress={() => { navigation.navigate('BottomNavigation') }} />}
+			<HalfSpacer />
 			<View style={[styles.loyaltyCard]}>
 				<View style={[styles.cardHeader]}>
 					<View style={[styles.storeInfo]}>
@@ -396,9 +405,6 @@ function CardScreen ({ navigation }) {
 
 					</View>
 				)}
-			<TouchableOpacity style={[styles.done]} onPress={() => { navigation.navigate('BottomNavigation') }}>
-				<Text>Done</Text>
-			</TouchableOpacity>
 			<Spacer />
 		</SafeAreaView>
 	)
