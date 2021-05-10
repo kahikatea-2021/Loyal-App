@@ -2,7 +2,7 @@
 import React, { useState } from 'react'
 import { useSelector, useDispatch, useLayoutEffect } from 'react-redux'
 import {
-	SafeAreaView, StyleSheet, Text, View, Alert, Modal, Pressable, Image,
+	SafeAreaView, StyleSheet, Text, View, Alert, Modal, Pressable, Image, ImageBackground,
 } from 'react-native'
 
 import request from 'superagent'
@@ -89,14 +89,18 @@ const styles = StyleSheet.create({
 		borderRadius: 20,
 		padding: 35,
 		alignItems: 'center',
-		shadowColor: '#000',
+		justifyContent: 'center',
+		shadowColor: 'rgba(0, 0, 0, 0.75)',
 		shadowOffset: {
-			width: 0,
-			height: 2,
+			width: 5,
+			height: 10,
 		},
-		shadowOpacity: 0.25,
+		shadowOpacity: 0.5,
 		shadowRadius: 4,
 		elevation: 5,
+		borderColor: 'white',
+		borderWidth: 4,
+
 	},
 	button: {
 		borderRadius: 20,
@@ -175,6 +179,19 @@ const styles = StyleSheet.create({
 		backgroundColor: 'grey',
 
 	},
+	congratulationsImage: {
+		width: 300,
+		height: 19,
+		justifyContent: 'center',
+		top: 10,
+		marginBottom: 20,
+	},
+	redeemIcon: {
+		width: 200,
+		height: 200,
+		justifyContent: 'center',
+		margin: 50,
+	},
 })
 
 const Spacer = () => (
@@ -199,7 +216,6 @@ function CardScreen ({ navigation }) {
 
 	function handleUserHasReedem () {
 		resetCard(dispatch, storeId)
-		// setModalVisible(!modalVisible)
 		setFinalModalVisible(!finalModalVisible)
 	}
 
@@ -285,7 +301,7 @@ function CardScreen ({ navigation }) {
 					<View style={styles.centeredView}>
 
 						<Modal
-							animationType="slide"
+							animationType="fade"
 							transparent
 							visible={finalModalVisible}
 							onRequestClose={() => {
@@ -295,14 +311,18 @@ function CardScreen ({ navigation }) {
 						>
 							<View style={styles.centeredView}>
 								<View style={styles.modalFinalView}>
+									<Image style={styles.congratulationsImage} source={require('../assets/congratulations-new.png')} />
+									<HalfSpacer />
+									<Image style={styles.redeemIcon} source={require('../assets/redeemIcon.png')} />
 									<Text style={styles.modalText}>
-										Show this to barrista to redeem your free coffee.
+										Present this to your barista to redeem a free coffee.
 									</Text>
+									<HalfSpacer />
 									<Pressable
-										style={[styles.button, styles.buttonClose]}
+										style={[styles.notYetButton, styles.notYetButtonClose]}
 										onPress={handleUserHasReedem}
 									>
-										<Text style={styles.textStyle}>Done</Text>
+										<Text style={styles.textStyle}>Complete transaction</Text>
 									</Pressable>
 								</View>
 							</View>
@@ -358,6 +378,7 @@ function CardScreen ({ navigation }) {
 									shadowOpacity: 0.25,
 									shadowRadius: 4,
 									elevation: 5,
+									opacity: pressed ? 0.95 : 0.6,
 									backgroundColor: pressed ? '#1282e9' : '#49378E',
 								},
 							]}
