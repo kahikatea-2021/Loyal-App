@@ -56,11 +56,10 @@ const styles = StyleSheet.create({
 	},
 })
 
-function WalletScreen({ navigation, onOpen, onClose }) {
-	const navigation = useNavigation()
+function WalletScreen ({ navigation, onOpen, onClose }) {
 	const wallet = useSelector((state) => state.wallet)
 	const dispatch = useDispatch()
-  useLayoutEffect(() => {
+	useLayoutEffect(() => {
 		navigation.setOptions({
 			title: 'My Wallet',
 			headerStyle: {
@@ -78,45 +77,45 @@ function WalletScreen({ navigation, onOpen, onClose }) {
 		<ScrollView>
 			<SafeAreaView style={styles.container}>
 				{wallet
-          && wallet.map((card) => (
-	<Swipeable
-          		leftContent={(
-			<View style={styles.leftSwipeItem}>
-	<Text />
-          			</View>
-          		)}
-          		rightButtons={[
-          			<TouchableOpacity
-          				style={[
-          					styles.rightSwipeItem,
-          					{ backgroundColor: '#B80F0F' },
-          				]}
-	>
-          				<Text>
-          					<Feather name="trash-2" size={24} color="#FCFAF1" />
-	</Text>
-	</TouchableOpacity>,
-          		]}
-          		onRightButtonsOpenRelease={onOpen}
-          		onRightButtonsCloseRelease={onClose}
-          	>
-          		<View style={[styles.listItem, { backgroundColor: '#FCFAF1' }]}>
-          			<TouchableOpacity
-          				activeOpacity={1}
-          				onPress={() => {
-          					navigation.navigate('Card')
-          				}}
-	>
-		<Text>{card.storeName}</Text>
-		<Text>{card.stampCount}</Text>
-          				<ImageBackground
-          					style={styles.cardBg}
-          					source={require('../assets/walletCardTest.png')}
-	/>
-	</TouchableOpacity>
-		</View>
-          	</Swipeable>
-          ))}
+					&& wallet.map((card) => (
+						<Swipeable
+							leftContent={(
+								<View style={styles.leftSwipeItem}>
+									<Text />
+								</View>
+							)}
+							rightButtons={[
+								<TouchableOpacity
+									style={[
+										styles.rightSwipeItem,
+										{ backgroundColor: '#B80F0F' },
+									]}
+								>
+									<Text>
+										<Feather name="trash-2" size={24} color="#FCFAF1" />
+									</Text>
+								</TouchableOpacity>,
+							]}
+							onRightButtonsOpenRelease={onOpen}
+							onRightButtonsCloseRelease={onClose}
+						>
+							<View style={[styles.listItem, { backgroundColor: '#FCFAF1' }]}>
+								<TouchableOpacity
+									activeOpacity={1}
+									onPress={() => {
+										navigation.navigate('Card')
+									}}
+								>
+									<Text>{card.storeName}</Text>
+									<Text>{card.stampCount}</Text>
+									<ImageBackground
+										style={styles.cardBg}
+										source={require('../assets/walletCardTest.png')}
+									/>
+								</TouchableOpacity>
+							</View>
+						</Swipeable>
+					))}
 			</SafeAreaView>
 		</ScrollView>
 	)
