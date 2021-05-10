@@ -13,7 +13,7 @@ const styles = StyleSheet.create({
 		padding: 15,
 		margin: 20,
 		borderRadius: 20,
-		backgroundColor: '#49378E',
+		backgroundColor: '#87878a',
 		shadowColor: 'rgba(0, 0, 0, 0.75)',
 		shadowOffset: {
 			width: 5,
@@ -78,6 +78,22 @@ const styles = StyleSheet.create({
 		shadowRadius: 4,
 		elevation: 5,
 	},
+	modalFinalView: {
+		flex: 0.8,
+		margin: 20,
+		backgroundColor: 'white',
+		borderRadius: 20,
+		padding: 35,
+		alignItems: 'center',
+		shadowColor: '#000',
+		shadowOffset: {
+			width: 0,
+			height: 2,
+		},
+		shadowOpacity: 0.25,
+		shadowRadius: 4,
+		elevation: 5,
+	},
 	button: {
 		borderRadius: 20,
 		padding: 10,
@@ -85,10 +101,10 @@ const styles = StyleSheet.create({
 		elevation: 2,
 	},
 	buttonOpen: {
-		backgroundColor: 'blue',
+		backgroundColor: '#1282e9',
 	},
 	buttonClose: {
-		backgroundColor: 'blue',
+		backgroundColor: '#1282e9',
 	},
 	textStyle: {
 		color: 'white',
@@ -257,7 +273,7 @@ function CardScreen() {
 							}}
 						>
 							<View style={styles.centeredView}>
-								<View style={styles.modalView}>
+								<View style={styles.modalFinalView}>
 									<Text style={styles.modalText}>
 										Show this to barrista to redeem your free coffee.
 									</Text>
@@ -336,9 +352,7 @@ function CardScreen() {
 									shadowOpacity: 0.25,
 									shadowRadius: 4,
 									elevation: 5,
-									// elevation: 2,
-									opacity: pressed ? 0.5 : 1,
-									backgroundColor: pressed ? 'red' : 'orange',
+									backgroundColor: pressed ? '#1282e9' : '#49378E',
 								},
 							]}
 							onLongPress={handleLongPress}
