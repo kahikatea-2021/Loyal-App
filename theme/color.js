@@ -6,9 +6,8 @@ const primary = '#49378E'
 export default {
 	light: {
 		text: 'white',
-		background: primary,
+		// background: primary,
 		primary,
-		border: 'red',
 		tint: tintColorLight,
 		tabIconDefault: '#ccc',
 		tabIconSelected: tintColorLight,

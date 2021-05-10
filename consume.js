@@ -9,19 +9,16 @@ export default function consume(endpoint, method = 'get', data = {}) {
 	}
 	const user = auth.currentUser
 	if (user) {
-		return user.getIdTokenResult(true).then((idToken) => {
-			console.log(idToken)
-			return request[method](baseUrl + endpoint)
-				.set({
-					Authorization: idToken ? `Bearer ${idToken.token}` : '',
-				})
-				.set(headers)[payLoadMethod](data)
-				.then((res) => res)
-				.catch((err) => {
-					const errMessage = err.response?.body?.error?.title
-					throw new Error(errMessage || err.message)
-				})
-		})
+		return user.getIdTokenResult(true).then((idToken) => request[method](baseUrl + endpoint)
+			.set({
+				Authorization: idToken ? `Bearer ${idToken.token}` : '',
+			})
+			.set(headers)[payLoadMethod](data)
+			.then((res) => res)
+			.catch((err) => {
+				const errMessage = err.response?.body?.error?.title
+				throw new Error(errMessage || err.message)
+			}))
 	}
 	return request[method](baseUrl + endpoint)
 		.set(headers)[payLoadMethod](data)

@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useLayoutEffect } from 'react'
+import React, { useState, useLayoutEffect } from 'react'
 import {
 	TouchableOpacity,
 	SafeAreaView,
@@ -11,7 +11,6 @@ import {
 } from 'react-native'
 import { useDispatch } from 'react-redux'
 import { FORGOT_PASSWORD, REGISTER } from '../navigationNames'
-import { auth } from '../auth'
 import { loginUser } from './accountHelper'
 
 const styles = StyleSheet.create({
@@ -77,9 +76,11 @@ function LoginScreen ({ navigation }) {
 		})
 	}, [navigation])
 
-	const signIn = () => {
+	function signIn() {
 		setLoading(true)
-		loginUser({ email, password }, dispatch)
+		loginUser({ email, password }, dispatch).finally(() => {
+			setLoading(false)
+		})
 
 		/* auth.signInWithEmailAndPassword(email, password)
 			.catch((error) => {

@@ -1,11 +1,12 @@
 
-import React, { useState } from 'react'
+
+import React, { useState, useLayoutEffect } from 'react'
+
 
 import {
-	TouchableOpacity, SafeAreaView, TextInput, Text, Button, StyleSheet, KeyboardAvoidingView, Image, ScrollView,
+	TouchableOpacity, SafeAreaView, TextInput, Text, Button, StyleSheet, KeyboardAvoidingView, Image, ScrollView, ActivityIndicator,
 } from 'react-native'
 
-import consume from '../consume'
 import { registerStoreUser } from './accountHelper'
 
 const styles = StyleSheet.create({
@@ -55,7 +56,7 @@ const styles = StyleSheet.create({
 })
 
 function StoreRegister ({ navigation }) {
-	/* useLayoutEffect(() => {
+	useLayoutEffect(() => {
 		navigation.setOptions({
 			title: 'Register your Store',
 			headerTitleStyle: {
@@ -67,7 +68,7 @@ function StoreRegister ({ navigation }) {
 			},
 			headerTintColor: '#fff',
 		})
-	}, [navigation]) */
+	}, [navigation])
 
 	const [storeName, setStoreName] = useState('')
 	const [adminFirstName, setAdminFirstName] = useState('')
@@ -75,15 +76,22 @@ function StoreRegister ({ navigation }) {
 	const [phone, setPhone] = useState('')
 	const [email, setEmail] = useState('')
 	const [password, setPassword] = useState('')
+  const [address, setAddress] = useState('')
+  const [loading, setLoading] = useState(false)
+	
+  function registerStore() {
+		setLoading(true)
 
-	function registerStore() {
 		registerStoreUser({
 			storeName,
+			address,
 			adminFirstName,
 			adminLastName,
 			phone,
 			email,
 			password,
+		}).finally(() => {
+			setLoading(false)
 		})
 	}
 
@@ -103,6 +111,15 @@ function StoreRegister ({ navigation }) {
 						type="text"
 						value={storeName}
 						onChangeText={(text) => setStoreName(text)}
+					/>
+					<TextInput
+						style={styles.inputContainer}
+						placeholder="Store Address"
+						autoCapitalize="none"
+						autofocus
+						type="text"
+						value={address}
+						onChangeText={(text) => setAddress(text)}
 					/>
 					<TextInput
 						style={styles.inputContainer}
@@ -144,6 +161,8 @@ function StoreRegister ({ navigation }) {
 						onChangeText={(text) => setPassword(text)}
 					/>
 				</SafeAreaView>
+				<ActivityIndicator color="white" animating={loading} size="large" />
+
 				<TouchableOpacity style={styles.wrap} onPress={registerStore}>
 					<Text style={styles.text}>Register</Text>
 				</TouchableOpacity>

@@ -43,46 +43,8 @@ const styles = StyleSheet.create({
 		width: '100%',
 		height: '100%',
 		alignItems: 'center',
-		justifyContent: 'center',
 	},
 })
-
-// const rightButtons = [
-// 	<TouchableHighlight>
-// 		<Text>
-// 			<Feather name="trash-2" size={24} color="black" />
-// 		</Text>
-// 	</TouchableHighlight>,
-// ]
-
-// const rightButtonWidth = 95
-
-// const DATA = [
-// 	{
-// 		id: 1,
-// 		title: 'First Card',
-// 	},
-// 	{
-// 		id: 2,
-// 		title: 'Second Card',
-// 	},
-// 	{
-// 		id: 3,
-// 		title: 'Third Card',
-// 	},
-// 	{
-// 		id: 4,
-// 		title: 'Fourth Card',
-// 	},
-// ]
-
-// function Item({ title }) {
-// 	return (
-// 		<View style={styles.item}>
-// 			<Text>{title}</Text>
-// 		</View>
-// 	)
-// }
 
 function WalletScreen({ onOpen, onClose }) {
 	return (
