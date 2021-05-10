@@ -4,9 +4,13 @@ import { useSelector, useDispatch } from 'react-redux'
 import {
 	SafeAreaView, StyleSheet, Text, View, Alert, Modal, Pressable, Image,
 } from 'react-native'
+
+import { resetCard } from './stampHelper'
+
 import request from 'superagent'
 import { AuthError } from 'expo-auth-session'
 import { getUserCard } from '../store/actions/cardActions'
+
 
 const styles = StyleSheet.create({
 	loyaltyCard: {
@@ -172,19 +176,26 @@ const HalfSpacer = () => (
 
 function CardScreen() {
 	const card = useSelector((globalState) => globalState.card)
-	const { shouldRedeem } = card
-	const { stampCount } = card
+	const { shouldRedeem, storeId, stampCount } = card
+
 	const [modalVisible, setModalVisible] = useState(false)
 	const [finalModalVisible, setFinalModalVisible] = useState(false)
 	const dispatch = useDispatch()
-
 	const handleLongPress = () => {
 		setModalVisible(true)
 	}
+  
+	function handleUserHasReedem() {
+		resetCard(dispatch, storeId)
+		setModalVisible(!modalVisible)
+    setFinalModalVisible(!finalModalVisible)
 
+  }
+  
 	const handleFinalPress = () => {
 		setModalVisible(!modalVisible)
 		setFinalModalVisible(true)
+    
 	}
 
 	return (
@@ -279,22 +290,7 @@ function CardScreen() {
 									</Text>
 									<Pressable
 										style={[styles.button, styles.buttonClose]}
-										onPress={() => {
-											request.patch('https://effc9dad5017.ngrok.io/api/v1/card')
-												.set({
-													Accept: 'application/json',
-												})
-												.send({
-													userId: 'abc123',
-													storeId: 1,
-												})
-												.then((res) => {
-													dispatch(getUserCard(res.body))
-													// shouldRedeem = false
-													// dispatch(getUserCard(res.body))
-												})
-											setFinalModalVisible(!finalModalVisible)
-										}}
+										onPress={handleUserHasReedem}
 									>
 										<Text style={styles.textStyle}>Done</Text>
 									</Pressable>

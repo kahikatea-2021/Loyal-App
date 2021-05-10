@@ -3,6 +3,7 @@ import {
 	TouchableOpacity, ActivityIndicator, SafeAreaView, TextInput, Text, Button, StyleSheet, KeyboardAvoidingView, Image, ScrollView, Alert,
 } from 'react-native'
 import { useDispatch } from 'react-redux'
+import request from 'superagent'
 import consume from '../consume'
 import { registerUser } from './accountHelper'
 
