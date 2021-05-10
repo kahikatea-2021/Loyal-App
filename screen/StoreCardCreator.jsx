@@ -64,11 +64,10 @@ const styles = StyleSheet.create({
 
 function StoreCardCreator({ navigation }) {
 	const [image, setImage] = useState(null)
-	console.log(image)
 	const dispatch = useDispatch()
 	useLayoutEffect(() => {
 		navigation.setOptions({
-			title: 'Create your loyalty card',
+			title: 'Create Card',
 			headerTitleStyle: {
 				color: '#fff',
 			},
@@ -98,46 +97,70 @@ function StoreCardCreator({ navigation }) {
 			mediaTypes: ImagePicker.MediaTypeOptions.All,
 			allowsEditing: true,
 			aspect: [4, 3],
-			quality: 1,
+			quality: 0,
+			base64: true,
 		})
 
-		console.log(result)
-
 		if (!result.cancelled) {
-			setImage(result.uri)
+			setImage(`data:image/png;base64,${result.base64}`)
 		}
 	}
 
-	// const [stampCount, setStampCount] = useState('')
-	// const [rewardThreshold, setRewardThreshold] = useState('')
-	// const []
+	const [rewardThreshold, setRewardThreshold] = useState(0)
+	const [reward, setReward] = useState('')
+	const [instagramHandle, setInstagramHandle] = useState('')
+
+	const [loading, setLoading] = useState(false)
+	function handleCardCreation() {
+		setLoading(true)
+		createStoreCard({
+			rewardThreshold,
+			reward,
+			instagramHandle,
+			image: 'image',
+		}, dispatch).finally(() => {
+			setLoading(false)
+		})
+	}
 	return (
 		<KeyboardAvoidingView>
 			<SafeAreaView>
 				<Text style={styles.text, styles.header}>Create your Loyalty Card</Text>
 				<TextInput
 					style={styles.inputContainer}
-					placeholder="Redeem number"
+					placeholder="Redeem Threshold"
 					keyboardType="numeric"
+					type="number"
+					value={setRewardThreshold}
+					onChangeText={(number) => setRewardThreshold(number)}
 				/>
 				<TextInput
 					style={styles.inputContainer}
 					type="text"
 					placeholder="Reward"
+					value={setReward}
+					onChangeText={(text) => setReward(text)}
 				/>
 				<TextInput
 					style={styles.inputContainer}
-					type="text"
+					type="url"
 					placeholder="Instagram Handle"
+					value={setInstagramHandle}
+					onChangeText={(text) => setInstagramHandle(text)}
 				/>
 
 				<TouchableOpacity style={styles.wrap} onPress={pickImage}>
-					<Text style={styles.text}>Pick an image from camera roll</Text>
+					<Text
+						style={styles.text}
+					>
+						Pick an image from camera roll
+
+					</Text>
 				</TouchableOpacity>
 				<SafeAreaView style={styles.imageBox}>
 					{image && <Image source={{ uri: image }} style={{ width: 200, height: 200 }} />}
 				</SafeAreaView>
-				<TouchableOpacity style={styles.wrap}>
+				<TouchableOpacity style={styles.wrap} onPress={() => { handleCardCreation() }}>
 					<Text style={styles.text}>Create Card</Text>
 				</TouchableOpacity>
 			</SafeAreaView>

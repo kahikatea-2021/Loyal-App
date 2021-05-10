@@ -1,7 +1,5 @@
 
-
 import React, { useState, useLayoutEffect } from 'react'
-
 
 import {
 	TouchableOpacity, SafeAreaView, TextInput, Text, Button, StyleSheet, KeyboardAvoidingView, Image, ScrollView, ActivityIndicator,
@@ -76,10 +74,10 @@ function StoreRegister ({ navigation }) {
 	const [phone, setPhone] = useState('')
 	const [email, setEmail] = useState('')
 	const [password, setPassword] = useState('')
-  const [address, setAddress] = useState('')
-  const [loading, setLoading] = useState(false)
-	
-  function registerStore() {
+	const [address, setAddress] = useState('')
+	const [loading, setLoading] = useState(false)
+
+	function registerStore () {
 		setLoading(true)
 
 		registerStoreUser({

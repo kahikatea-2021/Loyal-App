@@ -5,6 +5,7 @@ const primary = '#49378E'
 
 export default {
 	light: {
+
 		text: '#FCFAF1',
 		background: primary,
 		primary,
@@ -13,6 +14,7 @@ export default {
 		tabIconSelected: tintColorLight,
 	},
 	dark: {
+
 		text: '#FCFAF1',
 		background: '#000',
 		tint: tintColorDark,

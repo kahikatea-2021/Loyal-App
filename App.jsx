@@ -20,7 +20,6 @@ import { auth } from './auth'
 import colors from './theme/color'
 
 import { FORGOT_PASSWORD, LOGIN, REGISTER } from './navigationNames'
-import { showAlertAction } from './store/actions/infoActions'
 
 const AppStack = createStackNavigator()
 // const SPLASH_SCREEN_TIME = 3000
@@ -44,7 +43,6 @@ export default function App () {
 			isUser: false,
 		},
 	})
-
 	const { appIsReady, isAuthenticated, claim } = appState
 
 	useEffect(() => {
@@ -122,6 +120,7 @@ export default function App () {
 						onAlert('Please enter correct password')
 						break
 					case 'auth/user-not-found':
+
 						onAlert('This account is not registered')
 						break
 					case 'auth/email-already-exists':
