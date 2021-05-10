@@ -228,13 +228,16 @@ function CardScreen ({ navigation }) {
 	}
 
 	const handleFinalPress = () => {
+		setTimeout(() => {
+			handleUserHasReedem()
+		}, 150000)
 		setModalVisible(!modalVisible)
 		setFinalModalVisible(true)
 	}
 
 	return (
 		<SafeAreaView style={{ flex: 1, backgroundColor: 'white' }}>
-			<Ionicons name="chevron-back" size={50} style={[styles.closeIcon]} onPress={() => { navigation.navigate('BottomNavigation') }} />}
+			<Ionicons name="chevron-back" size={50} style={[styles.closeIcon]} onPress={() => { navigation.navigate('BottomNavigation') }} />
 			<HalfSpacer />
 			<View style={[styles.loyaltyCard]}>
 				<View style={[styles.cardHeader]}>
