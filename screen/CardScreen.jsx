@@ -5,14 +5,12 @@ import {
 	SafeAreaView, StyleSheet, Text, View, Alert, Modal, Pressable, Image,
 } from 'react-native'
 
-import { resetCard } from './stampHelper'
-
 import request from 'superagent'
 
 import { TouchableOpacity } from 'react-native-gesture-handler'
 import { AuthError } from 'expo-auth-session'
+import { resetCard } from './stampHelper'
 import { getUserCard } from '../store/actions/cardActions'
-
 
 const styles = StyleSheet.create({
 	loyaltyCard: {
@@ -162,7 +160,7 @@ const styles = StyleSheet.create({
 		elevation: 5,
 		alignItems: 'center',
 		justifyContent: 'center',
-
+	},
 	redeemModalButtons: {
 		flexDirection: 'row',
 	},
@@ -197,18 +195,16 @@ function CardScreen ({ navigation }) {
 	const handleLongPress = () => {
 		setModalVisible(true)
 	}
-  
-	function handleUserHasReedem() {
+
+	function handleUserHasReedem () {
 		resetCard(dispatch, storeId)
 		setModalVisible(!modalVisible)
-    setFinalModalVisible(!finalModalVisible)
+		setFinalModalVisible(!finalModalVisible)
+	}
 
-  }
-  
 	const handleFinalPress = () => {
 		setModalVisible(!modalVisible)
 		setFinalModalVisible(true)
-    
 	}
 
 	return (
