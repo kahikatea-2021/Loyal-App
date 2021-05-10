@@ -7,11 +7,9 @@ export function getStoreDetail(dispatch) {
 	})
 }
 
-export function createStoreCard(dispatch) {
-	consume('/cards', 'post', {}).then((res) => {
-		console.log('create card', res.body)
-
-		dispatch(createStoreCardAction(res.body))
+export function createStoreCard(data, dispatch) {
+	return consume('/stores', 'post', data).then((res) => {
+		 dispatch(createStoreCardAction(res.body))
 	})
 }
 

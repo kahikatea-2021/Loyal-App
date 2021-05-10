@@ -54,6 +54,19 @@ const styles = StyleSheet.create({
 		padding: 9,
 		margin: 4,
 	},
+	forgot: {
+		alignItems: 'center',
+		borderWidth: 1,
+		borderRadius: 10,
+		borderColor: '#800000',
+		backgroundColor: '#800000',
+		padding: 9,
+		margin: 4,
+	},
+	textForgot: {
+		color: '#fff',
+		fontSize: 20,
+	},
 	text: {
 		color: '#fff',
 		fontSize: 20,
@@ -76,7 +89,7 @@ function LoginScreen ({ navigation }) {
 		})
 	}, [navigation])
 
-	function signIn() {
+	function signIn () {
 		setLoading(true)
 		loginUser({ email, password }, dispatch).finally(() => {
 			setLoading(false)
@@ -137,10 +150,10 @@ function LoginScreen ({ navigation }) {
 						</TouchableOpacity>
 					</SafeAreaView>
 					<TouchableOpacity
-						style={styles.wrap}
+						style={styles.forgot}
 						onPress={() => navigation.navigate(FORGOT_PASSWORD)}
 					>
-						<Text style={styles.text}>Forgot Password ?</Text>
+						<Text style={styles.textForgot}>Forgot Password ?</Text>
 					</TouchableOpacity>
 					<ActivityIndicator color="white" animating={loading} size="large" />
 				</ScrollView>
