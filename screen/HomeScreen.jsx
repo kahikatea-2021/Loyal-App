@@ -98,9 +98,11 @@ function HomeScreen ({ navigation }) {
 		const sec = a.getSeconds() < 10 ? `0${a.getSeconds()}` : a.getSeconds()
 		return `${month} ${date}, ${year}, ${hour}:${min}:${sec}`
 	}
+	console.log(user)
 	return (
 		<KeyboardAvoidingView behaviour="position" style={styles.container}>
 			<SafeAreaView>
+
 				{user && (
 					<>
 						<Text style={styles.text}>
