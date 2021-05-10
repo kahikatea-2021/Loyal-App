@@ -16,7 +16,7 @@ function Index () {
 		<AppTab.Navigator>
 			<AppTab.Screen
 				name={WALLET}
-				component={WalletScreen}
+				component={WalletNavigationItem}
 				options={{
 					tabBarIcon: ({ color }) => <MaterialCommunityIcons name="cards" size={24} color={color} />,
 				}}
