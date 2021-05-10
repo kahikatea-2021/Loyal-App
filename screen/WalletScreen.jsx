@@ -10,9 +10,12 @@ import {
 	Image,
 	ImageBackground,
 } from 'react-native'
-import Swipeable from 'react-native-swipeable-row'
+// import Swipeable from 'react-native-swipeable-row'
+import Swipeable from 'react-native-gesture-handler/Swipeable'
 import { Feather } from '@expo/vector-icons'
 import React from 'react'
+import { RectButton } from 'react-native-gesture-handler'
+import Animated from 'react-native-reanimated'
 
 const styles = StyleSheet.create({
 	container: {
@@ -46,86 +49,106 @@ const styles = StyleSheet.create({
 	},
 })
 
-function WalletScreen({ onOpen, onClose }) {
+// function WalletScreen({ onOpen, onClose }) {
+// 	return (
+// 		<ScrollView>
+// 			<SafeAreaView style={styles.container}>
+// 				<Swipeable
+// 					leftContent={(
+// 						<View style={[styles.leftSwipeItem, { backgroundColor: '#8977CE' }]}>
+// 							<Text />
+// 						</View>
+// 					)}
+// 					rightButtons={[
+// 						<TouchableOpacity style={[styles.rightSwipeItem, { backgroundColor: '#B80F0F' }]}>
+// 							<Text>
+// 								<Feather name="trash-2" size={24} color="#FCFAF1" />
+// 							</Text>
+// 						</TouchableOpacity>,
+
+// 					]}
+// 					onRightButtonsOpenRelease={onOpen}
+// 					onRightButtonsCloseRelease={onClose}
+// 				>
+// 					<View style={[styles.listItem, { backgroundColor: '#FCFAF1' }]}>
+// 						<ImageBackground
+// 							style={styles.cardBg}
+// 							source={require('../assets/walletCardTest.png')}
+// 						/>
+// 					</View>
+// 				</Swipeable>
+// 				<Swipeable
+// 					leftContent={(
+// 						<View style={[styles.leftSwipeItem, { backgroundColor: '#AFAFAF' }]}>
+// 							<Text />
+// 						</View>
+// 					)}
+// 					rightButtons={[
+// 						<TouchableOpacity style={[styles.rightSwipeItem, { backgroundColor: '#B80F0F' }]}>
+// 							<Text>
+// 								<Feather name="trash-2" size={24} color="#FCFAF1" />
+// 							</Text>
+// 						</TouchableOpacity>,
+
+// 					]}
+// 					onRightButtonsOpenRelease={onOpen}
+// 					onRightButtonsCloseRelease={onClose}
+// 				>
+// 					<View style={[styles.listItem, { backgroundColor: '#FCFAF1' }]}>
+// 						<ImageBackground
+// 							style={styles.cardBg}
+// 							source={require('../assets/walletCardTest.png')}
+// 						/>
+// 					</View>
+// 				</Swipeable>
+// 				<Swipeable
+// 					leftContent={(
+// 						<View style={[styles.leftSwipeItem, { backgroundColor: '#AFAFAF' }]}>
+// 							<Text />
+// 						</View>
+// 					)}
+// 					rightButtons={[
+// 						<TouchableOpacity style={[styles.rightSwipeItem, { backgroundColor: '#B80F0F' }]}>
+// 							<Text>
+// 								<Feather name="trash-2" size={24} color="#FCFAF1" />
+// 							</Text>
+// 						</TouchableOpacity>,
+
+// 					]}
+// 					onRightButtonsOpenRelease={onOpen}
+// 					onRightButtonsCloseRelease={onClose}
+// 				>
+// 					<View style={[styles.listItem, { backgroundColor: '#FCFAF1' }]}>
+// 						<ImageBackground
+// 							style={styles.cardBg}
+// 							source={require('../assets/walletCardTest.png')}
+// 						/>
+// 					</View>
+// 				</Swipeable>
+// 			</SafeAreaView>
+// 		</ScrollView>
+
+// 	)
+// }
+function WalletScreen() {
+	function renderRightActions(progress, dragX) {
+		const trans = dragX.interpolate({
+			inputRange: [0, 50, 100, 101],
+			outputRange: [-20, 0, 0, 1],
+		})
+		return (
+			<RectButton style={styles.leftAction} onPress={() => {}}>
+				<Animated.Text>
+					Archive
+				</Animated.Text>
+			</RectButton>
+		)
+	}
 	return (
-		<ScrollView>
-			<SafeAreaView style={styles.container}>
-				<Swipeable
-					leftContent={(
-						<View style={[styles.leftSwipeItem, { backgroundColor: '#8977CE' }]}>
-							<Text />
-						</View>
-					)}
-					rightButtons={[
-						<TouchableOpacity style={[styles.rightSwipeItem, { backgroundColor: '#B80F0F' }]}>
-							<Text>
-								<Feather name="trash-2" size={24} color="#FCFAF1" />
-							</Text>
-						</TouchableOpacity>,
-
-					]}
-					onRightButtonsOpenRelease={onOpen}
-					onRightButtonsCloseRelease={onClose}
-				>
-					<View style={[styles.listItem, { backgroundColor: '#FCFAF1' }]}>
-						<ImageBackground
-							style={styles.cardBg}
-							source={require('../assets/walletCardTest.png')}
-						/>
-					</View>
-				</Swipeable>
-				<Swipeable
-					leftContent={(
-						<View style={[styles.leftSwipeItem, { backgroundColor: '#AFAFAF' }]}>
-							<Text />
-						</View>
-					)}
-					rightButtons={[
-						<TouchableOpacity style={[styles.rightSwipeItem, { backgroundColor: '#B80F0F' }]}>
-							<Text>
-								<Feather name="trash-2" size={24} color="#FCFAF1" />
-							</Text>
-						</TouchableOpacity>,
-
-					]}
-					onRightButtonsOpenRelease={onOpen}
-					onRightButtonsCloseRelease={onClose}
-				>
-					<View style={[styles.listItem, { backgroundColor: '#FCFAF1' }]}>
-						<ImageBackground
-							style={styles.cardBg}
-							source={require('../assets/walletCardTest.png')}
-						/>
-					</View>
-				</Swipeable>
-				<Swipeable
-					leftContent={(
-						<View style={[styles.leftSwipeItem, { backgroundColor: '#AFAFAF' }]}>
-							<Text />
-						</View>
-					)}
-					rightButtons={[
-						<TouchableOpacity style={[styles.rightSwipeItem, { backgroundColor: '#B80F0F' }]}>
-							<Text>
-								<Feather name="trash-2" size={24} color="#FCFAF1" />
-							</Text>
-						</TouchableOpacity>,
-
-					]}
-					onRightButtonsOpenRelease={onOpen}
-					onRightButtonsCloseRelease={onClose}
-				>
-					<View style={[styles.listItem, { backgroundColor: '#FCFAF1' }]}>
-						<ImageBackground
-							style={styles.cardBg}
-							source={require('../assets/walletCardTest.png')}
-						/>
-					</View>
-				</Swipeable>
-			</SafeAreaView>
-		</ScrollView>
-
-	)
+		<Swipeable renderRightActions={renderRightActions}>
+			<Text>Card</Text>
+		</Swipeable>
+	  )
 }
 
 export default WalletScreen
