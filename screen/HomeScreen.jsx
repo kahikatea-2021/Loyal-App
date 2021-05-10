@@ -5,6 +5,7 @@ import {
 import firebase from 'firebase/app'
 import { auth } from '../auth'
 import 'firebase/firestore'
+import { useSelector } from 'react-redux'
 
 const styles = StyleSheet.create({
 	container: {
@@ -54,6 +55,7 @@ const styles = StyleSheet.create({
 	},
 })
 function HomeScreen ({ navigation }) {
+	const user = useSelector((state) => state.user)
 	firebase.auth().onAuthStateChanged((user) => {
 		if (user) {
 			// User is signed in.
@@ -85,9 +87,39 @@ function HomeScreen ({ navigation }) {
 			headerTintColor: '#fff',
 		})
 	}, [navigation])
-
+	function convertUnixTime (unix) {
+		const a = new Date(unix * 1000)
+		const year = a.getFullYear()
+		const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
+		const month = months[a.getMonth()]
+		const date = a.getDate()
+		const hour = a.getHours()
+		const min = a.getMinutes() < 10 ? `0${a.getMinutes()}` : a.getMinutes()
+		const sec = a.getSeconds() < 10 ? `0${a.getSeconds()}` : a.getSeconds()
+		return `${month} ${date}, ${year}, ${hour}:${min}:${sec}`
+	}
+	console.log(user)
 	return (
 		<KeyboardAvoidingView behaviour="position" style={styles.container}>
+			<SafeAreaView>
+
+				{user && (
+					<>
+						<Text style={styles.text}>
+							Account Created:
+							{convertUnixTime(1620603044647)}
+						</Text>
+						<Text style={styles.text}>
+							User:
+							{user.displayName}
+						</Text>
+						<Text style={styles.text}>
+							Email:
+							{user.email}
+						</Text>
+					</>
+				)}
+			</SafeAreaView>
 			<TouchableOpacity style={styles.wrap} onPress={signOutUser}>
 				<Text style={styles.text}>Sign Out</Text>
 			</TouchableOpacity>

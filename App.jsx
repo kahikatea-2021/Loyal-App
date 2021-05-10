@@ -46,7 +46,7 @@ export default function App () {
 	const { appIsReady, isAuthenticated, claim } = appState
 
 	useEffect(() => {
-		async function prepare() {
+		async function prepare () {
 			try {
 				// Keep the splash screen visible while we fetch resources
 				await SplashScreen.preventAutoHideAsync()
@@ -90,6 +90,7 @@ export default function App () {
 					},
 				})
 			}
+			store.dispatch({ type: 'USER', user })
 		})
 	}, [])
 
@@ -150,7 +151,7 @@ export default function App () {
 	return (
 		<Provider store={store}>
 			<SafeAreaProvider>
-				<StatusBar style={{ }} />
+				<StatusBar style="light" />
 				<NavigationContainer theme={AppLightTheme} onReady={onLayoutRootView}>
 					<AppStack.Navigator screenOptions={{
 						headerShown: false,
@@ -160,7 +161,7 @@ export default function App () {
 					}}
 					>
 
-						{ !isAuthenticated
+						{!isAuthenticated
 							&& (
 								<>
 									<AppStack.Screen name={LOGIN} component={LoginScreen} />
@@ -204,14 +205,14 @@ export default function App () {
 
 						{
 							isAuthenticated && claim.isStore
-								&& (
-									<>
-										<AppStack.Screen
-											name="StoreNavigation"
-											component={StoreNavigation}
-										/>
-									</>
-								)
+							&& (
+								<>
+									<AppStack.Screen
+										name="StoreNavigation"
+										component={StoreNavigation}
+									/>
+								</>
+							)
 						}
 						<AppStack.Screen
 							name={FORGOT_PASSWORD}
