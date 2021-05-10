@@ -1,10 +1,11 @@
 /* eslint-disable global-require */
 import React, { useState } from 'react'
-import { useSelector, useDispatch } from 'react-redux'
+import { useSelector, useDispatch, useLayoutEffect } from 'react-redux'
 import {
 	SafeAreaView, StyleSheet, Text, View, Alert, Modal, Pressable, Image,
 } from 'react-native'
 import request from 'superagent'
+import { TouchableOpacity } from 'react-native-gesture-handler'
 import { getUserCard } from '../store/actions/cardActions'
 
 const styles = StyleSheet.create({
@@ -129,6 +130,15 @@ const styles = StyleSheet.create({
 	cardLogo: {
 		flex: 1.5, width: 60, height: 60,
 	},
+	done: {
+		padding: 15,
+		margin: 20,
+		borderRadius: 20,
+		backgroundColor: '#3C97EA',
+		elevation: 5,
+		alignItems: 'center',
+		justifyContent: 'center',
+	},
 })
 
 const Spacer = () => (
@@ -139,7 +149,7 @@ const HalfSpacer = () => (
 	<View style={styles.halfSpacer} />
 )
 
-function CardScreen() {
+function CardScreen ({ navigation }) {
 	const card = useSelector((globalState) => globalState.card)
 	console.log(card)
 	const { shouldRedeem } = card
@@ -152,6 +162,7 @@ function CardScreen() {
 	}
 
 	return (
+
 		<SafeAreaView style={{ flex: 1 }}>
 			<Spacer />
 			<View style={[styles.loyaltyCard]}>
@@ -289,6 +300,9 @@ function CardScreen() {
 
 					</View>
 				)}
+			<TouchableOpacity style={[styles.done]} onPress={() => { navigation.navigate('BottomNavigation') }}>
+				<Text>Done</Text>
+			</TouchableOpacity>
 			<Spacer />
 		</SafeAreaView>
 	)

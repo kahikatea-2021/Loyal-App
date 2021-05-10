@@ -8,7 +8,6 @@ export default {
 		text: 'white',
 		background: primary,
 		primary,
-		border: 'red',
 		tint: tintColorLight,
 		tabIconDefault: '#ccc',
 		tabIconSelected: tintColorLight,

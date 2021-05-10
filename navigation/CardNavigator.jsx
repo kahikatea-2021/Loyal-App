@@ -4,7 +4,7 @@ import CardScreen from '../screen/CardScreen'
 
 const StackNavigator = createStackNavigator()
 
-function CardNavigator() {
+function CardNavigator () {
 	return (
 		<StackNavigator.Navigator>
 			<StackNavigator.Screen

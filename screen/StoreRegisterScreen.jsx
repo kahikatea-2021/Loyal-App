@@ -1,5 +1,5 @@
 
-import React, { useState } from 'react'
+import React, { useState, useLayoutEffect } from 'react'
 
 import {
 	TouchableOpacity, SafeAreaView, TextInput, Text, Button, StyleSheet, KeyboardAvoidingView, Image, ScrollView,
@@ -55,7 +55,7 @@ const styles = StyleSheet.create({
 })
 
 function StoreRegister ({ navigation }) {
-	/* useLayoutEffect(() => {
+	useLayoutEffect(() => {
 		navigation.setOptions({
 			title: 'Register your Store',
 			headerTitleStyle: {
@@ -67,7 +67,7 @@ function StoreRegister ({ navigation }) {
 			},
 			headerTintColor: '#fff',
 		})
-	}, [navigation]) */
+	}, [navigation])
 
 	const [storeName, setStoreName] = useState('')
 	const [adminFirstName, setAdminFirstName] = useState('')
@@ -75,10 +75,11 @@ function StoreRegister ({ navigation }) {
 	const [phone, setPhone] = useState('')
 	const [email, setEmail] = useState('')
 	const [password, setPassword] = useState('')
-
-	function registerStore() {
+	const [address, setAddress] = useState('')
+	function registerStore () {
 		registerStoreUser({
 			storeName,
+			address,
 			adminFirstName,
 			adminLastName,
 			phone,
@@ -103,6 +104,15 @@ function StoreRegister ({ navigation }) {
 						type="text"
 						value={storeName}
 						onChangeText={(text) => setStoreName(text)}
+					/>
+					<TextInput
+						style={styles.inputContainer}
+						placeholder="Store Address"
+						autoCapitalize="none"
+						autofocus
+						type="text"
+						value={address}
+						onChangeText={(text) => setAddress(text)}
 					/>
 					<TextInput
 						style={styles.inputContainer}
