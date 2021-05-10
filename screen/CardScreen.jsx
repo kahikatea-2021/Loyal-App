@@ -32,7 +32,7 @@ const styles = StyleSheet.create({
 		justifyContent: 'center',
 	},
 	loyaltyCardRow: {
-		flexDirection: 'row', height: 70,
+		flexShrink: 1, flexDirection: 'row', height: 70,
 
 	},
 	defaultStamp: {
@@ -132,7 +132,7 @@ const styles = StyleSheet.create({
 		flex: 0.3,
 	},
 	stampIcon: {
-		width: 60, height: 60, margin: 5,
+		flexShrink: 1, width: 60, height: 60, margin: 5,
 	},
 	cardHeader: {
 		flexDirection: 'row', height: 70,
