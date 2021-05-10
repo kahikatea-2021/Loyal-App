@@ -1,8 +1,8 @@
 import consume from '../consume'
 import { getUserWalletAction } from '../store/actions/walletAction'
 
-export function getUserWallet(dispatch, userId = 'abc123') {
-	consume(`wallet/${userId}`).then((res) => {
+export function getUserWallet(dispatch) {
+	consume('/wallet').then((res) => {
 		dispatch(getUserWalletAction(res.body))
 	})
 }
