@@ -81,13 +81,14 @@ const styles = StyleSheet.create({
 	button: {
 		borderRadius: 20,
 		padding: 10,
+		margin: 20,
 		elevation: 2,
 	},
 	buttonOpen: {
 		backgroundColor: 'blue',
 	},
 	buttonClose: {
-		backgroundColor: '#2196F3',
+		backgroundColor: 'blue',
 	},
 	textStyle: {
 		color: 'white',
@@ -130,6 +131,19 @@ const styles = StyleSheet.create({
 	cardLogo: {
 		flex: 1.5, width: 60, height: 60,
 	},
+	redeemModalButtons: {
+		flexDirection: 'row',
+	},
+	notYetButton: {
+		backgroundColor: 'grey',
+		borderRadius: 20,
+		padding: 10,
+		margin: 20,
+		elevation: 2,
+	},
+	notYetbuttonClose: {
+		backgroundColor: 'grey',
+	},
 })
 
 const Spacer = () => (
@@ -142,14 +156,19 @@ const HalfSpacer = () => (
 
 function CardScreen() {
 	const card = useSelector((globalState) => globalState.card)
-	console.log(card)
 	const { shouldRedeem } = card
 	const { stampCount } = card
 	const [modalVisible, setModalVisible] = useState(false)
+	const [finalModalVisible, setFinalModalVisible] = useState(false)
 	const dispatch = useDispatch()
 
 	const handleLongPress = () => {
 		setModalVisible(true)
+	}
+
+	const handleFinalPress = () => {
+		setModalVisible(!modalVisible)
+		setFinalModalVisible(true)
 	}
 
 	return (
@@ -227,20 +246,20 @@ function CardScreen() {
 			{(shouldRedeem)
 				? (
 					<View style={styles.centeredView}>
+
 						<Modal
 							animationType="slide"
 							transparent
-							visible={modalVisible}
+							visible={finalModalVisible}
 							onRequestClose={() => {
 								Alert.alert('Modal has been closed.')
-								setModalVisible(!modalVisible)
+								setFinalModalVisible(!finalModalVisible)
 							}}
 						>
 							<View style={styles.centeredView}>
 								<View style={styles.modalView}>
 									<Text style={styles.modalText}>
-										Show this to your barista to redeem
-										your free coffee.
+										Show this to barrista to redeem your free coffee.
 									</Text>
 									<Pressable
 										style={[styles.button, styles.buttonClose]}
@@ -258,11 +277,46 @@ function CardScreen() {
 													// shouldRedeem = false
 													// dispatch(getUserCard(res.body))
 												})
-											setModalVisible(!modalVisible)
+											setFinalModalVisible(!finalModalVisible)
 										}}
 									>
-										<Text style={styles.textStyle}>Close</Text>
+										<Text style={styles.textStyle}>Done</Text>
 									</Pressable>
+								</View>
+							</View>
+						</Modal>
+
+						<Modal
+							animationType="slide"
+							transparent
+							visible={modalVisible}
+							onRequestClose={() => {
+								Alert.alert('Modal has been closed.')
+								setModalVisible(!modalVisible)
+							}}
+						>
+							<View style={styles.centeredView}>
+								<View style={styles.modalView}>
+									<Text style={styles.modalText}>
+										Are you sure you would like to redeem now?
+										Redeeming will clear your stamp balance.
+									</Text>
+									<View style={styles.redeemModalButtons}>
+										<Pressable
+											style={[styles.button, styles.buttonClose]}
+											onPress={handleFinalPress}
+										>
+											<Text style={styles.textStyle}>Yes! Redeem now</Text>
+										</Pressable>
+										<Pressable
+											style={[styles.notYetButton, styles.notYetButtonClose]}
+											onPress={() => {
+												setModalVisible(!modalVisible)
+											}}
+										>
+											<Text style={styles.textStyle}>Not yet</Text>
+										</Pressable>
+									</View>
 								</View>
 							</View>
 						</Modal>
