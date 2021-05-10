@@ -3,7 +3,7 @@ import 'firebase/firestore'
 import 'firebase/auth'
 
 const firebaseConfig = {
-	 apiKey: 'AIzaSyAsQEL9G1VwxYaHzxcsosCBNDwGZeiLVlo',
+	apiKey: 'AIzaSyAsQEL9G1VwxYaHzxcsosCBNDwGZeiLVlo',
 	authDomain: 'coffee-loyalty-app-312823.firebaseapp.com',
 	databaseURL: 'https://coffee-loyalty-app-312823-default-rtdb.firebaseio.com',
 	projectId: 'coffee-loyalty-app-312823',

@@ -3,7 +3,6 @@ import { getStoreDetailAction, createStoreCardAction } from '../store/actions/st
 
 export function getStoreDetail(dispatch) {
 	consume('/stores').then((res) => {
-		console.log(res.body)
 		dispatch(getStoreDetailAction(res.body))
 	})
 }
