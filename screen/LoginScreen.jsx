@@ -76,7 +76,7 @@ function LoginScreen ({ navigation }) {
 		})
 	}, [navigation])
 
-	function signIn() {
+	function signIn () {
 		setLoading(true)
 		loginUser({ email, password }, dispatch).finally(() => {
 			setLoading(false)
