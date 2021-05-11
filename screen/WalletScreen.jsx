@@ -91,12 +91,7 @@ const styles = StyleSheet.create({
 })
 
 function WalletScreen ({ navigation, onOpen, onClose }) {
-	// const wallet = useSelector((state) => state.wallet)
-	const wallet = [{
-		id: 1,
-		stampCount: 2,
-		storeName: 'Rad Coffee Shop',
-	}]
+	const wallet = useSelector((state) => state.wallet)
 	const dispatch = useDispatch()
 	useLayoutEffect(() => {
 		navigation.setOptions({
@@ -108,8 +103,7 @@ function WalletScreen ({ navigation, onOpen, onClose }) {
 		})
 	}, [navigation])
 	useEffect(() => {
-		// getUserWallet(dispatch)
-
+		getUserWallet(dispatch)
 	}, [])
 	console.log(wallet)
 
