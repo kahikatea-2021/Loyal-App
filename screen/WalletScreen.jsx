@@ -71,7 +71,6 @@ function WalletScreen ({ navigation, onOpen, onClose }) {
 	useEffect(() => {
 		getUserWallet(dispatch)
 	}, [])
-	console.log(wallet)
 
 	return (
 		<ScrollView>

@@ -212,7 +212,9 @@ const HalfSpacer = () => (
 
 function CardScreen ({ navigation }) {
 	const card = useSelector((globalState) => globalState.card)
-	const { shouldRedeem, storeId, stampCount } = card
+	const {
+		shouldRedeem, stampCount, cardId,
+	} = card
 
 	const [modalVisible, setModalVisible] = useState(false)
 	const [finalModalVisible, setFinalModalVisible] = useState(false)
@@ -223,7 +225,7 @@ function CardScreen ({ navigation }) {
 	}
 
 	function handleUserHasReedem() {
-		resetCard(dispatch, storeId)
+		resetCard(dispatch, cardId)
 		setFinalModalVisible(!finalModalVisible)
 	}
 

@@ -20,6 +20,7 @@ import { auth } from './auth'
 import colors from './theme/color'
 
 import { FORGOT_PASSWORD, LOGIN, REGISTER } from './navigationNames'
+import { showAlertAction } from './store/actions/infoActions'
 
 const AppStack = createStackNavigator()
 // const SPLASH_SCREEN_TIME = 3000
