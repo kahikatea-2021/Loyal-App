@@ -17,8 +17,9 @@ import * as Haptics from 'expo-haptics'
 import Animated from 'react-native-reanimated'
 import { RectButton } from 'react-native-gesture-handler'
 import { deleteCardFromWallet, getUserWallet } from './walletHelper'
-import { setStampCard } from './stampHelper'
+import WalletNavigationItem from '../navigation/WalletNavigationItem'
 import LoadingComponent from '../components/LoadingComponent'
+import { setStampCard } from './stampHelper'
 
 const styles = StyleSheet.create({
 	container: {
