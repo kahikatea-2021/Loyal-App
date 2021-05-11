@@ -105,7 +105,6 @@ function WalletScreen ({ navigation, onOpen, onClose }) {
 	useEffect(() => {
 		getUserWallet(dispatch)
 	}, [])
-	console.log(wallet)
 
 	function handleCardDelete (cardId) {
 		deleteCardFromWallet(cardId, dispatch)

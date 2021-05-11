@@ -72,7 +72,7 @@ function HomeScreen () {
 	function handleCodeScanned ({ data }) {
 		setScannedCode(true)
 		const storeInfo = JSON.parse(data)
-		stampCard(dispatch, storeInfo.id)
+		stampCard(dispatch, storeInfo.storeId, storeInfo.cardId)
 		navigation.navigate(CARD)
 	}
 
