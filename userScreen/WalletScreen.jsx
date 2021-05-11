@@ -44,25 +44,23 @@ function WalletScreen({ navigation }) {
 	}
 	return (
 		<LoadingComponent>
-			<SafeAreaView>
-				<ScrollView
-					refreshControl={(
-						<RefreshControl
-							tintColor="#FCFAF1"
-							refreshing={refreshing}
-							onRefresh={onRefresh}
-						/>
-					)}
-				>
-					{
-						wallet && wallet.map((card) => (
-							<SwipeableItem handleRight={() => handleCardDelete(card.cardId)} key={card.cardId}>
-								<WalletItemComponent card={card} onItemPress={onDispatch} navigation={navigation} />
-							</SwipeableItem>
-						))
-					}
-				</ScrollView>
-			</SafeAreaView>
+			<ScrollView
+				refreshControl={(
+					<RefreshControl
+						tintColor="#FCFAF1"
+						refreshing={refreshing}
+						onRefresh={onRefresh}
+					/>
+				)}
+			>
+				{
+					wallet && wallet.map((card) => (
+						<SwipeableItem handleRight={() => handleCardDelete(card.cardId)} key={card.cardId}>
+							<WalletItemComponent card={card} onItemPress={onDispatch} navigation={navigation} />
+						</SwipeableItem>
+					))
+				}
+			</ScrollView>
 		</LoadingComponent>
 	)
 }
