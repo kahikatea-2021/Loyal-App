@@ -60,8 +60,17 @@ export default function App () {
 		prepare()
 
 		auth().onAuthStateChanged((user) => {
-			console.log(user)
+			const { displayName, email, emailVerified } = user
 			if (user) {
+				store.dispatch({
+					type: 'USER',
+					user: {
+						displayName,
+						email,
+						emailVerified,
+					},
+				})
+
 				user.getIdTokenResult(true).then((idToken) => {
 					if (idToken.claims.shop) {
 						setAppState({
@@ -84,6 +93,7 @@ export default function App () {
 					}
 				})
 			} else {
+				store.dispatch({ type: 'USER', user: {} })
 				setAppState({
 					appIsReady: true,
 					isAuthenticated: false,
@@ -93,7 +103,6 @@ export default function App () {
 					},
 				})
 			}
-			store.dispatch({ type: 'USER', user })
 		})
 	}, [])
 

@@ -32,7 +32,7 @@ function Index () {
 			/>
 			<AppTab.Screen
 				name={HOME}
-				component={WalletScreen}
+				component={HomeNavigationItem}
 				options={{
 					title: 'Account',
 					tabBarIcon: ({ color }) => <TabIcon color={color} name="supervised-user-circle" />,
