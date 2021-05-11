@@ -1,5 +1,5 @@
 import consume from '../consume'
-import { getUserWalletAction } from '../store/actions/walletAction'
+import { getUserWalletAction, deleteCardFromWalletAction } from '../store/actions/walletAction'
 
 export function getUserWallet(dispatch) {
 	consume('/wallet').then((res) => {
@@ -7,6 +7,13 @@ export function getUserWallet(dispatch) {
 	})
 }
 
+export function deleteCardFromWallet(cardId, dispatch) {
+	return consume(`/wallet/${cardId}`, 'delete').then((res) => {
+		dispatch(deleteCardFromWalletAction(res.body))
+	})
+}
+
 export default {
 	getUserWallet,
+	deleteCardFromWallet,
 }

@@ -18,7 +18,6 @@ import { CARD } from './navigation/screenDefinitions'
 import CardScreen from './screen/CardScreen'
 import { auth } from './auth'
 import colors from './theme/color'
-
 import { FORGOT_PASSWORD, LOGIN, REGISTER } from './navigationNames'
 import { showAlertAction } from './store/actions/infoActions'
 
@@ -95,7 +94,7 @@ export default function App () {
 		})
 	}, [])
 
-	function onAlert(message) {
+	function onAlert (message) {
 		Alert.alert('Error', message, [
 			{
 				onPress: () => {
@@ -115,22 +114,27 @@ export default function App () {
 				const { info } = store.getState()
 				if (info.show) {
 					switch (info.message) {
-					case 'auth/invalid-email':
-						onAlert('Please use a valid email')
-						break
-					case 'auth/wrong-password':
-						onAlert('Please enter correct password')
-						break
-					case 'auth/user-not-found':
-
-						onAlert('This account is not registered')
-						break
-					case 'auth/email-already-exists':
-						onAlert('This account is already registered')
-						break
-					default:
-						onAlert(info.message)
-						break
+						case 'auth/invalid-email':
+							onAlert('Please use a valid email address')
+							break
+						case 'auth/wrong-password':
+							onAlert('Wrong password, please try again')
+							break
+						case 'auth/user-not-found':
+							onAlert('This account is not registered')
+							break
+						case 'auth/email-already-exists':
+							onAlert('This account is already registered')
+							break
+						case 'auth/invalid-password':
+							onAlert('Please enter a password at least 6 characters long')
+							break
+						case 'auth/too-many-requests':
+							onAlert('We have disabled all requests from this device due to unusual activity. Please try again later.')
+							break
+						default:
+							onAlert(info.message)
+							break
 					}
 				}
 

@@ -8,7 +8,9 @@ export function getStoreDetail(dispatch) {
 }
 
 export function createStoreCard(data, dispatch) {
+
 	return consume('/store/cards', 'post', data).then((res) => {
+
 		dispatch(createStoreCardAction(res.body))
 	})
 }

@@ -6,6 +6,7 @@ import {
 } from 'react-native'
 
 import request from 'superagent'
+import * as Haptics from 'expo-haptics'
 
 import { Ionicons } from '@expo/vector-icons'
 import { TouchableOpacity } from 'react-native-gesture-handler'
@@ -212,9 +213,11 @@ const HalfSpacer = () => (
 
 function CardScreen ({ navigation }) {
 	const card = useSelector((globalState) => globalState.card)
+  
 	const {
 		shouldRedeem, stampCount, cardId,
 	} = card
+
 
 	const [modalVisible, setModalVisible] = useState(false)
 	const [finalModalVisible, setFinalModalVisible] = useState(false)
@@ -222,6 +225,7 @@ function CardScreen ({ navigation }) {
 
 	const handleLongPress = () => {
 		setModalVisible(true)
+		Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Heavy)
 	}
 
 	function handleUserHasReedem() {
@@ -230,11 +234,48 @@ function CardScreen ({ navigation }) {
 	}
 
 	const handleFinalPress = () => {
+		Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Heavy)
 		setTimeout(() => {
 			handleUserHasReedem()
-		}, 150000)
+		}, 10000)
 		setModalVisible(!modalVisible)
 		setFinalModalVisible(true)
+	}
+
+	const stampsRemaining = (10 - card.stampCount)
+	const units = ['zero', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten']
+
+	function stampsWord(it) {
+		let theword = ''
+		let started
+		if (it === 0) return units[0]
+		for (let i = 9; i >= 1; i--) {
+			if (it >= i * 100) {
+				theword += units[i]
+				started = 1
+				theword += ' hundred'
+				if (it !== i * 100) theword += ' and '
+				it -= i * 100
+				i = 0
+			}
+		}
+
+		for (let i = 9; i >= 2; i--) {
+			if (it >= i * 10) {
+				theword += (started ? [i - 2].toLowerCase() : [i - 2])
+				started = 1
+				if (it !== i * 10) theword += '-'
+				it -= i * 10
+				i = 0
+			}
+		}
+
+		for (let i = 1; i < 20; i++) {
+			if (it === i) {
+				theword += (started ? units[i].toLowerCase() : units[i])
+			}
+		}
+		return theword
 	}
 
 	return (
@@ -244,7 +285,7 @@ function CardScreen ({ navigation }) {
 			<View style={[styles.loyaltyCard]}>
 				<View style={[styles.cardHeader]}>
 					<View style={[styles.storeInfo]}>
-						<Text style={[styles.cardTitle]}>Mutual Friends</Text>
+						<Text style={[styles.cardTitle]}>{card.storeName}</Text>
 						<Text style={[styles.cardDetails]}>
 							{card.address}
 							{'\n'}
@@ -405,7 +446,11 @@ function CardScreen ({ navigation }) {
 				: (
 					<View style={[styles.redeemPlaceholder]}>
 						<Text style={[styles.redeemPlaceholderText]}>
-							Collect ten stamps to claim a free coffee
+							Collect
+							{' '}
+							{stampsWord(stampsRemaining)}
+							{' '}
+							stamps to claim a free coffee
 						</Text>
 
 					</View>
