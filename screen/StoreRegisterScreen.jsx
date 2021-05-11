@@ -159,12 +159,10 @@ function StoreRegister ({ navigation }) {
 						onChangeText={(text) => setPassword(text)}
 					/>
 				</SafeAreaView>
-				<ActivityIndicator color="white" animating={loading} size="large" />
-
 				<TouchableOpacity style={styles.wrap} onPress={registerStore}>
 					<Text style={styles.text}>Register</Text>
 				</TouchableOpacity>
-
+				<ActivityIndicator color="white" animating={loading} size="large" />
 			</ScrollView>
 		</KeyboardAvoidingView>
 	)

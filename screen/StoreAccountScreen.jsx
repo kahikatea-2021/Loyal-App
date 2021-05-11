@@ -65,6 +65,7 @@ const styles = StyleSheet.create({
     },
     emailText: {
         color: '#000',
+        textAlign: 'center',
     },
 })
 function StoreAccountScreen () {
@@ -82,10 +83,11 @@ function StoreAccountScreen () {
                 source={require('../assets/testIcon.png')}
             />
             <SafeAreaView style={styles.email}>
+                <Text style={styles.emailText}>Our stores are our world, if you would like speak to an expert directly about setting up your card or a customised card. Call us from the link below between 7:00 NZT - 19:00 NZT</Text>
                 <TouchableOpacity style={styles.wrap} onPress={() => Linking.openURL(`tel:${'0278676748'}`)}>
-                    <Text>Have an imediate issue ? Call our help line available 24/7</Text>
+                    <Text>Support Line</Text>
                 </TouchableOpacity>
-                <Text style={styles.emailText}>Need help or have a suggestion?</Text>
+                <Text style={styles.emailText}>Require other assistance or have a suggestion?</Text>
                 <TouchableOpacity style={styles.wrap} onPress={() => Linking.openURL('mailto:loyalrewardsapp@gmail.com?')}>
                     <Text>Send us an email!</Text>
                 </TouchableOpacity>

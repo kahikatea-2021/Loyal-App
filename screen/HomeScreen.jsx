@@ -113,7 +113,7 @@ function HomeScreen ({ navigation }) {
 				source={require('../assets/testIcon.png')}
 			/>
 			<SafeAreaView style={styles.email}>
-				<Text style={styles.emailText}>Need help or have a suggestion?</Text>
+				<Text style={styles.emailText}>Require assistance or have a suggestion?</Text>
 				<TouchableOpacity style={styles.wrap} onPress={() => Linking.openURL('mailto:loyalrewardsapp@gmail.com?')}>
 					<Text>Send us an email!</Text>
 				</TouchableOpacity>
