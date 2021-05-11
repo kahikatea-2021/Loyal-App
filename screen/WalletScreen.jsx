@@ -126,6 +126,7 @@ function WalletScreen ({ navigation, onOpen, onClose }) {
 		<ScrollView
 			refreshControl={(
 				<RefreshControl
+					tintColor="#FCFAF1"
 					refreshing={refreshing}
 					onRefresh={onRefresh}
 				/>
