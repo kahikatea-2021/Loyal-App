@@ -2,7 +2,7 @@
 import React, { useState, useLayoutEffect } from 'react'
 
 import {
-	TouchableOpacity, SafeAreaView, TextInput, Text, Button, StyleSheet, KeyboardAvoidingView, Image, ScrollView, ActivityIndicator,
+	TouchableOpacity, SafeAreaView, TextInput, Text, StyleSheet, KeyboardAvoidingView, Image, ScrollView, ActivityIndicator,
 } from 'react-native'
 
 import { registerStoreUser } from './accountHelper'
@@ -159,12 +159,10 @@ function StoreRegister ({ navigation }) {
 						onChangeText={(text) => setPassword(text)}
 					/>
 				</SafeAreaView>
-				<ActivityIndicator color="white" animating={loading} size="large" />
-
 				<TouchableOpacity style={styles.wrap} onPress={registerStore}>
 					<Text style={styles.text}>Register</Text>
 				</TouchableOpacity>
-
+				<ActivityIndicator color="white" animating={loading} size="large" />
 			</ScrollView>
 		</KeyboardAvoidingView>
 	)
