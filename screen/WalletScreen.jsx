@@ -10,6 +10,7 @@ import {
 	Image,
 	ImageBackground,
 	Pressable,
+	RefreshControl,
 } from 'react-native'
 import Swipeable from 'react-native-swipeable-row'
 // import Swipeable from 'react-native-gesture-handler/Swipeable'
@@ -22,6 +23,9 @@ import { useSelector, useDispatch } from 'react-redux'
 import * as Haptics from 'expo-haptics'
 import { getUserCard } from '../store/actions/cardActions'
 import { deleteCardFromWallet, getUserWallet } from './walletHelper'
+
+import WalletNavigationItem from '../navigation/WalletNavigationItem'
+
 
 const styles = StyleSheet.create({
 	container: {
@@ -90,6 +94,8 @@ const styles = StyleSheet.create({
 	},
 })
 
+// const wait = (timeout) => new Promise((resolve) => setTimeout(resolve, timeout))
+
 function WalletScreen ({ navigation, onOpen, onClose }) {
 	const wallet = useSelector((state) => state.wallet)
 	const dispatch = useDispatch()
@@ -106,6 +112,11 @@ function WalletScreen ({ navigation, onOpen, onClose }) {
 		getUserWallet(dispatch)
 	}, [])
 
+	const [refreshing, setRefreshing] = React.useState(false)
+	const onRefresh = React.useCallback(() => {
+		setRefreshing(true)
+		getUserWallet(dispatch).then(() => setRefreshing(false))
+	}, [])
 	function handleCardDelete (cardId) {
 		deleteCardFromWallet(cardId, dispatch)
 		Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light)
@@ -113,7 +124,15 @@ function WalletScreen ({ navigation, onOpen, onClose }) {
 	// define a variable - if it is true show cards, if not then say "You have no cards"
 
 	return (
-		<ScrollView>
+		<ScrollView
+			refreshControl={(
+				<RefreshControl
+					tintColor="#FCFAF1"
+					refreshing={refreshing}
+					onRefresh={onRefresh}
+				/>
+			)}
+		>
 			<SafeAreaView style={styles.container}>
 				{!wallet ? (
 					<View>
