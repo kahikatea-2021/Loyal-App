@@ -18,8 +18,8 @@ import { CARD } from './navigation/screenDefinitions'
 import CardScreen from './screen/CardScreen'
 import { auth } from './auth'
 import colors from './theme/color'
-
 import { FORGOT_PASSWORD, LOGIN, REGISTER } from './navigationNames'
+import { showAlertAction } from './store/actions/infoActions'
 
 const AppStack = createStackNavigator()
 // const SPLASH_SCREEN_TIME = 3000
@@ -128,6 +128,9 @@ export default function App () {
 							break
 						case 'auth/invalid-password':
 							onAlert('Please enter a password at least 6 characters long')
+							break
+						case 'auth/too-many-requests':
+							onAlert('We have disabled all requests from this device due to unusual activity. Please try again later.')
 							break
 						default:
 							onAlert(info.message)
