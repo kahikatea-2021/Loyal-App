@@ -213,11 +213,10 @@ const HalfSpacer = () => (
 
 function CardScreen ({ navigation }) {
 	const card = useSelector((globalState) => globalState.card)
-  
+
 	const {
 		shouldRedeem, stampCount, cardId,
 	} = card
-
 
 	const [modalVisible, setModalVisible] = useState(false)
 	const [finalModalVisible, setFinalModalVisible] = useState(false)
@@ -289,10 +288,11 @@ function CardScreen ({ navigation }) {
 						<Text style={[styles.cardDetails]}>
 							{card.address}
 							{'\n'}
-							@mutualfriendsespresso
+							@
+							{card.instagramHandle}
 						</Text>
 					</View>
-					<Image style={[styles.cardLogo]} source={require('../assets/mutual-friends.png')} />
+					<Image style={[styles.cardLogo]} source={{ uri: card.logo }} />
 				</View>
 				<View style={[styles.loyaltyCardRow]}>
 					<Image
