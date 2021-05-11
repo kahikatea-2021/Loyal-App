@@ -1,12 +1,11 @@
-import React, { useState, useLayoutEffect } from 'react'
+import React, { useState } from 'react'
 import {
     TouchableOpacity,
     SafeAreaView,
-    TextInput, Text,
+    Text,
     StyleSheet,
     KeyboardAvoidingView,
     Image,
-    ScrollView,
     ActivityIndicator,
     Linking,
 } from 'react-native'
@@ -70,12 +69,16 @@ const styles = StyleSheet.create({
 })
 function StoreAccountScreen () {
     const user = useSelector((state) => state.user)
+    const [loading, setLoading] = useState(false)
 
     const signOutUser = () => {
-        auth.signOut()
-    }
-    // console.log('hello:', user)
+        setLoading(true)
 
+        auth.signOut()
+            .finally(() => {
+                setLoading(false)
+            })
+    }
     return (
         <KeyboardAvoidingView behaviour="position" style={styles.container}>
             <Image
@@ -106,10 +109,11 @@ function StoreAccountScreen () {
                     </>
                 )}
             </SafeAreaView>
-
             <TouchableOpacity style={styles.wrap} onPress={signOutUser}>
                 <Text style={styles.text}>Sign Out</Text>
             </TouchableOpacity>
+            <ActivityIndicator color="white" animating={loading} size="large" />
+
         </KeyboardAvoidingView>
     )
 }

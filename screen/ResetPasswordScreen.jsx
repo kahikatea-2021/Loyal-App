@@ -1,9 +1,15 @@
-import { registerRootComponent } from 'expo'
-import request from 'superagent'
-import React, { useState, useLayoutEffect } from 'react'
 
+import React, { useState, useLayoutEffect } from 'react'
 import {
-	TouchableOpacity, SafeAreaView, TextInput, Text, Button, StyleSheet, KeyboardAvoidingView, Image, ScrollView, ActivityIndicator,
+	TouchableOpacity,
+	SafeAreaView,
+	TextInput,
+	Text,
+	StyleSheet,
+	KeyboardAvoidingView,
+	Image,
+	ScrollView,
+	ActivityIndicator,
 } from 'react-native'
 
 import { auth } from '../auth/index'
@@ -63,12 +69,12 @@ function ResetPassword ({ navigation }) {
 			}).catch((error) => {
 				console.log(error.code)
 				switch (error.code) {
-				case 'auth/invalid-email':
-					alert('Please use a valid email address')
-					break
-				case 'auth/user-not-found':
-					alert('This account is not registered')
-					break
+					case 'auth/invalid-email':
+						alert('Please use a valid email address')
+						break
+					case 'auth/user-not-found':
+						alert('This account is not registered')
+						break
 				}
 			}).finally(() => {
 				setLoading(false)
