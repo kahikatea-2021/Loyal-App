@@ -2,7 +2,7 @@
 import React, { useState, useLayoutEffect } from 'react'
 
 import {
-	TouchableOpacity, SafeAreaView, TextInput, Text, Button, StyleSheet, KeyboardAvoidingView, Image, ScrollView, ActivityIndicator,
+	TouchableOpacity, SafeAreaView, TextInput, Text, StyleSheet, KeyboardAvoidingView, Image, ScrollView, ActivityIndicator,
 } from 'react-native'
 
 import { registerStoreUser } from './accountHelper'

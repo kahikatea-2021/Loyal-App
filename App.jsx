@@ -115,10 +115,10 @@ export default function App () {
 				if (info.show) {
 					switch (info.message) {
 						case 'auth/invalid-email':
-							onAlert('Please use a valid email')
+							onAlert('Please use a valid email address')
 							break
 						case 'auth/wrong-password':
-							onAlert('Please enter correct password')
+							onAlert('Wrong password, please try again')
 							break
 						case 'auth/user-not-found':
 							onAlert('This account is not registered')

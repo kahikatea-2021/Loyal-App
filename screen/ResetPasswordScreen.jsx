@@ -64,7 +64,7 @@ function ResetPassword ({ navigation }) {
 				console.log(error.code)
 				switch (error.code) {
 				case 'auth/invalid-email':
-					alert('Please use a valid email')
+					alert('Please use a valid email address')
 					break
 				case 'auth/user-not-found':
 					alert('This account is not registered')
