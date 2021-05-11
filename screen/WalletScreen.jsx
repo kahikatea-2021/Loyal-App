@@ -24,7 +24,6 @@ import * as Haptics from 'expo-haptics'
 import { getUserCard } from '../store/actions/cardActions'
 import { deleteCardFromWallet, getUserWallet } from './walletHelper'
 import WalletNavigationItem from '../navigation/WalletNavigationItem'
-import LoadingComponent from '../components/LoadingComponent'
 
 const styles = StyleSheet.create({
 	container: {
