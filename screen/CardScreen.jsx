@@ -212,12 +212,12 @@ const HalfSpacer = () => (
 )
 
 function CardScreen ({ navigation }) {
-	// const card = useSelector((globalState) => globalState.card)
-	const card = {
-		shouldRedeem: true,
-		storeId: '1',
-		stampCount: 10,
-	}
+	const card = useSelector((globalState) => globalState.card)
+	// const card = {
+	// 	shouldRedeem: true,
+	// 	storeId: '1',
+	// 	stampCount: 10,
+	// }
 	const { shouldRedeem, storeId, stampCount } = card
 
 	const [modalVisible, setModalVisible] = useState(false)
