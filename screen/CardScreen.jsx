@@ -160,7 +160,6 @@ const styles = StyleSheet.create({
 	},
 	closeIcon: {
 		padding: 15,
-		// margin: 20,
 		borderRadius: 20,
 		elevation: 5,
 		color: 'red',
@@ -213,11 +212,10 @@ const HalfSpacer = () => (
 
 function CardScreen ({ navigation }) {
 	const card = useSelector((globalState) => globalState.card)
-  
+
 	const {
 		shouldRedeem, stampCount, cardId,
 	} = card
-
 
 	const [modalVisible, setModalVisible] = useState(false)
 	const [finalModalVisible, setFinalModalVisible] = useState(false)
@@ -289,7 +287,9 @@ function CardScreen ({ navigation }) {
 						<Text style={[styles.cardDetails]}>
 							{card.address}
 							{'\n'}
-							@mutualfriendsespresso
+							{console.log(card.logo)}
+							@
+							{card.instagramHandle}
 						</Text>
 					</View>
 					<Image style={[styles.cardLogo]} source={require('../assets/mutual-friends.png')} />
