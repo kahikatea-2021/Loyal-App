@@ -7,6 +7,7 @@ import { createStackNavigator } from '@react-navigation/stack'
 import { SafeAreaProvider } from 'react-native-safe-area-context'
 import * as SplashScreen from 'expo-splash-screen'
 import { Alert } from 'react-native'
+import { isFirebaseAppExisted, initializeFirebase, auth } from './firebase'
 import store from './store'
 import LoginScreen from './screen/LoginScreen'
 import BottomNavigation from './navigation'
@@ -16,13 +17,11 @@ import StoreRegisterScreen from './screen/StoreRegisterScreen'
 import ResetPasswordScreen from './screen/ResetPasswordScreen'
 import { CARD } from './navigation/screenDefinitions'
 import CardScreen from './screen/CardScreen'
-import { auth } from './auth'
 import colors from './theme/color'
 import { FORGOT_PASSWORD, LOGIN, REGISTER } from './navigationNames'
 import { showAlertAction } from './store/actions/infoActions'
 
 const AppStack = createStackNavigator()
-// const SPLASH_SCREEN_TIME = 3000
 
 const AppLightTheme = {
 	...DarkTheme,
@@ -33,6 +32,10 @@ const AppLightTheme = {
 }
 
 export default function App () {
+	if (!isFirebaseAppExisted()) {
+		initializeFirebase()
+	}
+
 	let unsubcribed
 	const [appState, setAppState] = useState({
 		appIsReady: false,
@@ -42,6 +45,7 @@ export default function App () {
 			isUser: false,
 		},
 	})
+
 	const { appIsReady, isAuthenticated, claim } = appState
 
 	useEffect(() => {
@@ -55,7 +59,8 @@ export default function App () {
 		}
 		prepare()
 
-		auth.onAuthStateChanged((user) => {
+		auth().onAuthStateChanged((user) => {
+			console.log(user)
 			if (user) {
 				user.getIdTokenResult(true).then((idToken) => {
 					if (idToken.claims.shop) {
@@ -68,7 +73,6 @@ export default function App () {
 							},
 						})
 					} else {
-						console.log('this state')
 						setAppState({
 							appIsReady: true,
 							isAuthenticated: true,
@@ -113,38 +117,34 @@ export default function App () {
 				const { info } = store.getState()
 				if (info.show) {
 					switch (info.message) {
-						case 'auth/invalid-email':
-							onAlert('Please use a valid email address')
-							break
-						case 'auth/wrong-password':
-							onAlert('Wrong password, please try again')
-							break
-						case 'auth/user-not-found':
-							onAlert('This account is not registered')
-							break
-						case 'auth/email-already-exists':
-							onAlert('This account is already registered')
-							break
-						case 'auth/invalid-password':
-							onAlert('Please enter a password at least 6 characters long')
-							break
-						case 'auth/too-many-requests':
-							onAlert('We have disabled all requests from this device due to unusual activity. Please try again later.')
-							break
-						default:
-							onAlert(info.message)
-							break
+					case 'auth/invalid-email':
+						onAlert('Please use a valid email address')
+						break
+					case 'auth/wrong-password':
+						onAlert('Wrong password, please try again')
+						break
+					case 'auth/user-not-found':
+						onAlert('This account is not registered')
+						break
+					case 'auth/email-already-exists':
+						onAlert('This account is already registered')
+						break
+					case 'auth/invalid-password':
+						onAlert('Please enter a password at least 6 characters long')
+						break
+					case 'auth/too-many-requests':
+						onAlert('We have disabled all requests from this device due to unusual activity. Please try again later.')
+						break
+					default:
+						try {
+							const errorObj = JSON.parse(info.message)
+							onAlert(errorObj.message)
+						} catch (err) {
+							onAlert('Error has occured, please try again.')
+						}
+						break
 					}
 				}
-
-				/* if (store) {
-					store.dispatch(showAlertAction(
-						{
-							show: false,
-							message: "",
-						},
-					))
-				} */
 			})
 		}
 	}, [appIsReady])

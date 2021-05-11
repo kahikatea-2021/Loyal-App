@@ -4,10 +4,13 @@ import walletReducer from './wallet'
 import storeReducer from './store'
 import infoReducer from './info'
 import userInfoReducer from './userInfo'
+import intialStateLoadingReducer from './initialLoadingState'
+
 export default combineReducers({
 	card: cardReducer,
 	wallet: walletReducer,
 	store: storeReducer,
 	info: infoReducer,
-	user: userInfoReducer ,
+	initialStateLoading: intialStateLoadingReducer,
+	user: userInfoReducer,
 })

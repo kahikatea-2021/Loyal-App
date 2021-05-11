@@ -1,9 +1,9 @@
-import { auth } from '../auth'
 import consume from '../consume'
+import { auth } from '../firebase'
 import { showAlertAction } from '../store/actions/infoActions'
 
 export function loginUser({ email, password }, dispatch) {
-	return auth.signInWithEmailAndPassword(email, password)
+	return auth().signInWithEmailAndPassword(email, password)
 		.catch((error) => {
 			dispatch(showAlertAction(
 				{

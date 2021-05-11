@@ -1,11 +1,12 @@
-import React, { useState, useEffect, useLayoutEffect } from 'react'
+import React, { useEffect, useLayoutEffect } from 'react'
 import {
-	StyleSheet, Image, Text, View,
+	StyleSheet, Image, Text,
 } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { useDispatch, useSelector } from 'react-redux'
 import { ScrollView } from 'react-native-gesture-handler'
 import { getStoreDetail } from './storeHelper'
+import LoadingComponent from '../components/LoadingComponent'
 
 const styles = StyleSheet.create({
 	container: {
@@ -58,16 +59,7 @@ function StoreDetailScreen ({ navigation }) {
 		})
 	})
 	// const [cardStatus, setCardStatus] = useState(store.cardId)
-	console.log('storestatus:', store.address)
-	if (!store.address) {
-		return (
-			<Image
-				style={styles.wait}
-				source={require('../assets/testTitleImage.png')}
-			/>
-		)
-	}
-	console.log('storeaddress:', store.address)
+
 	if (!store.cardId) navigation.navigate('StoreCardCreator')
 	// if (!cardStatus) navigation.navigate('StoreCardCreator')
 	// if (cardStatus >= 1) { console.log(store.cardId) }
@@ -77,8 +69,9 @@ function StoreDetailScreen ({ navigation }) {
 				flex: 1, backgroundColor: '#49378E',
 			}}
 			>
-				<ScrollView style={styles.container}>
-					{store
+				<LoadingComponent>
+					<ScrollView style={styles.container}>
+						{store
 						&& (
 							<>
 								<Image
@@ -98,7 +91,8 @@ function StoreDetailScreen ({ navigation }) {
 							</>
 						)}
 
-				</ScrollView>
+					</ScrollView>
+				</LoadingComponent>
 			</SafeAreaView>
 		)
 	}

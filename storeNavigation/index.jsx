@@ -1,10 +1,8 @@
 import React from 'react'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
-import { MaterialIcons, Ionicons } from '@expo/vector-icons'
-import { Button, View } from 'react-native'
+import { MaterialIcons } from '@expo/vector-icons'
 import StoreDetailScreen from '../screen/StoreDetailScreen'
 import StoreCardCreator from '../screen/StoreCardCreator'
-import { auth } from '../auth'
 import StoreAccount from '../screen/StoreAccountScreen'
 
 const AppTab = createBottomTabNavigator()

@@ -12,8 +12,6 @@ import {
 	ActivityIndicator,
 } from 'react-native'
 
-import { auth } from '../auth/index'
-
 const styles = StyleSheet.create({
 	container: {
 		flex: 1,
@@ -62,23 +60,23 @@ function ResetPassword ({ navigation }) {
 	const reset = () => {
 		setLoading(true)
 
-		auth.sendPasswordResetEmail(email)
+		/* auth.sendPasswordResetEmail(email)
 			.then(() => {
 				navigation.navigate('Login')
 				alert('You should recieve an email shortly')
 			}).catch((error) => {
 				console.log(error.code)
 				switch (error.code) {
-					case 'auth/invalid-email':
-						alert('Please use a valid email address')
-						break
-					case 'auth/user-not-found':
-						alert('This account is not registered')
-						break
+				case 'auth/invalid-email':
+					alert('Please use a valid email address')
+					break
+				case 'auth/user-not-found':
+					alert('This account is not registered')
+					break
 				}
 			}).finally(() => {
 				setLoading(false)
-			})
+			}) */
 	}
 	useLayoutEffect(() => {
 		navigation.setOptions({
