@@ -23,8 +23,12 @@ import { useSelector, useDispatch } from 'react-redux'
 import * as Haptics from 'expo-haptics'
 import { getUserCard } from '../store/actions/cardActions'
 import { deleteCardFromWallet, getUserWallet } from './walletHelper'
+
 import WalletNavigationItem from '../navigation/WalletNavigationItem'
 import LoadingComponent from '../components/LoadingComponent'
+
+import { setStampCard } from './stampHelper'
+
 
 const styles = StyleSheet.create({
 	container: {
@@ -165,6 +169,7 @@ function WalletScreen ({ navigation, onOpen, onClose }) {
 							<View style={styles.listItem}>
 								<Pressable
 									onPress={() => {
+										setStampCard(card, dispatch)
 										navigation.navigate('Card')
 									}}
 									style={styles.cardItem}
