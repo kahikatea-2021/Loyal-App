@@ -1,11 +1,13 @@
 import React, { useLayoutEffect } from 'react'
 import {
+	Linking, Image,
 	SafeAreaView, Button, Text, TouchableOpacity, View, StyleSheet, KeyboardAvoidingView, KeyboardAvoidingViewComponent,
 } from 'react-native'
 import firebase from 'firebase/app'
 import { auth } from '../auth'
 import 'firebase/firestore'
 import { useSelector } from 'react-redux'
+import * as MailComposer from 'expo-mail-composer'
 
 const styles = StyleSheet.create({
 	container: {
@@ -53,6 +55,12 @@ const styles = StyleSheet.create({
 		color: '#fff',
 		fontSize: 20,
 	},
+	email: {
+		backgroundColor: '#fff',
+	},
+	emailText: {
+		color: '#000',
+	},
 })
 function HomeScreen ({ navigation }) {
 	const user = useSelector((state) => state.user)
@@ -87,35 +95,40 @@ function HomeScreen ({ navigation }) {
 			headerTintColor: '#fff',
 		})
 	}, [navigation])
-	function convertUnixTime (unix) {
-		const a = new Date(unix * 1000)
-		const year = a.getFullYear()
-		const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
-		const month = months[a.getMonth()]
-		const date = a.getDate()
-		const hour = a.getHours()
-		const min = a.getMinutes() < 10 ? `0${a.getMinutes()}` : a.getMinutes()
-		const sec = a.getSeconds() < 10 ? `0${a.getSeconds()}` : a.getSeconds()
-		return `${month} ${date}, ${year}, ${hour}:${min}:${sec}`
-	}
-	console.log(user)
+	// function convertUnixTime (unix) {
+	// 	const a = new Date(unix * 1000)
+	// 	const year = a.getFullYear()
+	// 	const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
+	// 	const month = months[a.getMonth()]
+	// 	const date = a.getDate()
+	// 	const hour = a.getHours()
+	// 	const min = a.getMinutes() < 10 ? `0${a.getMinutes()}` : a.getMinutes()
+	// 	const sec = a.getSeconds() < 10 ? `0${a.getSeconds()}` : a.getSeconds()
+	// 	return `${month} ${date}, ${year}, ${hour}:${min}:${sec}`
+	// }
 	return (
 		<KeyboardAvoidingView behaviour="position" style={styles.container}>
+			<Image
+				style={styles.logo}
+				source={require('../assets/testIcon.png')}
+			/>
+			<SafeAreaView style={styles.email}>
+				<Text style={styles.emailText}>Need help or have a suggestion?</Text>
+				<TouchableOpacity style={styles.wrap} onPress={() => Linking.openURL('mailto:loyalrewardsapp@gmail.com?')}>
+					<Text>Send us an email!</Text>
+				</TouchableOpacity>
+			</SafeAreaView>
 			<SafeAreaView>
 
 				{user && (
 					<>
 						<Text style={styles.text}>
-							Account Created:
-							{convertUnixTime(1620603044647)}
-						</Text>
-						<Text style={styles.text}>
-							User:
-							{user.displayName}
+							Current User:
+							{` ${user.displayName}`}
 						</Text>
 						<Text style={styles.text}>
 							Email:
-							{user.email}
+							{` ${user.email}`}
 						</Text>
 					</>
 				)}
