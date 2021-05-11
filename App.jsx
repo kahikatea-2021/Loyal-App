@@ -33,7 +33,6 @@ const AppLightTheme = {
 }
 
 export default function App () {
-	// const colorSchema = useColorScheme()
 	let unsubcribed
 	const [appState, setAppState] = useState({
 		appIsReady: false,

@@ -21,7 +21,7 @@ function Index () {
 				}}
 			/>
 			<AppTab.Screen
-				name="createCard"
+				name="StoreCardCreator"
 				component={StoreCardCreator}
 				options={{
 					title: 'Create Card',
