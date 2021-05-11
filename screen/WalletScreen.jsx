@@ -10,18 +10,22 @@ import {
 	Image,
 	ImageBackground,
 	Pressable,
+	RefreshControl,
 } from 'react-native'
 import Swipeable from 'react-native-swipeable-row'
 // import Swipeable from 'react-native-gesture-handler/Swipeable'
 import { Feather } from '@expo/vector-icons'
 import React, { useEffect, useLayoutEffect } from 'react'
-import { useNavigation } from '@react-navigation/native'
+import { useIsFocused, useNavigation } from '@react-navigation/native'
 import { RectButton } from 'react-native-gesture-handler'
 import Animated from 'react-native-reanimated'
 import { useSelector, useDispatch } from 'react-redux'
 import * as Haptics from 'expo-haptics'
 import { getUserCard } from '../store/actions/cardActions'
 import { deleteCardFromWallet, getUserWallet } from './walletHelper'
+import { setStampCard } from './stampHelper'
+
+import WalletNavigationItem from '../navigation/WalletNavigationItem'
 
 const styles = StyleSheet.create({
 	container: {
@@ -90,6 +94,8 @@ const styles = StyleSheet.create({
 	},
 })
 
+// const wait = (timeout) => new Promise((resolve) => setTimeout(resolve, timeout))
+
 function WalletScreen ({ navigation, onOpen, onClose }) {
 	const wallet = useSelector((state) => state.wallet)
 	const dispatch = useDispatch()
@@ -106,22 +112,35 @@ function WalletScreen ({ navigation, onOpen, onClose }) {
 		getUserWallet(dispatch)
 	}, [])
 
+	const [refreshing, setRefreshing] = React.useState(false)
+	const onRefresh = React.useCallback(() => {
+		setRefreshing(true)
+		getUserWallet(dispatch).then(() => setRefreshing(false))
+	}, [])
 	function handleCardDelete (cardId) {
 		deleteCardFromWallet(cardId, dispatch)
 		Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light)
 	}
-
 	// define a variable - if it is true show cards, if not then say "You have no cards"
 
 	return (
-		<ScrollView>
+		<ScrollView
+			refreshControl={(
+				<RefreshControl
+					tintColor="#FCFAF1"
+					refreshing={refreshing}
+					onRefresh={onRefresh}
+				/>
+			)}
+		>
 			<SafeAreaView style={styles.container}>
 				{!wallet ? (
 					<View>
 						<Text>Your shit is empty</Text>
 					</View>
 				) : wallet
-					&& wallet.map((card) => (
+				&& wallet.map((card) => (
+					<View key={card.id}>
 						<Swipeable
 							leftContent={(
 								<View style={styles.leftSwipeItem}>
@@ -134,7 +153,7 @@ function WalletScreen ({ navigation, onOpen, onClose }) {
 										styles.rightSwipeItem,
 										{ backgroundColor: '#B80F0F' },
 									]}
-									onPress={() => { handleCardDelete() }}
+									onPress={() => { handleCardDelete(card.cardId) }}
 								>
 									<Text>
 										<Feather name="trash-2" size={24} color="#FCFAF1" />
@@ -147,6 +166,7 @@ function WalletScreen ({ navigation, onOpen, onClose }) {
 							<View style={styles.listItem}>
 								<Pressable
 									onPress={() => {
+										setStampCard(card, dispatch)
 										navigation.navigate('Card')
 									}}
 									style={styles.cardItem}
@@ -163,7 +183,8 @@ function WalletScreen ({ navigation, onOpen, onClose }) {
 								</Pressable>
 							</View>
 						</Swipeable>
-					))}
+					</View>
+				))}
 			</SafeAreaView>
 		</ScrollView>
 	)

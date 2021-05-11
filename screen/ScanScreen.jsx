@@ -8,6 +8,7 @@ import { BarCodeScanner } from 'expo-barcode-scanner'
 import { useDispatch } from 'react-redux'
 import { CARD } from '../navigation/screenDefinitions'
 import { stampCard } from './stampHelper'
+import { showAlertAction } from '../store/actions/infoActions'
 
 const styles = StyleSheet.create({
 	container: {
@@ -71,9 +72,16 @@ function HomeScreen () {
 
 	function handleCodeScanned ({ data }) {
 		setScannedCode(true)
-		const storeInfo = JSON.parse(data)
-		stampCard(dispatch, storeInfo.storeId, storeInfo.cardId)
-		navigation.navigate(CARD)
+		try {
+			const storeInfo = JSON.parse(data)
+			stampCard(dispatch, storeInfo.storeId, storeInfo.cardId)
+			navigation.navigate(CARD)
+		} catch (err) {
+			dispatch(showAlertAction({
+				show: true,
+				message: 'The QR code is not valid',
+			}))
+		}
 	}
 
 	useEffect(() => {
