@@ -2,7 +2,7 @@ import consume from '../consume'
 import { getUserWalletAction, deleteCardFromWalletAction } from '../store/actions/walletAction'
 
 export function getUserWallet(dispatch) {
-	consume('/wallet').then((res) => {
+	return consume('/wallet').then((res) => {
 		dispatch(getUserWalletAction(res.body))
 	})
 }

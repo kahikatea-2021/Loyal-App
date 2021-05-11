@@ -10,15 +10,14 @@ export function stampCard(dispatch, storeId, cardId) {
 	})
 }
 
+export function setStampCard(card, dispatch) {
+	return dispatch(getUserCard(card))
+}
+
 export function resetCard(dispatch, cardId) {
 	consume('/stamp/reset', 'patch', {
 		cardId,
 	}).then((res) => {
 		dispatch(getUserCard(res.body))
 	})
-}
-
-export default {
-	stampCard,
-	resetCard,
 }
