@@ -60,8 +60,8 @@ export default function App () {
 		prepare()
 
 		auth().onAuthStateChanged((user) => {
-			const { displayName, email, emailVerified } = user
 			if (user) {
+				const { displayName, email, emailVerified } = user
 				store.dispatch({
 					type: 'USER',
 					user: {
