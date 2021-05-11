@@ -33,7 +33,7 @@ const styles = StyleSheet.create({
 	},
 })
 
-function StoreDetailScreen({ navigation }) {
+function StoreDetailScreen ({ navigation }) {
 	const dispatch = useDispatch()
 	const store = useSelector((state) => state.store)
 
@@ -50,7 +50,8 @@ function StoreDetailScreen({ navigation }) {
 			},
 		})
 	})
-
+if (!store.cardId) navigation.navigate('StoreCardCreator')
+// console.log(store.cardId)
 	return (
 		<SafeAreaView style={{
 			flex: 1, backgroundColor: '#49378E',

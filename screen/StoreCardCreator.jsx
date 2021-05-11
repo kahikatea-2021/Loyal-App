@@ -91,8 +91,6 @@ function StoreCardCreator({ navigation }) {
 	}, [])
 
 	const pickImage = async () => {
-		console.log('image', ImagePicker)
-
 		const result = await ImagePicker.launchImageLibraryAsync({
 			mediaTypes: ImagePicker.MediaTypeOptions.All,
 			allowsEditing: true,
@@ -117,7 +115,7 @@ function StoreCardCreator({ navigation }) {
 			rewardThreshold,
 			reward,
 			instagramHandle,
-			image: 'image',
+			image,
 		}, dispatch).finally(() => {
 			setLoading(false)
 		})
