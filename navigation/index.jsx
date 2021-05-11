@@ -3,6 +3,8 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import { MaterialIcons, MaterialCommunityIcons, Ionicons } from '@expo/vector-icons'
 import ScanNavigator from './ScanNavigator'
 import WalletScreen from '../screen/WalletScreen'
+import WalletScreen2 from '../userScreen/WalletScreen'
+
 import HomeNavigationItem from './HomeNavigationItem'
 import {
 	CARD, HOME, SCAN, WALLET,
@@ -13,7 +15,7 @@ const AppTab = createBottomTabNavigator()
 
 function Index () {
 	return (
-		<AppTab.Navigator>
+		<AppTab.Navigator initialRouteName={SCAN}>
 			<AppTab.Screen
 				name={WALLET}
 				component={WalletNavigationItem}

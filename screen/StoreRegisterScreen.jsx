@@ -83,8 +83,8 @@ function StoreRegister ({ navigation }) {
 		registerStoreUser({
 			storeName,
 			address,
-			adminFirstName,
-			adminLastName,
+			firstName: adminFirstName,
+			lastName: adminLastName,
 			phone,
 			email,
 			password,

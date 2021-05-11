@@ -4,10 +4,10 @@ import {
 	SafeAreaView, Button, Text, TouchableOpacity, View, StyleSheet, KeyboardAvoidingView, KeyboardAvoidingViewComponent,
 } from 'react-native'
 import firebase from 'firebase/app'
-import { auth } from '../auth'
 import 'firebase/firestore'
 import { useSelector } from 'react-redux'
 import * as MailComposer from 'expo-mail-composer'
+import { auth } from '../firebase'
 
 const styles = StyleSheet.create({
 	container: {
@@ -64,22 +64,9 @@ const styles = StyleSheet.create({
 })
 function HomeScreen ({ navigation }) {
 	const user = useSelector((state) => state.user)
-	firebase.auth().onAuthStateChanged((user) => {
-		if (user) {
-			// User is signed in.
-			user.getIdToken().then((token) => {
-				console.log(token)
-				console.log(token)
-			})
-			// ...
-		} else {
-			// User is signed out.
-			// ...
-		}
-	})
 
 	const signOutUser = () => {
-		auth.signOut()
+		auth().signOut()
 	}
 
 	useLayoutEffect(() => {

@@ -79,7 +79,7 @@ function HomeScreen () {
 		} catch (err) {
 			dispatch(showAlertAction({
 				show: true,
-				message: 'The QR code is not valid',
+				message: JSON.stringify({ message: 'The QR code is not valid' }),
 			}))
 		}
 	}

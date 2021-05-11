@@ -1,14 +1,10 @@
 import {
-	TouchableHighlight,
 	TouchableOpacity,
 	SafeAreaView,
-	FlatList,
 	StyleSheet,
 	Text,
 	View,
 	ScrollView,
-	Image,
-	ImageBackground,
 	Pressable,
 	RefreshControl,
 } from 'react-native'
@@ -16,19 +12,14 @@ import Swipeable from 'react-native-swipeable-row'
 // import Swipeable from 'react-native-gesture-handler/Swipeable'
 import { Feather } from '@expo/vector-icons'
 import React, { useEffect, useLayoutEffect } from 'react'
-import { useIsFocused, useNavigation } from '@react-navigation/native'
-import { RectButton } from 'react-native-gesture-handler'
-import Animated from 'react-native-reanimated'
 import { useSelector, useDispatch } from 'react-redux'
 import * as Haptics from 'expo-haptics'
-import { getUserCard } from '../store/actions/cardActions'
+import Animated from 'react-native-reanimated'
+import { RectButton } from 'react-native-gesture-handler'
 import { deleteCardFromWallet, getUserWallet } from './walletHelper'
-
 import WalletNavigationItem from '../navigation/WalletNavigationItem'
 import LoadingComponent from '../components/LoadingComponent'
-
 import { setStampCard } from './stampHelper'
-
 
 const styles = StyleSheet.create({
 	container: {
@@ -97,6 +88,34 @@ const styles = StyleSheet.create({
 	},
 })
 
+/* function WalletScreen() {
+	function renderRightActions(progress, dragX) {
+		const trans = dragX.interpolate({
+			inputRange: [0, 50, 100, 101],
+			outputRange: [-20, 0, 0, 1],
+		})
+		return (
+			<RectButton style={styles.leftAction} onPress={() => {}}>
+				<Animated.Text
+					style={[
+						styles.actionText,
+						{
+							transform: [{ translateX: trans }],
+						},
+					]}
+				>
+					Archive
+				</Animated.Text>
+			</RectButton>
+		)
+	}
+	return (
+		<Swipeable renderRightActions={renderRightActions}>
+			<Text>Card</Text>
+		</Swipeable>
+	)
+} */
+
 // const wait = (timeout) => new Promise((resolve) => setTimeout(resolve, timeout))
 
 function WalletScreen ({ navigation, onOpen, onClose }) {
@@ -125,23 +144,24 @@ function WalletScreen ({ navigation, onOpen, onClose }) {
 		Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light)
 	}
 	// define a variable - if it is true show cards, if not then say "You have no cards"
-
 	return (
-		<ScrollView
-			refreshControl={(
-				<RefreshControl
-					tintColor="#FCFAF1"
-					refreshing={refreshing}
-					onRefresh={onRefresh}
-				/>
-			)}
-		>
-			<SafeAreaView style={styles.container}>
-				{!wallet ? (
-					<View>
-						<Text>Your shit is empty</Text>
-					</View>
-				) : wallet
+		<LoadingComponent>
+
+			<ScrollView
+				refreshControl={(
+					<RefreshControl
+						tintColor="#FCFAF1"
+						refreshing={refreshing}
+						onRefresh={onRefresh}
+					/>
+				)}
+			>
+				<SafeAreaView style={styles.container}>
+					{!wallet ? (
+						<View>
+							<Text>Your shit is empty</Text>
+						</View>
+					) : wallet
 				&& wallet.map((card) => (
 					<View key={card.id}>
 						<Swipeable
@@ -180,7 +200,9 @@ function WalletScreen ({ navigation, onOpen, onClose }) {
 									<View style={styles.cardCountArea}>
 										<Text style={styles.stampCountText}>
 											{card.stampCount}
-											/10
+											/
+											{' '}
+											{ card.threshold}
 										</Text>
 									</View>
 								</Pressable>
@@ -188,29 +210,10 @@ function WalletScreen ({ navigation, onOpen, onClose }) {
 						</Swipeable>
 					</View>
 				))}
-			</SafeAreaView>
-		</ScrollView>
+				</SafeAreaView>
+			</ScrollView>
+		</LoadingComponent>
 	)
 }
-// function WalletScreen() {
-// 	function renderRightActions(progress, dragX) {
-// 		const trans = dragX.interpolate({
-// 			inputRange: [0, 50, 100, 101],
-// 			outputRange: [-20, 0, 0, 1],
-// 		})
-// 		return (
-// 			<RectButton style={styles.leftAction} onPress={() => {}}>
-// 				<Animated.Text>
-// 					Archive
-// 				</Animated.Text>
-// 			</RectButton>
-// 		)
-// 	}
-// 	return (
-// 		<Swipeable renderRightActions={renderRightActions}>
-// 			<Text>Card</Text>
-// 		</Swipeable>
-// 	  )
-// }
 
 export default WalletScreen

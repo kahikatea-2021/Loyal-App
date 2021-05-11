@@ -1,8 +1,8 @@
 import React from 'react'
 import { createStackNavigator } from '@react-navigation/stack'
 import ScanScreen from '../screen/ScanScreen'
-import WalletScreen from '../screen/WalletScreen'
 import color from '../theme/color'
+import WalletScreen from '../userScreen/WalletScreen'
 
 const StackNavigator = createStackNavigator()
 
