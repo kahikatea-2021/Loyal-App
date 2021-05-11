@@ -6,6 +6,7 @@ import {
 } from 'react-native'
 
 import request from 'superagent'
+import * as Haptics from 'expo-haptics'
 
 import { Ionicons } from '@expo/vector-icons'
 import { TouchableOpacity } from 'react-native-gesture-handler'
@@ -211,7 +212,12 @@ const HalfSpacer = () => (
 )
 
 function CardScreen ({ navigation }) {
-	const card = useSelector((globalState) => globalState.card)
+	// const card = useSelector((globalState) => globalState.card)
+	const card = {
+		shouldRedeem: true,
+		storeId: '1',
+		stampCount: 10,
+	}
 	const { shouldRedeem, storeId, stampCount } = card
 
 	const [modalVisible, setModalVisible] = useState(false)
@@ -220,6 +226,7 @@ function CardScreen ({ navigation }) {
 
 	const handleLongPress = () => {
 		setModalVisible(true)
+		Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Heavy)
 	}
 
 	function handleUserHasReedem() {
@@ -228,6 +235,7 @@ function CardScreen ({ navigation }) {
 	}
 
 	const handleFinalPress = () => {
+		Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Heavy)
 		setTimeout(() => {
 			handleUserHasReedem()
 		}, 10000)
@@ -278,7 +286,7 @@ function CardScreen ({ navigation }) {
 			<View style={[styles.loyaltyCard]}>
 				<View style={[styles.cardHeader]}>
 					<View style={[styles.storeInfo]}>
-						<Text style={[styles.cardTitle]}>Mutual Friends</Text>
+						<Text style={[styles.cardTitle]}>{card.storeName}</Text>
 						<Text style={[styles.cardDetails]}>
 							{card.address}
 							{'\n'}
