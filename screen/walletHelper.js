@@ -9,7 +9,7 @@ export function getUserWallet(dispatch) {
 
 export function deleteCardFromWallet(cardId, dispatch) {
 	return consume(`/wallet/${cardId}`, 'delete').then((res) => {
-		dispatch(deleteCardFromWalletAction(res.body))
+		dispatch(getUserWalletAction(res.body))
 	})
 }
 
