@@ -23,9 +23,9 @@ import { useSelector, useDispatch } from 'react-redux'
 import * as Haptics from 'expo-haptics'
 import { getUserCard } from '../store/actions/cardActions'
 import { deleteCardFromWallet, getUserWallet } from './walletHelper'
+import { setStampCard } from './stampHelper'
 
 import WalletNavigationItem from '../navigation/WalletNavigationItem'
-
 
 const styles = StyleSheet.create({
 	container: {
@@ -166,6 +166,7 @@ function WalletScreen ({ navigation, onOpen, onClose }) {
 							<View style={styles.listItem}>
 								<Pressable
 									onPress={() => {
+										setStampCard(card, dispatch)
 										navigation.navigate('Card')
 									}}
 									style={styles.cardItem}
@@ -176,8 +177,8 @@ function WalletScreen ({ navigation, onOpen, onClose }) {
 									<View style={styles.cardCountArea}>
 										<Text style={styles.stampCountText}>
 											{card.stampCount}
-												/10
-											</Text>
+											/10
+										</Text>
 									</View>
 								</Pressable>
 							</View>
