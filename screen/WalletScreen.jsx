@@ -24,6 +24,7 @@ import * as Haptics from 'expo-haptics'
 import { getUserCard } from '../store/actions/cardActions'
 import { deleteCardFromWallet, getUserWallet } from './walletHelper'
 import WalletNavigationItem from '../navigation/WalletNavigationItem'
+import LoadingComponent from '../components/LoadingComponent'
 
 const styles = StyleSheet.create({
 	container: {
@@ -137,51 +138,51 @@ function WalletScreen ({ navigation, onOpen, onClose }) {
 						<Text>Your shit is empty</Text>
 					</View>
 				) : wallet
-					&& wallet.map((card) => (
-						<View key={card.id}>
-							<Swipeable
-								leftContent={(
-									<View style={styles.leftSwipeItem}>
-										<Text />
-									</View>
-								)}
-								rightButtons={[
-									<TouchableOpacity
-										style={[
-											styles.rightSwipeItem,
-											{ backgroundColor: '#B80F0F' },
-										]}
-										onPress={() => { handleCardDelete(card.cardId) }}
-									>
-										<Text>
-											<Feather name="trash-2" size={24} color="#FCFAF1" />
-										</Text>
-									</TouchableOpacity>,
-								]}
-								onRightButtonsOpenRelease={onOpen}
-								onRightButtonsCloseRelease={onClose}
-							>
-								<View style={styles.listItem}>
-									<Pressable
-										onPress={() => {
-											navigation.navigate('Card')
-										}}
-										style={styles.cardItem}
-									>
-										<View style={styles.cardNameArea}>
-											<Text style={styles.storeNameText}>{card.storeName}</Text>
-										</View>
-										<View style={styles.cardCountArea}>
-											<Text style={styles.stampCountText}>
-												{card.stampCount}
-												/10
-											</Text>
-										</View>
-									</Pressable>
+				&& wallet.map((card) => (
+					<View key={card.id}>
+						<Swipeable
+							leftContent={(
+								<View style={styles.leftSwipeItem}>
+									<Text />
 								</View>
-							</Swipeable>
-						</View>
-					))}
+							)}
+							rightButtons={[
+								<TouchableOpacity
+									style={[
+										styles.rightSwipeItem,
+										{ backgroundColor: '#B80F0F' },
+									]}
+									onPress={() => { handleCardDelete(card.cardId) }}
+								>
+									<Text>
+										<Feather name="trash-2" size={24} color="#FCFAF1" />
+									</Text>
+								</TouchableOpacity>,
+							]}
+							onRightButtonsOpenRelease={onOpen}
+							onRightButtonsCloseRelease={onClose}
+						>
+							<View style={styles.listItem}>
+								<Pressable
+									onPress={() => {
+										navigation.navigate('Card')
+									}}
+									style={styles.cardItem}
+								>
+									<View style={styles.cardNameArea}>
+										<Text style={styles.storeNameText}>{card.storeName}</Text>
+									</View>
+									<View style={styles.cardCountArea}>
+										<Text style={styles.stampCountText}>
+											{card.stampCount}
+											/10
+										</Text>
+									</View>
+								</Pressable>
+							</View>
+						</Swipeable>
+					</View>
+				))}
 			</SafeAreaView>
 		</ScrollView>
 	)
