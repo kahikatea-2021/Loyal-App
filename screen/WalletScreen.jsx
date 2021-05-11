@@ -111,10 +111,16 @@ function WalletScreen ({ navigation, onOpen, onClose }) {
 		Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light)
 	}
 
+	// define a variable - if it is true show cards, if not then say "You have no cards"
+
 	return (
 		<ScrollView>
 			<SafeAreaView style={styles.container}>
-				{wallet
+				{!wallet ? (
+					<View>
+						<Text>Your shit is empty</Text>
+					</View>
+				) : wallet
 					&& wallet.map((card) => (
 						<Swipeable
 							leftContent={(
