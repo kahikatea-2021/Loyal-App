@@ -11,10 +11,11 @@ import {
 	Button,
 	ScrollView,
 	ActivityIndicator,
+
 } from 'react-native'
 import * as ImagePicker from 'expo-image-picker'
 import { useDispatch } from 'react-redux'
-import { createStoreCard } from './storeHelper'
+import { createStoreCard, getStoreDetail } from './storeHelper'
 
 const styles = StyleSheet.create({
 	container: {
@@ -62,7 +63,7 @@ const styles = StyleSheet.create({
 	},
 })
 
-function StoreCardCreator({ navigation }) {
+function StoreCardCreator ({ navigation }) {
 	const [image, setImage] = useState(null)
 	const dispatch = useDispatch()
 	useLayoutEffect(() => {
@@ -109,21 +110,26 @@ function StoreCardCreator({ navigation }) {
 	const [instagramHandle, setInstagramHandle] = useState('')
 
 	const [loading, setLoading] = useState(false)
-	function handleCardCreation() {
+	function handleCardCreation () {
 		setLoading(true)
 		createStoreCard({
 			rewardThreshold,
 			reward,
 			instagramHandle,
 			image,
-		}, dispatch).finally(() => {
-			setLoading(false)
-		})
+		}, dispatch)
+
+			.then(() => getStoreDetail(dispatch))
+			.then(() => {
+				navigation.navigate('Home')
+			}).finally(() => {
+				setLoading(false)
+			})
 	}
 	return (
 		<KeyboardAvoidingView>
 			<SafeAreaView>
-				<Text style={styles.text, styles.header}>Create your Loyalty Card</Text>
+				<Text style={styles.header}>Create your Loyalty Card</Text>
 				<TextInput
 					style={styles.inputContainer}
 					placeholder="Redeem Threshold"
@@ -161,6 +167,7 @@ function StoreCardCreator({ navigation }) {
 				<TouchableOpacity style={styles.wrap} onPress={() => { handleCardCreation() }}>
 					<Text style={styles.text}>Create Card</Text>
 				</TouchableOpacity>
+				<ActivityIndicator color="white" animating={loading} size="large" />
 			</SafeAreaView>
 		</KeyboardAvoidingView>
 	)
