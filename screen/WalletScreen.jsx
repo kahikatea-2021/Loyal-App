@@ -23,9 +23,12 @@ import { useSelector, useDispatch } from 'react-redux'
 import * as Haptics from 'expo-haptics'
 import { getUserCard } from '../store/actions/cardActions'
 import { deleteCardFromWallet, getUserWallet } from './walletHelper'
-import { setStampCard } from './stampHelper'
 
 import WalletNavigationItem from '../navigation/WalletNavigationItem'
+import LoadingComponent from '../components/LoadingComponent'
+
+import { setStampCard } from './stampHelper'
+
 
 const styles = StyleSheet.create({
 	container: {
