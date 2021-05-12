@@ -89,7 +89,7 @@ function HomeScreen () {
 	}, [])
 
 	if (isPermitted === null) {
-		return <Text>Requesting for camera permission</Text>
+		return <Text />
 	}
 
 	if (isPermitted === false) {

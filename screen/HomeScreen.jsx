@@ -43,6 +43,7 @@ const styles = StyleSheet.create({
 		flexDirection: 'row',
 	},
 	wrap: {
+		width: 300,
 		alignItems: 'center',
 		borderWidth: 1,
 		borderRadius: 10,
@@ -60,6 +61,51 @@ const styles = StyleSheet.create({
 	},
 	emailText: {
 		color: '#000',
+	},
+	help: {
+		width: 350,
+		alignSelf: 'center',
+		alignItems: 'center',
+		borderWidth: 3,
+		borderRadius: 10,
+		borderColor: '#8977CE',
+		backgroundColor: '#8977CE',
+	},
+	helpText: {
+		color: '#fff',
+		textAlign: 'center',
+		fontSize: 15,
+		width: 300,
+		padding: 10,
+	},
+	signOut: {
+		width: 300,
+		alignItems: 'center',
+		borderWidth: 1,
+		borderRadius: 10,
+		borderColor: '#FF8902',
+		backgroundColor: '#FF8902',
+		padding: 9,
+		margin: 10,
+	},
+	textSupport: {
+		color: '#fff',
+		fontSize: 20,
+	},
+	user: {
+		width: 350,
+		borderWidth: 3,
+		borderRadius: 10,
+		borderColor: '#8977CE',
+		backgroundColor: '#8977CE',
+		margin: 5,
+		alignItems: 'center',
+	},
+	userText: {
+		textAlign: 'center',
+		color: '#fff',
+		fontSize: 15,
+		padding: 10,
 	},
 })
 function HomeScreen ({ navigation }) {
@@ -99,30 +145,31 @@ function HomeScreen ({ navigation }) {
 				style={styles.logo}
 				source={require('../assets/testIcon.png')}
 			/>
-			<SafeAreaView style={styles.email}>
-				<Text style={styles.emailText}>Require assistance or have a suggestion?</Text>
+			<SafeAreaView style={styles.help}>
+				<Text style={styles.helpText}>Require assistance or have a suggestion?</Text>
 				<TouchableOpacity style={styles.wrap} onPress={() => Linking.openURL('mailto:loyalrewardsapp@gmail.com?')}>
-					<Text>Send us an email!</Text>
+					<Text style={styles.textSupport}>Send us an email!</Text>
 				</TouchableOpacity>
 			</SafeAreaView>
-			<SafeAreaView>
-
+			<SafeAreaView style={styles.user}>
 				{user && (
 					<>
-						<Text style={styles.text}>
+						<Text style={styles.userText}>
 							Current User:
 							{` ${user.displayName}`}
-						</Text>
-						<Text style={styles.text}>
-							Email:
+							{'\n'}
+							Account Email:
 							{` ${user.email}`}
 						</Text>
+
+						<TouchableOpacity style={styles.signOut} onPress={signOutUser}>
+							<Text style={styles.text}>Sign Out</Text>
+						</TouchableOpacity>
 					</>
+
 				)}
 			</SafeAreaView>
-			<TouchableOpacity style={styles.wrap} onPress={signOutUser}>
-				<Text style={styles.text}>Sign Out</Text>
-			</TouchableOpacity>
+
 		</KeyboardAvoidingView>
 
 	)
