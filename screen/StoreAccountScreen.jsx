@@ -101,7 +101,7 @@ const styles = StyleSheet.create({
 	userText: {
 		textAlign: 'center',
 		color: '#fff',
-		fontSize: 1,
+		fontSize: 15,
 		padding: 10,
 	},
 
@@ -149,7 +149,6 @@ function StoreAccountScreen () {
 							Account Email:
 							{` ${user.email}`}
 						</Text>
-	
 						<TouchableOpacity style={styles.signOut} onPress={signOutUser}>
 							<Text style={styles.text}>Sign Out</Text>
 						</TouchableOpacity>
