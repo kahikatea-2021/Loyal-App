@@ -1,5 +1,5 @@
-# Coffee Shop Loyalty App
-A cross platform app for coffee shop loyalty 
+# Loyal 
+A cross platform app created to replace traditional coffee cards. 
 
 ## Setup
 
@@ -18,6 +18,14 @@ sudo npm install --global expo-cli
 ```
 The password you are prompted to enter is the password for the machine you are working on.
 
-## Running app on your device
+## Running the Loyal app on your device
 Install the Expo client app on your iOS or Android phone and connect to the same wireless network as your computer. 
-On Android, use the Expo app to scan the QR code from your terminal to open your project. On iOS, use the built-in QR code scanner of the Camera app.
+On Android, use the Expo app to scan the QR code that appears in your terminal when you run the project. 
+On iOS, use the built-in QR code scanner of the Camera app to scan the QR code that appears in your terminal when you run the project.
+
+
+## User Stories
+* As a user, I want to be able to scan a QR code to add a cafe loyalty card and start collecting stamps
+* I want my stamps to increase with each scan and to be offered a reward when I reach a threshold
+* As a user, I want to be able to see a list of my loyalty cards in a wallet
+* As a coffee shop, I want to be able to create a card and QR code for my customers to scan
