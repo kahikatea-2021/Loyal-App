@@ -35,6 +35,14 @@ On iOS, use the built-in QR code scanner of the Camera app to scan the QR code t
 
 ## Design & Development
 
+Icon Concepts -
 ![Icon Concepts](https://github.com/kahikatea-2021/coffee-shop-loyalty-app/blob/testing/assets/ReadeMeAssets/iconConcepts.png)
+![Icon Development](https://github.com/kahikatea-2021/coffee-shop-loyalty-app/blob/testing/assets/ReadeMeAssets/iconDevelopment.png)
+![Wallet and Text Elements](https://github.com/kahikatea-2021/coffee-shop-loyalty-app/blob/testing/assets/ReadeMeAssets/walletAndTextElements.png)
+![Miscellaneous Elements](https://github.com/kahikatea-2021/coffee-shop-loyalty-app/blob/testing/assets/ReadeMeAssets/elements.png)
+![App Theme Tests](https://github.com/kahikatea-2021/coffee-shop-loyalty-app/blob/testing/assets/ReadeMeAssets/themeTests.png)
+
+
+
 
 
