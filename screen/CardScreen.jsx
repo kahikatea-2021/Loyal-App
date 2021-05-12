@@ -456,7 +456,7 @@ function CardScreen ({ navigation }) {
 							{' '}
 							more stamps to claim a free
 							{' '}
-							{reward.toLowerCase()}
+							{reward && reward.toLowerCase()}
 						</Text>
 
 					</View>

@@ -65,7 +65,10 @@ function StoreDetailScreen ({ navigation }) {
 	const store = useSelector((state) => state.store)
 
 	useEffect(() => {
-		getStoreDetail(dispatch)
+		getStoreDetail(dispatch).then(() => {
+			// console.log(store.cardId)
+			// if (!store.cardId) navigation.navigate('StoreCardCreator')
+		})
 	}, [])
 
 	useLayoutEffect(() => {
@@ -77,17 +80,15 @@ function StoreDetailScreen ({ navigation }) {
 			},
 		})
 	})
-	if (!store.cardId) navigation.navigate('StoreCardCreator')
 
-	{
-		return (
-			<SafeAreaView style={{
-				flex: 1, backgroundColor: '#49378E',
-			}}
-			>
-				<LoadingComponent>
-					<ScrollView style={styles.container}>
-						{store
+	return (
+		<SafeAreaView style={{
+			flex: 1, backgroundColor: '#49378E',
+		}}
+		>
+			<LoadingComponent>
+				<ScrollView style={styles.container}>
+					{store
 							&& (
 								<>
 									<Image
@@ -109,11 +110,10 @@ function StoreDetailScreen ({ navigation }) {
 									</View>
 								</>
 							)}
-					</ScrollView>
-				</LoadingComponent>
-			</SafeAreaView>
-		)
-	}
+				</ScrollView>
+			</LoadingComponent>
+		</SafeAreaView>
+	)
 }
 
 export default StoreDetailScreen

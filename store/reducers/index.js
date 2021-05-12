@@ -5,6 +5,7 @@ import storeReducer from './store'
 import infoReducer from './info'
 import userInfoReducer from './userInfo'
 import intialStateLoadingReducer from './initialLoadingState'
+import loadingReducer from './loadingIndicator'
 
 export default combineReducers({
 	card: cardReducer,
@@ -13,4 +14,5 @@ export default combineReducers({
 	info: infoReducer,
 	initialStateLoading: intialStateLoadingReducer,
 	user: userInfoReducer,
+	loadingIndicator: loadingReducer,
 })
