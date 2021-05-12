@@ -115,7 +115,6 @@ function LoginScreen ({ navigation }) {
 		<KeyboardAvoidingView behaviour="height" style={styles.container}>
 			<SafeAreaView>
 				<ScrollView keyboardDismissMode="interactive">
-
 					<Image
 						style={styles.logo}
 						source={require('../assets/testTitleImage.png')}
