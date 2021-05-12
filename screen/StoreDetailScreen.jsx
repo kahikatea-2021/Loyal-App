@@ -66,8 +66,7 @@ function StoreDetailScreen ({ navigation }) {
 
 	useEffect(() => {
 		getStoreDetail(dispatch).then(() => {
-			// console.log(store.cardId)
-			// if (!store.cardId) navigation.navigate('StoreCardCreator')
+			if (!store.cardId) navigation.navigate('StoreCardCreator')
 		})
 	}, [])
 
