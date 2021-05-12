@@ -25,6 +25,7 @@ import { FORGOT_PASSWORD, LOGIN, REGISTER } from './navigationNames'
 import { showAlertAction } from './store/actions/infoActions'
 import StoreCardCreatorScreen from './screen/StoreCardCreator'
 
+console.disableYellowBox = true
 const AppStack = createStackNavigator()
 
 const AppLightTheme = {
@@ -37,45 +38,45 @@ const AppLightTheme = {
 
 const styles = StyleSheet.create({
 	centeredView: {
-	  flex: 1,
-	  justifyContent: 'center',
-	  alignItems: 'center',
-	  marginTop: 22,
+		flex: 1,
+		justifyContent: 'center',
+		alignItems: 'center',
+		marginTop: 22,
 	},
 	modalView: {
-	  margin: 20,
-	  backgroundColor: 'white',
-	  borderRadius: 20,
-	  padding: 35,
-	  alignItems: 'center',
-	  shadowColor: '#000',
-	  shadowOffset: {
+		margin: 20,
+		backgroundColor: 'white',
+		borderRadius: 20,
+		padding: 35,
+		alignItems: 'center',
+		shadowColor: '#000',
+		shadowOffset: {
 			width: 0,
 			height: 2,
-	  },
-	  shadowOpacity: 0.25,
-	  shadowRadius: 4,
-	  elevation: 5,
+		},
+		shadowOpacity: 0.25,
+		shadowRadius: 4,
+		elevation: 5,
 	},
 	button: {
-	  borderRadius: 20,
-	  padding: 10,
-	  elevation: 2,
+		borderRadius: 20,
+		padding: 10,
+		elevation: 2,
 	},
 	buttonOpen: {
-	  backgroundColor: '#F194FF',
+		backgroundColor: '#F194FF',
 	},
 	buttonClose: {
-	  backgroundColor: '#2196F3',
+		backgroundColor: '#2196F3',
 	},
 	textStyle: {
-	  color: 'white',
-	  fontWeight: 'bold',
-	  textAlign: 'center',
+		color: 'white',
+		fontWeight: 'bold',
+		textAlign: 'center',
 	},
 	modalText: {
-	  marginBottom: 15,
-	  textAlign: 'center',
+		marginBottom: 15,
+		textAlign: 'center',
 	},
 })
 
@@ -180,32 +181,32 @@ export default function App () {
 
 				if (info.show) {
 					switch (info.message) {
-					case 'auth/invalid-email':
-						onAlert('Please use a valid email address')
-						break
-					case 'auth/wrong-password':
-						onAlert('Wrong password, please try again')
-						break
-					case 'auth/user-not-found':
-						onAlert('This account is not registered')
-						break
-					case 'auth/email-already-exists':
-						onAlert('This account is already registered')
-						break
-					case 'auth/invalid-password':
-						onAlert('Please enter a password at least 6 characters long')
-						break
-					case 'auth/too-many-requests':
-						onAlert('We have disabled all requests from this device due to unusual activity. Please try again later.')
-						break
-					default:
-						try {
-							const errorObj = JSON.parse(info.message)
-							onAlert(errorObj.message)
-						} catch (err) {
-							onAlert('Error has occured, please try again.')
-						}
-						break
+						case 'auth/invalid-email':
+							onAlert('Please use a valid email address')
+							break
+						case 'auth/wrong-password':
+							onAlert('Wrong password, please try again')
+							break
+						case 'auth/user-not-found':
+							onAlert('This account is not registered')
+							break
+						case 'auth/email-already-exists':
+							onAlert('This account is already registered')
+							break
+						case 'auth/invalid-password':
+							onAlert('Please enter a password at least 6 characters long')
+							break
+						case 'auth/too-many-requests':
+							onAlert('We have disabled all requests from this device due to unusual activity. Please try again later.')
+							break
+						default:
+							try {
+								const errorObj = JSON.parse(info.message)
+								onAlert(errorObj.message)
+							} catch (err) {
+								onAlert('Error has occured, please try again.')
+							}
+							break
 					}
 				}
 			})
