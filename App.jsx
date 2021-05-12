@@ -6,7 +6,10 @@ import { NavigationContainer, DarkTheme } from '@react-navigation/native'
 import { createStackNavigator } from '@react-navigation/stack'
 import { SafeAreaProvider } from 'react-native-safe-area-context'
 import * as SplashScreen from 'expo-splash-screen'
-import { Alert } from 'react-native'
+import {
+	ActivityIndicator,
+	Alert, Modal, Pressable, StyleSheet, Text, View,
+} from 'react-native'
 import { isFirebaseAppExisted, initializeFirebase, auth } from './firebase'
 import store from './store'
 import LoginScreen from './screen/LoginScreen'
@@ -20,6 +23,7 @@ import CardScreen from './screen/CardScreen'
 import colors from './theme/color'
 import { FORGOT_PASSWORD, LOGIN, REGISTER } from './navigationNames'
 import { showAlertAction } from './store/actions/infoActions'
+import color from './theme/color'
 
 const AppStack = createStackNavigator()
 
@@ -31,7 +35,52 @@ const AppLightTheme = {
 	},
 }
 
+const styles = StyleSheet.create({
+	centeredView: {
+	  flex: 1,
+	  justifyContent: 'center',
+	  alignItems: 'center',
+	  marginTop: 22,
+	},
+	modalView: {
+	  margin: 20,
+	  backgroundColor: 'white',
+	  borderRadius: 20,
+	  padding: 35,
+	  alignItems: 'center',
+	  shadowColor: '#000',
+	  shadowOffset: {
+			width: 0,
+			height: 2,
+	  },
+	  shadowOpacity: 0.25,
+	  shadowRadius: 4,
+	  elevation: 5,
+	},
+	button: {
+	  borderRadius: 20,
+	  padding: 10,
+	  elevation: 2,
+	},
+	buttonOpen: {
+	  backgroundColor: '#F194FF',
+	},
+	buttonClose: {
+	  backgroundColor: '#2196F3',
+	},
+	textStyle: {
+	  color: 'white',
+	  fontWeight: 'bold',
+	  textAlign: 'center',
+	},
+	modalText: {
+	  marginBottom: 15,
+	  textAlign: 'center',
+	},
+})
+
 export default function App () {
+	const [modalVisible, setModalVisible] = useState(false)
 	if (!isFirebaseAppExisted()) {
 		initializeFirebase()
 	}
@@ -123,7 +172,12 @@ export default function App () {
 			await SplashScreen.hideAsync()
 			if (unsubcribed) { unsubcribed() }
 			unsubcribed = store.subscribe(() => {
-				const { info } = store.getState()
+				const { info, loadingIndicator } = store.getState()
+				console.log(store.getState())
+				if (loadingIndicator) {
+					setModalVisible(loadingIndicator)
+				}
+
 				if (info.show) {
 					switch (info.message) {
 					case 'auth/invalid-email':
@@ -165,6 +219,22 @@ export default function App () {
 		<Provider store={store}>
 			<SafeAreaProvider>
 				<StatusBar style="light" />
+				<Modal
+					animationType="slide"
+					transparent
+					visible={modalVisible}
+					onRequestClose={() => {
+						Alert.alert('Modal has been closed.')
+						setModalVisible(!modalVisible)
+					}}
+				>
+					<View style={styles.centeredView}>
+						<View style={[styles.container, styles.horizontal, styles.modalView]}>
+							<ActivityIndicator size="large" color={color.light.primary} />
+							<Text>Please wait...</Text>
+						</View>
+					</View>
+				</Modal>
 				<NavigationContainer theme={AppLightTheme} onReady={onLayoutRootView}>
 					<AppStack.Navigator screenOptions={{
 						headerShown: false,

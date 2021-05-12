@@ -1,9 +1,11 @@
 import consume from '../consume'
 import { showAlertAction } from '../store/actions/infoActions'
 import { setInitialLoadingState } from '../store/actions/initialLoadingStateAction'
+import { setLoadingIndicatorAction } from '../store/actions/loadingIndicator'
 import { getUserWalletAction } from '../store/actions/walletAction'
 
 export function getUserWallet(dispatch) {
+	dispatch(setLoadingIndicatorAction(true))
 	return consume('/wallet').then((res) => {
 		dispatch(setInitialLoadingState(false))
 		dispatch(getUserWalletAction(res.body))
@@ -15,6 +17,8 @@ export function getUserWallet(dispatch) {
 			},
 		))
 		return null
+	}).finally(() => {
+		dispatch(setLoadingIndicatorAction(false))
 	})
 }
 
