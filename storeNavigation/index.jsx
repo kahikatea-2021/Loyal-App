@@ -14,19 +14,11 @@ function Index () {
 				name="Home"
 				component={StoreDetailScreen}
 				options={{
+					headerShown: true,
 					title: 'Home',
 					tabBarIcon: ({ color }) => <TabIcon color={color} name="home" />,
 				}}
 			/>
-			<AppTab.Screen
-				name="StoreCardCreator"
-				component={StoreCardCreator}
-				options={{
-					title: 'Create Card',
-					tabBarIcon: ({ color }) => <TabIcon color={color} name="library-add" />,
-				}}
-			/>
-
 			<AppTab.Screen
 				name="StoreAccount"
 				component={StoreAccount}

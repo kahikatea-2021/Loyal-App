@@ -20,6 +20,7 @@ import CardScreen from './screen/CardScreen'
 import colors from './theme/color'
 import { FORGOT_PASSWORD, LOGIN, REGISTER } from './navigationNames'
 import { showAlertAction } from './store/actions/infoActions'
+import StoreCardCreatorScreen from './screen/StoreCardCreator'
 
 const AppStack = createStackNavigator()
 
@@ -126,32 +127,32 @@ export default function App () {
 				const { info } = store.getState()
 				if (info.show) {
 					switch (info.message) {
-					case 'auth/invalid-email':
-						onAlert('Please use a valid email address')
-						break
-					case 'auth/wrong-password':
-						onAlert('Wrong password, please try again')
-						break
-					case 'auth/user-not-found':
-						onAlert('This account is not registered')
-						break
-					case 'auth/email-already-exists':
-						onAlert('This account is already registered')
-						break
-					case 'auth/invalid-password':
-						onAlert('Please enter a password at least 6 characters long')
-						break
-					case 'auth/too-many-requests':
-						onAlert('We have disabled all requests from this device due to unusual activity. Please try again later.')
-						break
-					default:
-						try {
-							const errorObj = JSON.parse(info.message)
-							onAlert(errorObj.message)
-						} catch (err) {
-							onAlert('Error has occured, please try again.')
-						}
-						break
+						case 'auth/invalid-email':
+							onAlert('Please use a valid email address')
+							break
+						case 'auth/wrong-password':
+							onAlert('Wrong password, please try again')
+							break
+						case 'auth/user-not-found':
+							onAlert('This account is not registered')
+							break
+						case 'auth/email-already-exists':
+							onAlert('This account is already registered')
+							break
+						case 'auth/invalid-password':
+							onAlert('Please enter a password at least 6 characters long')
+							break
+						case 'auth/too-many-requests':
+							onAlert('We have disabled all requests from this device due to unusual activity. Please try again later.')
+							break
+						default:
+							try {
+								const errorObj = JSON.parse(info.message)
+								onAlert(errorObj.message)
+							} catch (err) {
+								onAlert('Error has occured, please try again.')
+							}
+							break
 					}
 				}
 			})
@@ -224,7 +225,17 @@ export default function App () {
 										name="StoreNavigation"
 										component={StoreNavigation}
 									/>
+									<AppStack.Screen
+										name="StoreCardCreator"
+										component={StoreCardCreatorScreen}
+										options={{
+											headerShown: true,
+											headerLeft: null,
+
+										}}
+									/>
 								</>
+
 							)
 						}
 						<AppStack.Screen

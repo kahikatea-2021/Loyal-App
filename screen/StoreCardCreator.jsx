@@ -11,7 +11,7 @@ import {
 	Button,
 	ScrollView,
 	ActivityIndicator,
-
+	BackHandler,
 } from 'react-native'
 import * as ImagePicker from 'expo-image-picker'
 import { useDispatch } from 'react-redux'
@@ -31,7 +31,7 @@ const styles = StyleSheet.create({
 		backgroundColor: '#fff',
 		padding: 9,
 		margin: 4,
-		marginLeft: 40,
+		alignSelf: 'center',
 	},
 	button: {
 		width: 100,
@@ -46,6 +46,15 @@ const styles = StyleSheet.create({
 		color: '#fff',
 		fontSize: 25,
 		margin: 50,
+		textAlign: 'center',
+
+	},
+	logo: {
+		width: 170,
+		height: 168,
+		alignSelf: 'center',
+		margin: 20,
+		borderRadius: 10,
 	},
 	wrap: {
 		alignItems: 'center',
@@ -55,8 +64,8 @@ const styles = StyleSheet.create({
 		backgroundColor: '#3C97EA',
 		padding: 9,
 		margin: 10,
-		marginLeft: 40,
-		marginRight: 35,
+		alignSelf: 'center',
+		width: 300,
 	},
 	imageBox: {
 		alignItems: 'center',
@@ -68,7 +77,7 @@ function StoreCardCreator ({ navigation }) {
 	const dispatch = useDispatch()
 	useLayoutEffect(() => {
 		navigation.setOptions({
-			title: 'Create Card',
+			title: 'Create your Loyalty Card',
 			headerTitleStyle: {
 				color: '#fff',
 			},
@@ -126,10 +135,17 @@ function StoreCardCreator ({ navigation }) {
 				setLoading(false)
 			})
 	}
+	useEffect(() => {
+		BackHandler.addEventListener('hardwareBackPress', () => true)
+		return () => BackHandler.removeEventListener('hardwareBackPress', () => true)
+	}, [])
 	return (
-		<KeyboardAvoidingView>
+		<KeyboardAvoidingView style={styles.Container}>
 			<SafeAreaView>
-				<Text style={styles.header}>Create your Loyalty Card</Text>
+				<Image
+					style={styles.logo}
+					source={require('../assets/testIcon.png')}
+				/>
 				<TextInput
 					style={styles.inputContainer}
 					placeholder="Redeem Threshold"

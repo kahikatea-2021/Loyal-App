@@ -4,6 +4,7 @@ import React, { useState, useLayoutEffect } from 'react'
 import {
 	TouchableOpacity, SafeAreaView, TextInput, Text, StyleSheet, KeyboardAvoidingView, Image, ScrollView, ActivityIndicator,
 } from 'react-native'
+import { useDispatch } from 'react-redux'
 
 import { registerStoreUser } from './accountHelper'
 
@@ -54,6 +55,7 @@ const styles = StyleSheet.create({
 })
 
 function StoreRegister ({ navigation }) {
+	const dispatch = useDispatch()
 	useLayoutEffect(() => {
 		navigation.setOptions({
 			title: 'Register your Store',
@@ -88,7 +90,7 @@ function StoreRegister ({ navigation }) {
 			phone,
 			email,
 			password,
-		}).finally(() => {
+		}, dispatch).finally(() => {
 			setLoading(false)
 		})
 	}
