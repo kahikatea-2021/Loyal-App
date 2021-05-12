@@ -20,7 +20,7 @@ function WalletScreen({ navigation }) {
 			title: 'My Wallet',
 			headerStyle: {
 				backgroundColor: '#49378E',
-				shadowColor: '#fff',
+				shadowColor: '#8977CE',
 			},
 		})
 	}, [navigation])

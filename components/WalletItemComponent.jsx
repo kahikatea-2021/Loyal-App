@@ -21,7 +21,10 @@ const styles = StyleSheet.create({
 		flex: 1,
 		flexDirection: 'row',
 		backgroundColor: '#49378E',
-		padding: 20,
+		paddingTop: 20,
+		paddingLeft: 20,
+		paddingRight: 20,
+		paddingBottom: 0,
 	},
 	cardNameArea: {
 		flex: 7,

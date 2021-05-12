@@ -15,7 +15,7 @@ const AppTab = createBottomTabNavigator()
 
 function Index () {
 	return (
-		<AppTab.Navigator initialRouteName={SCAN}>
+		<AppTab.Navigator tabBarOptions={{activeTintColor: '#A799E2'}} initialRouteName={SCAN}>
 			<AppTab.Screen
 				name={WALLET}
 				component={WalletNavigationItem}

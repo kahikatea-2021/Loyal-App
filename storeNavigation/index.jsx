@@ -9,7 +9,7 @@ const AppTab = createBottomTabNavigator()
 
 function Index () {
 	return (
-		<AppTab.Navigator>
+		<AppTab.Navigator tabBarOptions={{ activeTintColor: '#A799E2' }}>
 			<AppTab.Screen
 				name="Home"
 				component={StoreDetailScreen}
