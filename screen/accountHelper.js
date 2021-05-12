@@ -16,7 +16,7 @@ export function loginUser({ email, password }, dispatch) {
 
 export function registerUser(data, dispatch) {
 	return consume('/account/register', 'post', data)
-		.then(() => loginUser(data)).catch((err) => {
+		.then(() => loginUser(data, dispatch)).catch((err) => {
 			dispatch(showAlertAction(
 				{
 					show: true,
@@ -29,7 +29,7 @@ export function registerUser(data, dispatch) {
 
 export function registerStoreUser(data, dispatch) {
 	return consume('/account/store/register', 'post', data)
-		.then(() => loginUser(data)).catch((err) => {
+		.then(() => loginUser(data, dispatch)).catch((err) => {
 			dispatch(showAlertAction(
 				{
 					show: true,
