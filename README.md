@@ -31,3 +31,10 @@ On iOS, use the built-in QR code scanner of the Camera app to scan the QR code t
 * I want my stamps to increase with each scan and to be offered a reward when I reach a threshold
 * As a user, I want to be able to see a list of my loyalty cards in a wallet
 * As a coffee shop, I want to be able to create a card and QR code for my customers to scan
+
+
+## Design & Development
+
+![Icon Concepts](https://github.com/kahikatea-2021/coffee-shop-loyalty-app/blob/testing/assets/ReadeMeAssets/iconConcepts.png)
+
+
