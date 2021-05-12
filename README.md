@@ -3,7 +3,7 @@ A cross platform app created to replace traditional coffee cards.
 
 ## Setup
 
-To get started, clone this repo and then:
+To get started, clone this repo and then in your terminal run:
 
 ```
 cd coffee-shop-loyalty-app
