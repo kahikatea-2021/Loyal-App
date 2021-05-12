@@ -4,17 +4,20 @@ import { setInitialLoadingState } from '../store/actions/initialLoadingStateActi
 import { getStoreDetailAction, createStoreCardAction } from '../store/actions/storeActions'
 
 export function getStoreDetail (dispatch) {
-	consume('/stores').then((res) => {
-		dispatch(setInitialLoadingState(false))
-		dispatch(getStoreDetailAction(res.body))
-	}).catch((err) => {
-		dispatch(showAlertAction(
-			{
-				show: true,
-				message: err.response?.body?.message,
-			},
-		))
-		return null
+	return new Promise((resolve, reject) => {
+		consume('/stores').then((res) => {
+			dispatch(setInitialLoadingState(false))
+			dispatch(getStoreDetailAction(res.body))
+			resolve()
+		}).catch((err) => {
+			dispatch(showAlertAction(
+				{
+					show: true,
+					message: err.response?.body?.message,
+				},
+			))
+			reject(err)
+		})
 	})
 }
 

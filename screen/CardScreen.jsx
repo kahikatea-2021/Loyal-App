@@ -20,7 +20,7 @@ const styles = StyleSheet.create({
 		padding: 15,
 		margin: 20,
 		borderRadius: 20,
-		backgroundColor: '#87878a',
+		backgroundColor: '#4D4557',
 		shadowColor: 'rgba(0, 0, 0, 0.75)',
 		shadowOffset: {
 			width: 5,
@@ -63,6 +63,7 @@ const styles = StyleSheet.create({
 	},
 	redeemPlaceholderText: {
 		color: '#8d8d8d',
+		textAlign: 'center',
 	},
 	centeredView: {
 		flex: 1,
@@ -146,9 +147,9 @@ const styles = StyleSheet.create({
 		fontSize: 20,
 		fontWeight: 'bold',
 		textAlign: 'left',
-		textShadowColor: 'rgba(0, 0, 0, 0.75)',
-		textShadowOffset: { width: -1, height: 1 },
-		textShadowRadius: 10,
+		// textShadowColor: 'rgba(0, 0, 0, 0.75)',
+		// textShadowOffset: { width: -1, height: 1 },
+		// textShadowRadius: 10,
 	},
 	cardDetails: {
 		color: 'white',
@@ -156,14 +157,17 @@ const styles = StyleSheet.create({
 		marginTop: 5,
 	},
 	cardLogo: {
-		flex: 1.5, width: 60, height: 60,
+		flex: 1.5,
+		width: 60,
+		height: 60,
+		borderRadius: 15,
 	},
 	closeIcon: {
 		padding: 15,
 		// margin: 20,
 		borderRadius: 20,
 		elevation: 5,
-		color: 'red',
+		color: '#fff',
 		opacity: 0.5,
 		shadowColor: '#000',
 		shadowOffset: {
@@ -227,7 +231,7 @@ function CardScreen ({ navigation }) {
 		Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Heavy)
 	}
 
-	function handleUserHasReedem() {
+	function handleUserHasReedem () {
 		resetCard(dispatch, cardId)
 		setFinalModalVisible(!finalModalVisible)
 	}
@@ -241,10 +245,11 @@ function CardScreen ({ navigation }) {
 		setFinalModalVisible(true)
 	}
 
+	const { reward } = card
 	const stampsRemaining = (10 - card.stampCount)
 	const units = ['zero', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten']
 
-	function stampsWord(it) {
+	function stampsWord (it) {
 		let theword = ''
 		let started
 		if (it === 0) return units[0]
@@ -276,9 +281,8 @@ function CardScreen ({ navigation }) {
 		}
 		return theword
 	}
-
 	return (
-		<SafeAreaView style={{ flex: 1, backgroundColor: 'white' }}>
+		<SafeAreaView style={{ flex: 1, backgroundColor: '#8977CE' }}>
 			<Ionicons name="chevron-back" size={50} style={[styles.closeIcon]} onPress={() => { navigation.navigate('BottomNavigation') }} />
 			<HalfSpacer />
 			<View style={[styles.loyaltyCard]}>
@@ -450,7 +454,9 @@ function CardScreen ({ navigation }) {
 							{' '}
 							{stampsWord(stampsRemaining)}
 							{' '}
-							stamps to claim a free coffee
+							more stamps to claim a free
+							{' '}
+							{reward && reward.toLowerCase()}
 						</Text>
 
 					</View>

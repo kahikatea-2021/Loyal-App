@@ -21,29 +21,36 @@ const styles = StyleSheet.create({
 		flex: 1,
 		flexDirection: 'row',
 		backgroundColor: '#49378E',
-		padding: 20,
+		paddingTop: 20,
+		paddingLeft: 20,
+		paddingRight: 20,
+		paddingBottom: 0,
 	},
 	cardNameArea: {
 		flex: 7,
 		justifyContent: 'flex-end',
 		paddingBottom: 20,
-		borderTopLeftRadius: 6,
-		borderBottomLeftRadius: 6,
-		backgroundColor: '#FCFAF1',
+		borderTopLeftRadius: 15,
+		borderBottomLeftRadius: 15,
+		backgroundColor: '#4D4557',
 	},
 	cardCountArea: {
 		flex: 3,
 		alignItems: 'flex-end',
-		borderTopRightRadius: 6,
-		borderBottomRightRadius: 6,
-		backgroundColor: '#FCFAF1',
+		borderTopRightRadius: 15,
+		borderBottomRightRadius: 15,
+		backgroundColor: '#4D4557',
 	},
 	storeNameText: {
+		color: '#fcfaf1',
+		opacity: 0.8,
 		fontSize: 24,
 		paddingLeft: 20,
 		fontWeight: 'bold',
 	},
 	stampCountText: {
+		color: '#fcfaf1',
+		opacity: 0.8,
 		fontSize: 32,
 		paddingTop: 8,
 		paddingRight: 10,
@@ -72,7 +79,7 @@ const styles = StyleSheet.create({
 	},
 })
 
-function WalletItemComponent({ card, onItemPress }) {
+function WalletItemComponent ({ card, onItemPress }) {
 	return (
 		<View style={styles.listItem}>
 			<Pressable
@@ -89,7 +96,7 @@ function WalletItemComponent({ card, onItemPress }) {
 					<Text style={styles.stampCountText}>
 						{card.stampCount}
 						/
-						{ 10}
+						{10}
 					</Text>
 				</View>
 			</Pressable>

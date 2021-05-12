@@ -23,7 +23,7 @@ import CardScreen from './screen/CardScreen'
 import colors from './theme/color'
 import { FORGOT_PASSWORD, LOGIN, REGISTER } from './navigationNames'
 import { showAlertAction } from './store/actions/infoActions'
-import color from './theme/color'
+import StoreCardCreatorScreen from './screen/StoreCardCreator'
 
 const AppStack = createStackNavigator()
 
@@ -230,7 +230,7 @@ export default function App () {
 				>
 					<View style={styles.centeredView}>
 						<View style={[styles.container, styles.horizontal, styles.modalView]}>
-							<ActivityIndicator size="large" color={color.light.primary} />
+							<ActivityIndicator size="large" color={colors.light.primary} />
 							<Text>Please wait...</Text>
 						</View>
 					</View>
@@ -294,7 +294,17 @@ export default function App () {
 										name="StoreNavigation"
 										component={StoreNavigation}
 									/>
+									<AppStack.Screen
+										name="StoreCardCreator"
+										component={StoreCardCreatorScreen}
+										options={{
+											headerShown: true,
+											headerLeft: null,
+
+										}}
+									/>
 								</>
+
 							)
 						}
 						<AppStack.Screen

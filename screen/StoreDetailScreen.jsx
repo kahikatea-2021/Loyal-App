@@ -1,6 +1,6 @@
 import React, { useEffect, useLayoutEffect } from 'react'
 import {
-	StyleSheet, Image, Text,
+	StyleSheet, Image, Text, View,
 } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { useDispatch, useSelector } from 'react-redux'
@@ -18,10 +18,11 @@ const styles = StyleSheet.create({
 		width: 50,
 		height: 50,
 	},
-	logo: {
+	qr: {
 		width: 290,
 		height: 288,
-		margin: 50,
+		alignSelf: 'center',
+		margin: 10,
 	},
 	wait: {
 		width: 290,
@@ -33,11 +34,29 @@ const styles = StyleSheet.create({
 		fontSize: 30,
 		textAlign: 'center',
 		color: '#FCFAF1',
+		fontWeight: 'bold',
+		opacity: 0.8,
+		textDecorationLine: 'underline',
 	},
 
 	textSub: {
+		fontSize: 16,
+
 		textAlign: 'center',
 		color: '#FCFAF1',
+		opacity: 0.8,
+
+	},
+	border: {
+		backgroundColor: '#8977CE',
+		padding: 20,
+		margin: 30,
+		borderRadius: 20,
+	},
+	loyalLogo: {
+		width: 170,
+		height: 205,
+		alignSelf: 'center',
 	},
 })
 
@@ -46,7 +65,10 @@ function StoreDetailScreen ({ navigation }) {
 	const store = useSelector((state) => state.store)
 
 	useEffect(() => {
-		getStoreDetail(dispatch)
+		getStoreDetail(dispatch).then(() => {
+			// console.log(store.cardId)
+			// if (!store.cardId) navigation.navigate('StoreCardCreator')
+		})
 	}, [])
 
 	useLayoutEffect(() => {
@@ -58,44 +80,40 @@ function StoreDetailScreen ({ navigation }) {
 			},
 		})
 	})
-	// const [cardStatus, setCardStatus] = useState(store.cardId)
 
-	if (!store.cardId) navigation.navigate('StoreCardCreator')
-	// if (!cardStatus) navigation.navigate('StoreCardCreator')
-	// if (cardStatus >= 1) { console.log(store.cardId) }
-	{
-		return (
-			<SafeAreaView style={{
-				flex: 1, backgroundColor: '#49378E',
-			}}
-			>
-				<LoadingComponent>
-					<ScrollView style={styles.container}>
-						{store
-						&& (
-							<>
-								<Image
-									style={styles.logo}
-									source={{
-										uri: `${store.qrCode}`,
-									}}
-								/>
-								<Text style={styles.textMain}>
-									Welcome to
-									{' '}
-									{store.name}
-									{'\n'}
-								</Text>
-								<Text style={styles.textSub}>Scan the code to save for a free coffee</Text>
+	return (
+		<SafeAreaView style={{
+			flex: 1, backgroundColor: '#49378E',
+		}}
+		>
+			<LoadingComponent>
+				<ScrollView style={styles.container}>
+					{store
+							&& (
+								<>
+									<Image
+										style={styles.loyalLogo}
+										source={require('../assets/testIcon.png')}
+									/>
+									<View style={styles.border}>
+										<Text style={styles.textMain}>
+											{store.name}
 
-							</>
-						)}
-
-					</ScrollView>
-				</LoadingComponent>
-			</SafeAreaView>
-		)
-	}
+										</Text>
+										<Image
+											style={styles.qr}
+											source={{
+												uri: `${store.qrCode}`,
+											}}
+										/>
+										<Text style={styles.textSub}>Scan the code to record your stamps</Text>
+									</View>
+								</>
+							)}
+				</ScrollView>
+			</LoadingComponent>
+		</SafeAreaView>
+	)
 }
 
 export default StoreDetailScreen

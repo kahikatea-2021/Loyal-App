@@ -1,7 +1,7 @@
 import React, { useEffect, useLayoutEffect } from 'react'
 
 import {
-	RefreshControl, SafeAreaView,
+	RefreshControl, SafeAreaView, Alert,
 } from 'react-native'
 import { useDispatch, useSelector } from 'react-redux'
 import * as Haptics from 'expo-haptics'
@@ -20,7 +20,7 @@ function WalletScreen({ navigation }) {
 			title: 'My Wallet',
 			headerStyle: {
 				backgroundColor: '#49378E',
-				shadowColor: '#fff',
+				shadowColor: '#8977CE',
 			},
 		})
 	}, [navigation])
@@ -42,6 +42,19 @@ function WalletScreen({ navigation }) {
 		setStampCard(card, dispatch)
 		navigation.navigate('Card')
 	}
+
+	const twoButtonAlert = (card) => Alert.alert(
+		'Are you sure you would like to delete?',
+		'Existing stamps on your card will be cleared',
+		[
+			{
+				text: 'Cancel',
+				onPress: () => console.log('Cancel Pressed'),
+				style: 'cancel',
+			},
+			{ text: 'OK', onPress: () => { handleCardDelete(card.cardId) } },
+		],
+	)
 	return (
 		<LoadingComponent>
 			<ScrollView
@@ -55,7 +68,7 @@ function WalletScreen({ navigation }) {
 			>
 				{
 					wallet && wallet.map((card) => (
-						<SwipeableItem handleRight={() => handleCardDelete(card.cardId)} key={card.cardId}>
+						<SwipeableItem handleRight={() => { twoButtonAlert(card) }} key={card.cardId}>
 							<WalletItemComponent card={card} onItemPress={onDispatch} navigation={navigation} />
 						</SwipeableItem>
 					))
