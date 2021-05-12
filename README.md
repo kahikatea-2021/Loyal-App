@@ -1,3 +1,5 @@
+(https://github.com/kahikatea-2021/coffee-shop-loyalty-app/tree/testing/assets/redeemIcon.png)
+
 # Loyal 
 A cross platform app created to replace traditional coffee cards. 
 
