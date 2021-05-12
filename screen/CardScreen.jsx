@@ -63,6 +63,7 @@ const styles = StyleSheet.create({
 	},
 	redeemPlaceholderText: {
 		color: '#8d8d8d',
+		textAlign: 'center',
 	},
 	centeredView: {
 		flex: 1,
@@ -241,6 +242,7 @@ function CardScreen ({ navigation }) {
 		setFinalModalVisible(true)
 	}
 
+	const { reward } = card
 	const stampsRemaining = (10 - card.stampCount)
 	const units = ['zero', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten']
 
@@ -450,7 +452,9 @@ function CardScreen ({ navigation }) {
 							{' '}
 							{stampsWord(stampsRemaining)}
 							{' '}
-							stamps to claim a free coffee
+							more stamps to claim a free
+							{' '}
+							{reward.toLowerCase()}
 						</Text>
 
 					</View>
