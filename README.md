@@ -13,7 +13,7 @@ npm i
 npm start
 ```
 
-If you encounter a problem starting the app after running ```npm start``` stating Expo CLI is not working then follow these steps:
+If you encounter a problem starting the app after running ```npm start``` stating Expo CLI is not working, then follow these steps:
 
 ```
 sudo npm install --global expo-cli
