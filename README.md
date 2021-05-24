@@ -5,15 +5,14 @@ A cross platform app created to replace traditional coffee cards.
 
 ## Setup
 
-To get started, clone this repo and then in your terminal run:
+To get started, clone this repo, `cd` into the new directory then run:
 
 ```
-cd coffee-shop-loyalty-app
 npm i
 npm start
 ```
 
-If you encounter a problem starting the app after running ```npm start``` stating Expo CLI is not working, then follow these steps:
+If you encounter a problem starting the app after running ```npm start``` stating Expo CLI is not working, then run the following:
 
 ```
 sudo npm install --global expo-cli
