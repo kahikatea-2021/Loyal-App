@@ -1,4 +1,6 @@
-![Loyal Icon](https://github.com/kahikatea-2021/coffee-shop-loyalty-app/blob/testing/assets/ReadeMeAssets/titleImage.png)
+<p align="center">
+  <img src="https://github.com/kahikatea-2021/coffee-shop-loyalty-app/blob/testing/assets/ReadeMeAssets/titleImage.png" alt="Loyal Icon"/>
+</p>
 
 # Loyal 
 A cross platform app created to replace traditional coffee cards. 
