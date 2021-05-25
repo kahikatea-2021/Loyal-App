@@ -4,7 +4,6 @@
 A cross platform app created to replace traditional coffee cards. 
 
 ## Setup
-
 To get started, clone this repo, `cd` into the new directory then run:
 
 ```
@@ -23,7 +22,6 @@ The password you are prompted to enter is the password for the machine you are w
 Install the Expo client app on your iOS or Android phone and connect to the same wireless network as your computer. 
 On Android, use the Expo app to scan the QR code that appears in your terminal when you run the project. 
 On iOS, use the built-in QR code scanner of the Camera app to scan the QR code that appears in your terminal when you run the project.
-
 
 ## User Stories
 * As a user, I want to be able to scan a QR code to add a cafe loyalty card and start collecting stamps
