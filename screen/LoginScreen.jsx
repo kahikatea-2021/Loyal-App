@@ -4,12 +4,11 @@ import {
 	SafeAreaView,
 	TextInput, Text,
 	StyleSheet,
-	KeyboardAvoidingView,
 	Image,
-	ScrollView,
 	ActivityIndicator,
 } from 'react-native'
 import { useDispatch } from 'react-redux'
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import { FORGOT_PASSWORD, REGISTER } from '../navigationNames'
 import { loginUser } from './accountHelper'
 
@@ -94,71 +93,51 @@ function LoginScreen ({ navigation }) {
 		loginUser({ email, password }, dispatch).finally(() => {
 			setLoading(false)
 		})
-
-		/* auth.signInWithEmailAndPassword(email, password)
-			.catch((error) => {
-				console.log(error.code)
-				switch (error.code) {
-				case 'auth/invalid-email':
-					alert('Please use a valid email')
-					break
-				case 'auth/wrong-password':
-					alert('Please enter correct password')
-					break
-				case 'auth/user-not-found':
-					alert('This account is not registered')
-					break
-				}
-			}) */
 	}
 	return (
-		<KeyboardAvoidingView behaviour="height" style={styles.container}>
+		<KeyboardAwareScrollView contentContainerStyle={styles.container}>
 			<SafeAreaView>
-				<ScrollView keyboardDismissMode="interactive">
-					<Image
-						style={styles.logo}
-						source={require('../assets/testTitleImage.png')}
-					/>
-					<TextInput
-						style={styles.inputContainer}
-						placeholder="E-mail"
-						autoCapitalize="none"
-						type="email"
-						value={email}
-						onChangeText={(text) => setEmail(text)}
-					/>
-					<TextInput
-						style={styles.inputContainer}
-						placeholder="Password"
-						type="password"
-						secureTextEntry
-						value={password}
-						onChangeText={(text) => setPassword(text)}
-						onSubmitEditing={signIn}
-					/>
-
-					<TouchableOpacity style={styles.wrap} onPress={signIn}>
-						<Text style={styles.text}>Login</Text>
+				<Image
+					style={styles.logo}
+					source={require('../assets/testTitleImage.png')}
+				/>
+				<TextInput
+					style={styles.inputContainer}
+					placeholder="E-mail"
+					autoCapitalize="none"
+					type="email"
+					value={email}
+					onChangeText={(text) => setEmail(text)}
+				/>
+				<TextInput
+					style={styles.inputContainer}
+					placeholder="Password"
+					type="password"
+					secureTextEntry
+					value={password}
+					onChangeText={(text) => setPassword(text)}
+					onSubmitEditing={signIn}
+				/>
+				<TouchableOpacity style={styles.wrap} onPress={signIn}>
+					<Text style={styles.text}>Login</Text>
+				</TouchableOpacity>
+				<SafeAreaView style={styles.register}>
+					<TouchableOpacity color="#fff" style={styles.wrap} onPress={() => { navigation.navigate(REGISTER) }}>
+						<Text style={styles.text}>Register as User</Text>
 					</TouchableOpacity>
-					<SafeAreaView style={styles.register}>
-						<TouchableOpacity color="#fff" style={styles.wrap} onPress={() => { navigation.navigate(REGISTER) }}>
-							<Text style={styles.text}>Register as User</Text>
-						</TouchableOpacity>
-						<TouchableOpacity color="#fff" style={styles.wrap} onPress={() => navigation.navigate('StoreRegister')}>
-							<Text style={styles.text}>Register as Store</Text>
-						</TouchableOpacity>
-					</SafeAreaView>
-					<TouchableOpacity
-						style={styles.forgot}
-						onPress={() => navigation.navigate(FORGOT_PASSWORD)}
-					>
-						<Text style={styles.textForgot}>Forgot Password ?</Text>
+					<TouchableOpacity color="#fff" style={styles.wrap} onPress={() => navigation.navigate('StoreRegister')}>
+						<Text style={styles.text}>Register as Store</Text>
 					</TouchableOpacity>
-					<ActivityIndicator color="white" animating={loading} size="large" />
-				</ScrollView>
+				</SafeAreaView>
+				<TouchableOpacity
+					style={styles.forgot}
+					onPress={() => navigation.navigate(FORGOT_PASSWORD)}
+				>
+					<Text style={styles.textForgot}>Forgot Password ?</Text>
+				</TouchableOpacity>
+				<ActivityIndicator color="white" animating={loading} size="large" />
 			</SafeAreaView>
-		</KeyboardAvoidingView>
-
+		</KeyboardAwareScrollView>
 	)
 }
 
