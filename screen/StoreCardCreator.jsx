@@ -7,9 +7,6 @@ import {
 	KeyboardAvoidingView,
 	Image,
 	Platform,
-	View,
-	Button,
-	ScrollView,
 	ActivityIndicator,
 	BackHandler,
 } from 'react-native'
