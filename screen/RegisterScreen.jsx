@@ -4,6 +4,7 @@ import {
 } from 'react-native'
 import { useDispatch } from 'react-redux'
 import request from 'superagent'
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import consume from '../consume'
 import { registerUser } from './accountHelper'
 
@@ -118,68 +119,66 @@ function RegisterScreen ({ navigation }) {
 			}) */
 	}
 	return (
-		<KeyboardAvoidingView behavior="position" style={styles.container}>
-			<ScrollView>
-				<SafeAreaView>
-					<Image
-						style={styles.logo}
-						source={require('../assets/testIcon.png')}
-					/>
-					<TextInput
-						style={styles.inputContainer}
-						placeholder="User Name"
-						autoCapitalize="none"
-						autofocus
-						type="text"
-						value={userName}
-						onChangeText={(text) => setUserName(text)}
-					/>
-					<TextInput
-						style={styles.inputContainer}
-						placeholder="First Name"
-						type="text"
-						value={firstName}
-						onChangeText={(text) => setFirstName(text)}
-					/>
-					<TextInput
-						style={styles.inputContainer}
-						placeholder="Last Name"
-						type="text"
-						value={lastName}
-						onChangeText={(text) => setLastName(text)}
-					/>
-					<TextInput
-						style={styles.inputContainer}
-						placeholder="Phone Number"
-						type="tel"
-						value={phone}
-						keyboardType="phone-pad"
-						onChangeText={(num) => setPhone(num)}
-					/>
-					<TextInput
-						style={styles.inputContainer}
-						placeholder="E-mail"
-						autoCapitalize="none"
-						type="email"
-						value={email}
-						onChangeText={(text) => setEmail(text)}
-					/>
-					<TextInput
-						style={styles.inputContainer}
-						placeholder="Password"
-						type="password"
-						autoCapitalize="none"
-						secureTextEntry
-						value={password}
-						onChangeText={(text) => setPassword(text)}
-					/>
-					<TouchableOpacity style={styles.wrap} onPress={handleRegister}>
-						<Text style={styles.text}>Create Account</Text>
-					</TouchableOpacity>
-					<ActivityIndicator color="white" animating={loading} size="large" />
-				</SafeAreaView>
-			</ScrollView>
-		</KeyboardAvoidingView>
+		<KeyboardAwareScrollView contentContainerStyle={styles.container}>
+			<SafeAreaView>
+				<Image
+					style={styles.logo}
+					source={require('../assets/testIcon.png')}
+				/>
+				<TextInput
+					style={styles.inputContainer}
+					placeholder="User Name"
+					autoCapitalize="none"
+					autofocus
+					type="text"
+					value={userName}
+					onChangeText={(text) => setUserName(text)}
+				/>
+				<TextInput
+					style={styles.inputContainer}
+					placeholder="First Name"
+					type="text"
+					value={firstName}
+					onChangeText={(text) => setFirstName(text)}
+				/>
+				<TextInput
+					style={styles.inputContainer}
+					placeholder="Last Name"
+					type="text"
+					value={lastName}
+					onChangeText={(text) => setLastName(text)}
+				/>
+				<TextInput
+					style={styles.inputContainer}
+					placeholder="Phone Number"
+					type="tel"
+					value={phone}
+					keyboardType="phone-pad"
+					onChangeText={(num) => setPhone(num)}
+				/>
+				<TextInput
+					style={styles.inputContainer}
+					placeholder="E-mail"
+					autoCapitalize="none"
+					type="email"
+					value={email}
+					onChangeText={(text) => setEmail(text)}
+				/>
+				<TextInput
+					style={styles.inputContainer}
+					placeholder="Password"
+					type="password"
+					autoCapitalize="none"
+					secureTextEntry
+					value={password}
+					onChangeText={(text) => setPassword(text)}
+				/>
+				<TouchableOpacity style={styles.wrap} onPress={handleRegister}>
+					<Text style={styles.text}>Create Account</Text>
+				</TouchableOpacity>
+				<ActivityIndicator color="white" animating={loading} size="large" />
+			</SafeAreaView>
+		</KeyboardAwareScrollView>
 	)
 }
 

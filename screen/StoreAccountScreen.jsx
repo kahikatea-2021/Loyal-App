@@ -11,6 +11,7 @@ import {
 } from 'react-native'
 import { useSelector } from 'react-redux'
 import * as MailComposer from 'expo-mail-composer'
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import { auth } from '../firebase'
 
 const styles = StyleSheet.create({
@@ -119,7 +120,8 @@ function StoreAccountScreen () {
 			})
 	}
 	return (
-		<KeyboardAvoidingView behaviour="position" style={styles.container}>
+		<KeyboardAwareScrollView contentContainerStyle={styles.container}>
+
 			<Image
 				style={styles.logo}
 				source={require('../assets/testIcon.png')}
@@ -145,7 +147,7 @@ function StoreAccountScreen () {
 						<Text style={styles.userText}>
 							Current User:
 							{` ${user.displayName}`}
-							{"\n"}
+							{'\n'}
 							Account Email:
 							{` ${user.email}`}
 						</Text>
@@ -157,8 +159,8 @@ function StoreAccountScreen () {
 				)}
 			</SafeAreaView>
 			<ActivityIndicator color="white" animating={loading} size="large" />
+		</KeyboardAwareScrollView>
 
-		</KeyboardAvoidingView>
 	)
 }
 

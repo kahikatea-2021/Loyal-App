@@ -12,6 +12,8 @@ import {
 	ActivityIndicator,
 } from 'react-native'
 
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
+
 const styles = StyleSheet.create({
 	container: {
 		flex: 1,
@@ -93,28 +95,27 @@ function ResetPassword ({ navigation }) {
 	}, [navigation])
 
 	return (
-		<KeyboardAvoidingView behavior="position" style={styles.container}>
-			<ScrollView>
-				<SafeAreaView>
-					<Image
-						style={styles.logo}
-						source={require('../assets/testIcon.png')}
-					/>
-					<TextInput
-						style={styles.inputContainer}
-						placeholder="E-mail"
-						autoCapitalize="none"
-						type="email"
-						value={email}
-						onChangeText={(text) => setEmail(text)}
-					/>
-					<TouchableOpacity style={styles.wrap} onPress={reset}>
-						<Text style={styles.text}>Reset</Text>
-					</TouchableOpacity>
-					<ActivityIndicator color="white" animating={loading} size="large" />
-				</SafeAreaView>
-			</ScrollView>
-		</KeyboardAvoidingView>
+		<KeyboardAwareScrollView contentContainerStyle={styles.container}>
+			<SafeAreaView>
+				<Image
+					style={styles.logo}
+					source={require('../assets/testIcon.png')}
+				/>
+				<TextInput
+					style={styles.inputContainer}
+					placeholder="E-mail"
+					autoCapitalize="none"
+					type="email"
+					value={email}
+					onChangeText={(text) => setEmail(text)}
+				/>
+				<TouchableOpacity style={styles.wrap} onPress={reset}>
+					<Text style={styles.text}>Reset</Text>
+				</TouchableOpacity>
+				<ActivityIndicator color="white" animating={loading} size="large" />
+			</SafeAreaView>
+		</KeyboardAwareScrollView>
+
 	)
 }
 
