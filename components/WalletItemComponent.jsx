@@ -2,8 +2,6 @@ import React from 'react'
 import {
 	Pressable, StyleSheet, Text, View,
 } from 'react-native'
-import { useDispatch } from 'react-redux'
-import { setStampCard } from '../screen/stampHelper'
 
 const styles = StyleSheet.create({
 	container: {
@@ -14,7 +12,6 @@ const styles = StyleSheet.create({
 		height: 220,
 		alignItems: 'center',
 		justifyContent: 'center',
-		// backgroundColor: '#49378E',
 		backgroundColor: 'yellow',
 	},
 	cardItem: {
@@ -83,9 +80,6 @@ function WalletItemComponent ({ card, onItemPress }) {
 	return (
 		<View style={styles.listItem}>
 			<Pressable
-				/* onPress={() => {
-					//
-				}} */
 				onPress={() => { onItemPress(card) }}
 				style={styles.cardItem}
 			>
