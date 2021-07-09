@@ -9,15 +9,12 @@ import {
 	RefreshControl,
 } from 'react-native'
 import Swipeable from 'react-native-swipeable-row'
-// import Swipeable from 'react-native-gesture-handler/Swipeable'
 import { Feather } from '@expo/vector-icons'
 import React, { useEffect, useLayoutEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import * as Haptics from 'expo-haptics'
-import Animated from 'react-native-reanimated'
-import { RectButton } from 'react-native-gesture-handler'
+
 import { deleteCardFromWallet, getUserWallet } from './walletHelper'
-import WalletNavigationItem from '../navigation/WalletNavigationItem'
 import LoadingComponent from '../components/LoadingComponent'
 import { setStampCard } from './stampHelper'
 
@@ -30,7 +27,6 @@ const styles = StyleSheet.create({
 		height: 220,
 		alignItems: 'center',
 		justifyContent: 'center',
-		// backgroundColor: '#49378E',
 		backgroundColor: 'yellow',
 	},
 	cardItem: {
@@ -88,36 +84,6 @@ const styles = StyleSheet.create({
 	},
 })
 
-/* function WalletScreen() {
-	function renderRightActions(progress, dragX) {
-		const trans = dragX.interpolate({
-			inputRange: [0, 50, 100, 101],
-			outputRange: [-20, 0, 0, 1],
-		})
-		return (
-			<RectButton style={styles.leftAction} onPress={() => {}}>
-				<Animated.Text
-					style={[
-						styles.actionText,
-						{
-							transform: [{ translateX: trans }],
-						},
-					]}
-				>
-					Archive
-				</Animated.Text>
-			</RectButton>
-		)
-	}
-	return (
-		<Swipeable renderRightActions={renderRightActions}>
-			<Text>Card</Text>
-		</Swipeable>
-	)
-} */
-
-// const wait = (timeout) => new Promise((resolve) => setTimeout(resolve, timeout))
-
 function WalletScreen ({ navigation, onOpen, onClose }) {
 	const wallet = useSelector((state) => state.wallet)
 	const dispatch = useDispatch()
@@ -143,10 +109,8 @@ function WalletScreen ({ navigation, onOpen, onClose }) {
 		deleteCardFromWallet(cardId, dispatch)
 		Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light)
 	}
-	// define a variable - if it is true show cards, if not then say "You have no cards"
 	return (
 		<LoadingComponent>
-
 			<ScrollView
 				refreshControl={(
 					<RefreshControl
