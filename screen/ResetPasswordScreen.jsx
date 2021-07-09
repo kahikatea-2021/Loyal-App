@@ -6,9 +6,7 @@ import {
 	TextInput,
 	Text,
 	StyleSheet,
-	KeyboardAvoidingView,
 	Image,
-	ScrollView,
 	ActivityIndicator,
 } from 'react-native'
 
