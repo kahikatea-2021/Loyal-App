@@ -13,7 +13,6 @@ import { Feather } from '@expo/vector-icons'
 import React, { useEffect, useLayoutEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import * as Haptics from 'expo-haptics'
-
 import { deleteCardFromWallet, getUserWallet } from './walletHelper'
 import LoadingComponent from '../components/LoadingComponent'
 import { setStampCard } from './stampHelper'
