@@ -4,13 +4,11 @@ import {
 	SafeAreaView,
 	Text,
 	StyleSheet,
-	KeyboardAvoidingView,
 	Image,
 	ActivityIndicator,
 	Linking,
 } from 'react-native'
 import { useSelector } from 'react-redux'
-import * as MailComposer from 'expo-mail-composer'
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import { auth } from '../firebase'
 
@@ -20,7 +18,6 @@ const styles = StyleSheet.create({
 		backgroundColor: '#49378E',
 		alignItems: 'center',
 		justifyContent: 'center',
-
 	},
 	inputContainer: {
 		fontSize: 20,
@@ -160,7 +157,6 @@ function StoreAccountScreen () {
 			</SafeAreaView>
 			<ActivityIndicator color="white" animating={loading} size="large" />
 		</KeyboardAwareScrollView>
-
 	)
 }
 
