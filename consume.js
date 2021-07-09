@@ -2,8 +2,8 @@ import request from 'superagent'
 import { auth } from './firebase'
 import { showAlertAction } from './store/actions/infoActions'
 
-const baseUrl = 'https://3a1b4a7bba12.ngrok.io/api/v1'
-export default function consume(endpoint, method = 'get', data = {}) {
+const baseUrl = 'http://1b0e991e6008.ngrok.io/api/v1'
+export default function consume (endpoint, method = 'get', data = {}) {
 	const payLoadMethod = method.toLowerCase() === 'get' ? 'query' : 'send'
 	const headers = {
 		Accept: 'application/json',
