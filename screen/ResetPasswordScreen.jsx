@@ -61,24 +61,6 @@ function ResetPassword ({ navigation }) {
 
 	const reset = () => {
 		setLoading(true)
-
-		/* auth.sendPasswordResetEmail(email)
-			.then(() => {
-				navigation.navigate('Login')
-				alert('You should recieve an email shortly')
-			}).catch((error) => {
-				console.log(error.code)
-				switch (error.code) {
-				case 'auth/invalid-email':
-					alert('Please use a valid email address')
-					break
-				case 'auth/user-not-found':
-					alert('This account is not registered')
-					break
-				}
-			}).finally(() => {
-				setLoading(false)
-			}) */
 	}
 	useLayoutEffect(() => {
 		navigation.setOptions({
