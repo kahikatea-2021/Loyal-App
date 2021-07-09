@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useLayoutEffect } from 'react'
 import {
-	Text, StyleSheet, Button, Dimensions, View, Image, TouchableOpacity,
+	Text, StyleSheet, Image, TouchableOpacity,
 } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { useNavigation } from '@react-navigation/native'
