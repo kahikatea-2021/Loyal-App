@@ -157,6 +157,7 @@ function RegisterScreen ({ navigation }) {
 					onChangeText={(num) => setPhone(num)}
 				/>
 				<TextInput
+					keyboardType="email-address"
 					style={styles.inputContainer}
 					placeholder="E-mail"
 					autoCapitalize="none"
