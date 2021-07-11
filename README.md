@@ -2,9 +2,20 @@
   <img src="https://github.com/kahikatea-2021/coffee-shop-loyalty-app/blob/testing/assets/ReadeMeAssets/titleImage.png" alt="Loyal Icon"/>
 </p>
 
-## Working Demo
-  ![Card Demo](https://github.com/kahikatea-2021/coffee-shop-loyalty-app/blob/testing/assets/ReadeMeAssets/protodemo.jpeg)
-![Win Demo](https://github.com/kahikatea-2021/coffee-shop-loyalty-app/blob/testing/assets/ReadeMeAssets/windemo.jpeg)
+# Development Photos & Screenshots
+<div align="center">
+    <img src="https://github.com/kahikatea-2021/coffee-shop-loyalty-app/blob/testing/assets/ReadeMeAssets/protodemo.jpeg" alt="App with a cofee cup"/>
+    <img src="https://github.com/kahikatea-2021/coffee-shop-loyalty-app/blob/testing/assets/ReadeMeAssets/windemo.jpeg" alt="Win!"/>
+</div>
+<hr>
+<div display="flex">
+  <img height="500" src="https://github.com/kahikatea-2021/coffee-shop-loyalty-app/blob/testing/assets/ReadeMeAssets/login.jpeg" alt="Login screen"/>
+  <img height="500" src="https://github.com/kahikatea-2021/coffee-shop-loyalty-app/blob/testing/assets/ReadeMeAssets/register.jpeg" alt="Register screen"/>
+   <img height="500" src="https://github.com/kahikatea-2021/coffee-shop-loyalty-app/blob/testing/assets/ReadeMeAssets/wallet.png" alt="Wallet Screen"/>
+  <img height="500" src="https://github.com/kahikatea-2021/coffee-shop-loyalty-app/blob/testing/assets/ReadeMeAssets/deleteinteraction.png" alt="Delete card from wallet"/>
+  <img height="500" src="https://github.com/kahikatea-2021/coffee-shop-loyalty-app/blob/testing/assets/ReadeMeAssets/card.jpeg" alt="Dupion Loyalty Card"/>
+</div>
+
 
 # Loyal 
 A cross platform app created to replace traditional coffee cards. 
